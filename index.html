@@ -29,9 +29,9 @@ img{display:block;max-width:100%}
 
 /* sidebar */
 :root{--side:280px}
-.side{position:fixed;top:0;left:0;bottom:0;width:var(--side);background:var(--brand-deep);color:#fff;display:flex;flex-direction:column;align-items:center;padding:48px 0 32px;z-index:20;overflow-y:auto}
+.side{position:fixed;top:0;left:0;bottom:0;width:var(--side);background:var(--brand-deep);color:#fff;display:flex;flex-direction:column;align-items:center;padding:64px 0 32px;z-index:20;overflow-y:auto}
 .side-photo{width:168px;height:210px;border-radius:16px;object-fit:cover;object-position:top;box-shadow:0 10px 28px rgba(0,0,0,.25)}
-.side-name{font-size:24px;font-weight:800;margin-top:22px;letter-spacing:-.01em}
+.side-name{font-size:26px;font-weight:800;letter-spacing:-.01em}
 .side-en{font-size:13px;color:rgba(255,255,255,.62);margin-top:2px}
 .side-role{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.8);margin-top:12px;padding:4px 12px;border:1px solid rgba(255,255,255,.22);border-radius:999px}
 .side-nav{list-style:none;width:100%;margin-top:40px;border-top:1px solid rgba(255,255,255,.12)}
@@ -68,7 +68,9 @@ h2{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:8px 0 4px;line-he
 .btn.ghost:hover{color:var(--brand)}
 .btn:hover{transform:translateY(-1px)}
 
-.hero-top{display:block}
+.hero-top{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:48px;align-items:center}
+.hero-photo{margin:0}
+.hero-photo img{width:220px;height:275px;object-fit:cover;object-position:top;border-radius:20px;box-shadow:0 12px 32px rgba(0,28,100,.12)}
 /* kpi */
 .kpi-head{margin-top:64px}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
@@ -238,7 +240,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   .content{margin-left:0}
   html{scroll-padding-top:72px}
 }
-@media (max-width:560px){ .side-name{display:none} }
+@media (max-width:560px){ .side-nav li:first-child{display:none} }
+@media (max-width:860px){ .hero-top{grid-template-columns:1fr;gap:24px} .hero-photo{order:-1} .hero-photo img{width:120px;height:150px;border-radius:14px} }
 @media (max-width:860px){
   .kpis,.others{grid-template-columns:1fr}
         .p-meta{grid-template-columns:1fr 1fr}
@@ -1284,7 +1287,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
 <aside class="side" id="side">
   <div class="side-id">
-    <img class="side-photo" src="assets/profile.jpg" alt="황우찬 프로필 사진">
     <div class="side-text" style="text-align:center">
       <div class="side-name">황우찬</div>
       <div class="side-en">Hwang Woochan</div>
@@ -1292,6 +1294,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   </div>
   <div class="side-role">Backend Engineer</div>
   <ul class="side-nav">
+    <li><a href="#top" data-sec="top">Introduction</a></li>
     <li><a href="#projects" data-sec="projects">Projects</a></li>
     <li><a href="#about" data-sec="about">About</a></li>
     <li><a href="#contact" data-sec="contact">Contact</a></li>
@@ -1322,6 +1325,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       <a class="btn ghost" href="mailto:cmy397264@naver.com">cmy397264@naver.com</a>
     </div>
     </div>
+    <figure class="hero-photo"><img src="assets/profile.jpg" alt="황우찬 프로필 사진"></figure>
     </div>
 
     <div class="kpi-head sec-title">How I decide</div>
