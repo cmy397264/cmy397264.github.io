@@ -67,11 +67,12 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .hero-photo b{font-size:17px;font-weight:800}
 .hero-photo span{font-size:13px;color:var(--mute)}
 /* kpi */
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.kpi-head{margin-top:56px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
 .kpi{padding:26px 24px}
 .kpi .p{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand)}
-.kpi .v{font-size:28px;font-weight:800;color:var(--brand-deep);letter-spacing:-.02em;margin-top:8px;line-height:1.3}
-.kpi .d{font-size:14px;color:var(--mute)}
+.kpi .v{font-size:22px;font-weight:800;color:var(--brand-deep);letter-spacing:-.02em;margin-top:8px;line-height:1.35}
+.kpi .d{font-size:14.5px;color:var(--text);margin-top:8px;line-height:1.6}
 
 /* projects */
 .project{margin-top:40px;overflow:hidden}
@@ -252,19 +253,19 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 {
   "kpis": [
     {
-      "label": "NEXA",
-      "value": "동시 요청 3종 → 1건",
-      "desc": "문서 행을 FOR UPDATE로 잠가 겹친 요청을 차례로 재검증"
+      "label": "WITW · MANDAL-IN",
+      "value": "짐작보다 실측으로",
+      "desc": "인덱스 후보는 설정을 고정한 측정 환경에서 비교했고, 1GiB 서버의 대화방 한도는 배포 구성 그대로 메모리를 재서 정했습니다."
     },
     {
-      "label": "WHAT IN THE WORLD",
-      "value": "252.7 → 12.4ms",
-      "desc": "인덱스 5개 채택 · 집계 쿼리 재작성 (50만 건 기준)"
+      "label": "NEXA · 나랑등산이다",
+      "value": "대안과 비교해서 고르기",
+      "desc": "결재 동시성은 낙관적 락의 재시도 부담을 따져 비관적 락을 택했고, 순환 참조는 `@Lazy`로 미루지 않고 서비스를 나눠 풀었습니다."
     },
     {
-      "label": "MANDAL-IN",
-      "value": "900초 → 0초",
-      "desc": "소리 크기(RMS)로 판단해 말할 때만 STT 소켓 연결"
+      "label": "WITW · BIGPICTURE",
+      "value": "조용한 실패부터 찾기",
+      "desc": "에러 로그 없이 사라진 기사, 알림이 오지 않던 기기처럼 정상으로 보이는 곳에서 데이터가 새는지부터 확인합니다."
     }
   ],
   "projects": [
@@ -1188,7 +1189,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <div class="hero-text">
     <div class="eyebrow">BACKEND ENGINEER · PORTFOLIO 2026</div>
     <h1>데이터가 끊기지 않고<br><em>흐르게 하는</em> 백엔드 엔지니어입니다.</h1>
-    <p class="lead">에러 없이 조용히 실패하는 곳을 먼저 찾습니다. 사라지던 기사, 몰래 쌓이던 과금, 서비스 사이에서 유실될 뻔한 결재 결과를 실측과 구조로 막아 왔습니다.</p>
+    <p class="lead">문제가 생기면 원인을 끝까지 따라가고, 고칠 방법은 대안과 비교해 근거를 남긴 뒤 고릅니다. 여섯 개 프로젝트에서 그렇게 내린 판단을 정리했습니다.</p>
     <div class="chips" style="margin-top:22px">
       <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">Docker</span>
     </div>
@@ -1205,6 +1206,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     </figure>
     </div>
 
+    <div class="kpi-head label">How I decide</div>
     <div class="kpis" id="kpis"></div>
   </header>
 
