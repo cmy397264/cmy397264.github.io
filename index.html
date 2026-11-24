@@ -107,7 +107,7 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .pse{display:grid;grid-template-columns:72px 1fr;gap:6px 14px;font-size:14.5px;color:var(--text)}
 .pse b{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:.06em;padding-top:2px}
 .pse b.sol{color:var(--brand)}
-.result{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.result{display:flex;flex-wrap:wrap;gap:10px;margin-top:2px}
 .r{background:var(--pale);border-radius:10px;padding:12px 16px;min-width:150px}
 .r .n{font-size:20px;font-weight:800;color:var(--brand-deep);letter-spacing:-.02em;line-height:1.3}
 .r .l{font-size:12.5px;color:var(--mute)}
@@ -380,9 +380,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
-              "label": "해결",
-              "text": "RS256을 택해 개인키는 직원 서비스에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명, 만료, 토큰 종류 검사와 401/403 응답은 nexa-security 라이브러리로 묶어 Package Registry로 배포했습니다.",
+              "label": "판단",
+              "text": "검증하는 곳이 늘어나도 발급할 수 있는 곳은 하나여야 한다고 봤습니다. 그래서 발급과 검증의 키를 나누는 RS256을 택했고, 서비스마다 검증 코드를 복사하면 규칙이 어긋날 수 있어 공통 라이브러리로 묶기로 했습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "개인키는 직원 서비스에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명, 만료, 토큰 종류 검사와 401/403 응답은 nexa-security로 묶어 Package Registry로 배포했습니다.",
+              "key": false
             }
           ],
           "results": [
@@ -410,9 +415,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
-              "label": "해결",
-              "text": "낙관적 락은 실제로 겹치는 요청마다 재시도 로직이 필요하고, 결재자 추가는 approval_line 행 INSERT라 문서의 `@Version`으로 잡히지도 않았습니다. 그래서 문서 행을 `FOR UPDATE`로 잠가 늦은 요청이 바뀐 상태로 다시 검증되게 했습니다.",
+              "label": "판단",
+              "text": "낙관적 락도 검토했지만 결재와 회수는 실제로 자주 겹쳐서, 진 쪽마다 재시도 로직이 따로 필요했습니다. 결재자 추가는 approval_line에 행을 넣는 작업이라 문서의 `@Version`으로는 잡히지도 않았습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "문서 행을 `FOR UPDATE`로 잠가, 다음 요청은 기다렸다가 바뀐 상태로 다시 검증되게 했습니다. 동시 승인, 회수와 승인, 결재자 동시 추가를 한꺼번에 출발시키는 통합 테스트로 이 동작을 고정했습니다.",
+              "key": false
             }
           ],
           "results": [
@@ -434,9 +444,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
+              "label": "판단",
+              "text": "커밋한 뒤에 발행하는 방식도 발행이 실패하면 이벤트가 그대로 사라집니다. 결재 상태가 바뀐 사실과 보내야 할 이벤트가 같은 트랜잭션에 함께 남아야 한다고 보고 Transactional Outbox를 택했습니다.",
+              "key": true
+            },
+            {
               "label": "해결",
               "text": "결재 상태 변경과 아웃박스 기록을 같은 트랜잭션으로 커밋하고, 발행기는 `SKIP LOCKED`로 가져가 실패하면 그 자리에서 멈추게 했습니다. 프로듀서는 `acks=all`, idempotence, 문서별 키로 순서를 보장하고, 수신 측과 멱등 처리, DLT 계약을 합의했습니다.",
-              "key": true
+              "key": false
             }
           ],
           "results": [
@@ -520,9 +535,19 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
-              "label": "해결",
-              "text": "미션 갱신을 본 작업 커밋 이후로 분리하고 포인트 적립 흐름을 정리했습니다. 이미 누락된 사용자 데이터는 백필 스크립트로 채웠습니다.",
+              "label": "판단",
+              "text": "한 트랜잭션에 묶여 있어 한쪽 오류가 전체를 롤백시키는 구조라고 봤습니다. 성공한 본 작업은 확정하고, 미션 갱신은 롤백 범위를 따로 두기로 했습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "미션 갱신을 본 작업 커밋 이후로 분리하고 포인트 적립 흐름을 정리했습니다.",
+              "key": false
+            },
+            {
+              "label": "결과",
+              "text": "인증, 리뷰, 뽑기는 미션 오류와 상관없이 저장되고, 이미 누락된 사용자 미션은 백필 스크립트로 채웠습니다.",
+              "key": false
             }
           ]
         },
@@ -536,9 +561,19 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
-              "label": "해결",
-              "text": "주소 정규화로 인식 실패를 고치고, 실패 원인별 안내 문구(다른 지점 안내 포함)를 분리했습니다. 영수증 중복 검사 범위는 전체/사용자 단위로 전환할 수 있게 했습니다.",
+              "label": "판단",
+              "text": "실패가 하나로 뭉쳐 있으면 사용자는 다음에 무엇을 해야 할지 모르고, 서버에서도 고칠 곳을 찾을 수 없다고 봤습니다. 그래서 실패를 원인별로 나누는 것부터 하기로 했습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "원인을 나누자 주소 띄어쓰기 문제가 드러나 주소 정규화로 고쳤고, 다른 지점 영수증에는 지점 안내 문구를 따로 보여 주게 했습니다. 중복 검사 범위는 전체, 사용자 단위로 전환할 수 있게 했습니다.",
+              "key": false
+            },
+            {
+              "label": "결과",
+              "text": "사용자는 실패 이유와 다음 행동을 바로 알 수 있고, 서버 로그에서도 원인별로 실패를 구분할 수 있게 됐습니다.",
+              "key": false
             }
           ]
         }
@@ -679,13 +714,18 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
-              "label": "해결",
-              "text": "실패를 \"재시도로 풀리는가\"로 나눴습니다. DB 연결 부족, 데드락 같은 일시 오류는 0.5초~8초 지수 백오프(무작위 편차 포함)로 재시도하고, 미등록 국가, 형식 오류 같은 영구 오류는 원인과 위치를 기록해 즉시 DLT로 보존합니다. 국가 데이터는 Flyway 시드로 채우고, 새 컨슈머가 쌓인 메시지를 건너뛰지 않도록 오프셋 설정을 바꿨습니다.",
+              "label": "판단",
+              "text": "팀에서는 집계 기준 날짜를 미루자는 의견이 나왔지만, 원인을 그대로 두면 같은 유실이 반복된다고 봤습니다. 오류를 '다시 시도하면 풀리는가'로 나눠, 풀리지 않는 오류가 뒤 기사까지 막지 않게 하기로 했습니다.",
               "key": true
             },
             {
-              "label": "한계",
-              "text": "메시지 형식이 바뀌기 전의 약 2만 4천 건은 별도 재계산이 필요해 복구하지 못했습니다.",
+              "label": "해결",
+              "text": "DB 연결 부족, 데드락 같은 일시 오류는 0.5초~8초 지수 백오프(무작위 편차 포함)로 재시도하고, 미등록 국가, 형식 오류 같은 영구 오류는 원인과 위치를 기록해 즉시 DLT로 보냈습니다. 국가 데이터는 Flyway 시드로 옮겼습니다.",
+              "key": false
+            },
+            {
+              "label": "결과",
+              "text": "개발 서버에서 검증한 설정을 운영에 반영해, 실패한 기사는 위치와 원인과 함께 DLT에 남습니다. 다만 메시지 형식이 바뀌기 전의 약 2만 4천 건은 별도 재계산이 필요해 복구하지 못했습니다.",
               "key": false
             }
           ]
@@ -700,9 +740,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
-              "label": "해결",
-              "text": "설정을 고정한 측정 전용 컨테이너에서 후보를 비교했고, 측정이 틀릴 수 있는 지점 3가지(캐시 워밍 오염, 표본 부족, 단독 판정)를 먼저 걸러 냈습니다. 2배 이상 빨라진 후보만 채택해 인덱스 5개 채택, 2개 기각, 가장 느린 쿼리는 재작성했습니다.",
+              "label": "판단",
+              "text": "Kafka가 기사를 계속 넣는 테이블이라 인덱스마다 쓰기가 느려집니다. 그래서 2배 이상 빨라진 후보만 채택한다는 기준부터 정했고(1.3배는 측정 노이즈와 구분되지 않음), 각자 로컬 DB로 재면 설정이 달라 비교할 수 없다고 봤습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "설정을 고정한 측정 전용 컨테이너에서 한 번에 하나씩 바꿔 쟀고, 캐시 워밍 오염, 표본 부족, 단독 판정처럼 측정이 틀릴 수 있는 지점을 먼저 걸러 냈습니다. 인덱스로도 느린 쿼리는 집계를 서브쿼리로 나눠 다시 썼습니다.",
+              "key": false
             }
           ],
           "results": [
@@ -807,9 +852,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
-              "label": "해결",
-              "text": "\"말하지 않으면 과금 0초, 사용 경험은 그대로\"를 기준으로 세 방식을 비교했습니다. 버튼 방식은 UX 때문에, 음성 판별 모델(silero)은 서버 메모리 때문에 기각하고, 프레임 RMS로 소리 유무만 보는 게이트를 채택했습니다. 800ms 이하의 쉼은 그대로 보내고, 800ms 침묵에 발화를 끝내고, 5초 침묵에 소켓을 직접 닫습니다.",
+              "label": "판단",
+              "text": "'말하지 않으면 과금 0초, 사용 경험은 그대로'를 기준으로 세 방식을 비교했습니다. 브라우저 무음 감지는 직접 만들어 봤지만 요금이 줄지 않고 버튼을 다시 눌러야 해서 뺐고, silero VAD는 '보낼 소리가 있는가'만 판정하면 되는데 t3.micro에서 세션마다 CPU와 메모리를 써서 쓰지 않았습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "서버에서 프레임 RMS로 소리 유무만 보고 발화 구간에만 소켓을 열었습니다. 800ms 이하의 쉼은 그대로 보내고, 800ms 침묵에 발화를 끝내고, 5초 침묵에 소켓을 직접 닫습니다.",
+              "key": false
             }
           ],
           "results": [
@@ -833,13 +883,18 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "rows": [
             {
               "label": "문제",
-              "text": "캐시 적중이 3%뿐이라, 지시문의 49%를 차지하던 예시를 줄이기로 했습니다.",
+              "text": "캐시 적중이 3%뿐이라 지시문의 49%를 차지하던 예시를 줄였더니, 출력이 깨지는 경우가 생겼습니다.",
               "key": false
             },
             {
-              "label": "해결",
-              "text": "실제 파이프라인에 62개 케이스를 3회씩 태워 짝지은 정확 이항검정으로 비교했습니다. action 정확도는 차이가 없었지만(p=0.5) 출력 정상률이 100%에서 88.71%로 떨어졌고(p=0.0156), 원인은 예시가 가리던 글자 수 규칙 충돌(60자 vs 40자)이었습니다. 40자로 통일하고, 꼭 지켜야 할 규칙은 6단계 서버 가드로 옮겼습니다.",
+              "label": "판단",
+              "text": "정확도만 보면 그대로 배포될 변경이라, 감으로 판단하지 않고 같은 케이스끼리 짝지은 A/B로 재기로 했습니다. 안전 예시와 대조쌍은 남기고 생성 예시 4개만 뺐습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "62개 케이스를 3회씩 태워 정확 이항검정으로 비교하자 정확도는 그대로였지만(p=0.5) 출력 정상률이 100%에서 88.71%로 떨어졌습니다(p=0.0156). 원인은 예시가 가리던 글자 수 규칙 충돌(60자 vs 40자)이었고, 40자로 통일한 뒤 꼭 지켜야 할 규칙은 서버 가드로 옮겼습니다.",
+              "key": false
             }
           ],
           "results": [
@@ -869,9 +924,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
-              "label": "해결",
-              "text": "배포 구성 그대로 메모리(PSS)를 실측해 동시 대화방 상한을 정하고, 사양이 바뀌면 실패하는 테스트로 기준값을 고정했습니다. 배포 중 메모리 몰림에 대비해 2GB 스왑을 추가했습니다.",
+              "label": "판단",
+              "text": "짐작으로 정한 기준은 에러 없이 비용으로만 드러난다고 보고, 배포 구성 그대로 재서 정하기로 했습니다. 근거가 약한 옵션은 쓰지 않았습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "메모리(PSS)를 실측해 동시 대화방 상한을 정하고, 사양이 바뀌면 실패하는 테스트로 기준값을 고정했습니다. 배포 중 메모리 몰림에 대비해 2GB 스왑을 추가했습니다.",
+              "key": false
             }
           ],
           "results": [
@@ -970,13 +1030,18 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "rows": [
             {
               "label": "문제",
-              "text": "AuthService는 사용자 조회를 위해 UserService를, UserService는 탈퇴 시 토큰을 지우려고 AuthService를 주입받아 순환 참조로 기동이 멈췄습니다.",
+              "text": "AI가 제안한 코드를 반영하자 AuthService는 사용자 조회를 위해 UserService를, UserService는 탈퇴 시 토큰을 지우려고 AuthService를 주입받아 순환 참조로 기동이 멈췄습니다.",
               "key": false
             },
             {
-              "label": "해결",
-              "text": "`@Lazy`는 구조를 그대로 남긴다고 보고, 두 서비스가 실제로 함께 쓰던 토큰 저장, 삭제를 Redis와 JwtUtil만 의존하는 TokenService로 분리해 의존을 한 방향으로 정리했습니다.",
+              "label": "판단",
+              "text": "`@Lazy`로 주입 시점만 미루면 기동은 되지만 서로 기대는 구조는 그대로 남습니다. 두 서비스가 필요로 한 것은 상대 서비스가 아니라 토큰 저장과 삭제라고 봤습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "토큰 저장과 삭제를 Redis와 JwtUtil만 의존하는 TokenService로 떼어 내, AuthService → UserService, TokenService와 UserService → TokenService로 의존을 한 방향으로 정리했습니다.",
+              "key": false
             }
           ],
           "results": [
@@ -992,13 +1057,18 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "rows": [
             {
               "label": "문제",
-              "text": "id 폴더를 쓰려면 INSERT 후 업로드해야 했고, 뒤 단계가 실패하면 DB는 롤백돼도 R2에 올라간 파일은 그대로 남았습니다.",
+              "text": "파일을 게시글 id 폴더에 두려면 INSERT 후 업로드해야 했고, 뒤 단계가 실패하면 DB는 롤백돼도 R2에 올라간 파일은 그대로 남았습니다.",
               "key": false
+            },
+            {
+              "label": "판단",
+              "text": "R2는 DB 트랜잭션에 묶이지 않아 롤백에 기댈 수 없다고 봤습니다. 파일 위치가 DB id에 묶여 있는 것이 순서를 강제하는 원인이라, id 폴더를 포기하기로 했습니다.",
+              "key": true
             },
             {
               "label": "해결",
               "text": "고정 폴더 + UUID 키로 바꿔 업로드 → DB 저장 순서로 바꾸고, DB 저장이 실패하면 올린 파일을 보상 삭제했습니다. GPX 일괄 등록은 올린 키를 모아 두었다가 실패 시 한꺼번에 정리합니다.",
-              "key": true
+              "key": false
             }
           ],
           "results": [
@@ -1093,9 +1163,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "key": false
             },
             {
-              "label": "해결",
-              "text": "콜백을 suspend 함수로 바꿔 종목별 async 병렬 요청으로 전환하고, 리포트 갱신은 부팅에서 떼어 별도 코루틴으로 받아 Room에 저장한 뒤 알리도록 했습니다.",
+              "label": "판단",
+              "text": "병렬 요청으로 1분 30초를 40초로 줄였지만, 40초도 첫 화면을 막기에는 길었습니다. 사용자에게 먼저 필요한 것은 리포트 완성이 아니라 첫 화면이라고 보고 요청 순서를 다시 짰습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "콜백을 suspend 함수로 바꿔 종목별 async 병렬 요청으로 전환하고, 부팅에는 서버 핑과 FCM 토큰 등록만 남겼습니다. 리포트 갱신은 별도 코루틴으로 받아 Room에 저장한 뒤 완료 알림을 띄웁니다.",
+              "key": false
             }
           ],
           "results": [
@@ -1115,13 +1190,23 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "rows": [
             {
               "label": "문제",
-              "text": "FCM 토큰 콜백 전에 서버 등록이 실행돼, 첫 실행 기기에는 토큰 대신 \"-1\"이 저장되고 있었습니다.",
+              "text": "FCM 토큰 콜백 전에 서버 등록이 실행돼, 첫 실행 기기에는 토큰 대신 \"-1\"이 저장되고 있었습니다. 당시에는 '앱을 재시작해 주세요' 토스트로 우회하고 있었습니다.",
               "key": false
             },
             {
-              "label": "해결",
-              "text": "`suspendCancellableCoroutine`으로 토큰을 받은 뒤 등록하도록 순서를 바로잡고, 온보딩 경로의 등록 누락까지 수정했습니다.",
+              "label": "판단",
+              "text": "재시작 안내는 원인을 사용자에게 떠넘기는 우회라고 봤습니다. 토큰이 준비된 뒤에 등록하도록 순서를 고치되, 토큰 조회가 실패해도 부팅은 멈추지 않아야 한다고 정했습니다.",
               "key": true
+            },
+            {
+              "label": "해결",
+              "text": "콜백을 `suspendCancellableCoroutine`으로 감싸 토큰을 받은 뒤 등록하게 바꿨고, 등록 경로를 다시 훑다가 온보딩 직후 경로에 전송 호출이 없던 것까지 찾아 넣었습니다.",
+              "key": false
+            },
+            {
+              "label": "결과",
+              "text": "첫 실행 토큰 경합과 온보딩 경로 누락을 없애고 재시작 안내 문구를 지웠습니다.",
+              "key": false
             }
           ]
         }
@@ -1344,8 +1429,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     return `<div class="case">
       <div class="tag">${tx(c.tag)}</div>
       <h5>${tx(c.title)}</h5>
-      <div class="pse">${c.rows.map(r => `<b${r.key ? ' class="sol"' : ''}>${tx(r.label)}</b><span>${tx(r.text)}</span>`).join('')}</div>
-      ${c.results && c.results.length ? `<div class="result">${c.results.map(r => `<div class="r"><div class="n">${tx(r[0])}</div><div class="l">${tx(r[1])}</div></div>`).join('')}</div>` : ''}
+      <div class="pse">${c.rows.map(r => `<b${r.key ? ' class="sol"' : ''}>${tx(r.label)}</b><span>${tx(r.text)}</span>`).join('')}${
+        c.results && c.results.length ? `${c.rows.some(r => r.label === '결과') ? '<b></b>' : '<b>결과</b>'}<div class="result">${c.results.map(r => `<div class="r"><div class="n">${tx(r[0])}</div><div class="l">${tx(r[1])}</div></div>`).join('')}</div>` : ''}</div>
     </div>`;
   }
 
