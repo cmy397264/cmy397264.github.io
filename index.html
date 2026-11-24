@@ -89,7 +89,7 @@ h2{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:8px 0 4px;line-he
 .kpi-head{margin-top:64px}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
 .kpi{padding:26px 24px}
-.kpi .p{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand)}
+.kpi .p{font-size:12.5px;font-weight:700;letter-spacing:0;color:var(--brand)}
 .kpi .v{font-size:22px;font-weight:800;color:var(--brand-deep);letter-spacing:-.02em;margin-top:8px;line-height:1.35}
 .kpi .d{font-size:14.5px;color:var(--text);margin-top:8px;line-height:1.6}
 
@@ -332,17 +332,17 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 {
   "kpis": [
     {
-      "label": "MANDAL-IN",
+      "label": "음성 대화 AI 코치 웹 서비스",
       "value": "짐작보다 실측으로",
       "desc": "1GiB 서버에 대화방을 몇 개까지 받을지 배포 구성 그대로 메모리를 재서 정하고, 사양이 바뀌면 실패하는 테스트로 기준값을 고정했습니다."
     },
     {
-      "label": "NEXA",
+      "label": "MSA 기반 HR ERP 웹 서비스",
       "value": "대안과 비교해서 고르기",
       "desc": "결재와 회수가 겹치는 문제에서 낙관적 락의 재시도 부담과 결재자 추가가 `@Version`으로 잡히지 않는 점을 따져 비관적 락을 택했습니다."
     },
     {
-      "label": "WHAT IN THE WORLD",
+      "label": "글로벌 이슈 모니터링 웹 서비스",
       "value": "조용한 실패부터 찾기",
       "desc": "에러 로그 없이 사라진 기사 10,794건을 추적해, 재시도로 풀리는 오류와 아닌 오류를 나누고 실패한 기사는 DLT에 남기게 했습니다."
     }
@@ -1540,7 +1540,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         <img class="p-logo${p.logoFit === 'contain' ? ' contain' : ''}" src="${url(p.logo)}" alt="${esc(p.logoAlt)}">
         <div>
           <div class="p-no"><span class="p-no-n">프로젝트 ${two(i + 1)}</span>${tx(p.no)}</div>
-          <h3>${tx(p.name)}${p.nameSub ? ` <span class="name-sub">${tx(p.nameSub)}</span>` : ''}</h3>
+          <h3>${tx(p.nav || p.name)}</h3>
           <p class="one">${tx(p.summary)}</p>
           <div class="chips p-stack">${p.stack.map(s => `<span class="chip">${tx(s)}</span>`).join('')}</div>
         </div>
