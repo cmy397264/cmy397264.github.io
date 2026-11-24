@@ -42,6 +42,15 @@ img{display:block;max-width:100%}
 .side-links a{color:rgba(255,255,255,.7)}
 .side-links a:hover{color:#fff}
 .content{margin-left:var(--side);overflow-x:clip}
+.side-contact{margin-top:auto;width:100%;padding:24px 28px 0}
+.side-contact div{padding:10px 0;border-top:1px solid rgba(255,255,255,.12)}
+.side-contact div:first-child{border-top:0}
+.side-contact dt{font-size:11.5px;font-weight:700;color:rgba(255,255,255,.55)}
+.side-contact dd{font-size:13.5px;font-weight:600;margin-top:2px;word-break:break-all}
+.side-contact a{color:#fff}
+.side-contact a:hover{text-decoration:underline}
+.m-only,#contact{display:none}
+
 
 /* common */
 
@@ -234,7 +243,9 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   .side-photo{width:36px;height:44px;border-radius:8px;box-shadow:none}
   .side-id{display:flex;align-items:center;gap:10px}
   .side-name{font-size:16px;margin:0}
-  .side-en,.side-role,.side-links{display:none}
+  .side-en,.side-role,.side-contact{display:none}
+  .m-only{display:list-item}
+  #contact{display:block}
   .side-nav{display:flex;width:auto;margin:0;border:0}
   .side-nav a{padding:8px 10px;font-size:13.5px;border:0;border-radius:8px}
   .content{margin-left:0}
@@ -1298,12 +1309,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <li><a href="#top" data-sec="top">Introduction</a></li>
     <li><a href="#projects" data-sec="projects">Projects</a></li>
     <li><a href="#about" data-sec="about">About</a></li>
-    <li><a href="#contact" data-sec="contact">Contact</a></li>
+    <li class="m-only"><a href="#contact" data-sec="contact">Contact</a></li>
   </ul>
-  <div class="side-links">
-    <a href="https://github.com/cmy397264" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://velog.io/@cmy397264" target="_blank" rel="noopener">Velog</a>
-  </div>
+  <dl class="side-contact">
+    <div><dt>이메일</dt><dd><a href="mailto:cmy397264@naver.com">cmy397264@naver.com</a></dd></div>
+    <div><dt>연락처</dt><dd><a href="tel:01048496017">010-4849-6017</a></dd></div>
+    <div><dt>GitHub</dt><dd><a href="https://github.com/cmy397264" target="_blank" rel="noopener">github.com/cmy397264</a></dd></div>
+    <div><dt>Velog</dt><dd><a href="https://velog.io/@cmy397264" target="_blank" rel="noopener">velog.io/@cmy397264</a></dd></div>
+  </dl>
 </aside>
 <div class="content">
 
@@ -1547,8 +1560,9 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   const markSide = () => {
     const y = innerHeight * 0.35;
     let cur = 'top';
-    for (const [k, el] of secs) if (el && el.getBoundingClientRect().top <= y) cur = k;
-    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = 'contact';
+    for (const [k, el] of secs) if (el && el.offsetParent !== null && el.getBoundingClientRect().top <= y) cur = k;
+    const contactShown = document.getElementById('contact').offsetParent !== null;
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = contactShown ? 'contact' : 'about';
     sideLinks.forEach(a => a.classList.toggle('on', a.dataset.sec === cur));
   };
   addEventListener('scroll', markSide, { passive: true }); markSide();
