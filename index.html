@@ -302,7 +302,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "인증, 직원, 결재 서비스"
         ],
         [
-          "현황",
+          "성과",
           "개발 서버 배포, QA 완료"
         ]
       ],
@@ -485,6 +485,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "id": "bbang",
       "logo": "assets/logo-bbang.png",
       "logoAlt": "빵범대 로고",
+      "logoFit": "contain",
       "no": "팀 프로젝트",
       "name": "빵범대",
       "nameSub": "BBangPatrol",
@@ -502,7 +503,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "meta": [
         [
           "기간",
-          "2026.07 ~ 2026.10"
+          "2026.07 ~ 2026.10 (약 4개월)"
         ],
         [
           "인원",
@@ -513,20 +514,47 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "백엔드, 배포"
         ],
         [
-          "기여",
-          "백엔드 커밋 203/293"
+          "성과",
+          "운영 서버 배포, 백엔드 커밋 203/293"
         ]
       ],
       "role": [
-        "백엔드 메인 개발 (인증, 빵집, 방문, 리뷰, 미션, 포인트)",
-        "Docker, GHCR 기반 운영/개발 배포 환경 분리",
-        "2026 대전빵축제 참여 빵집 정보를 직접 수집해 서비스에 등록"
+        "백엔드: 인증, 빵집, 방문, 리뷰, 미션, 포인트 API 메인 개발",
+        "배포: Docker, GHCR 기반 운영과 개발 환경 분리",
+        "데이터: 2026 대전빵축제 참여 빵집 정보 수집과 등록"
       ],
       "build": [
         "영수증 사진만으로 가게를 찾는 방문 인증 API",
         "이미지 업로드 시 리사이즈, 썸네일 생성 (S3)",
         "탈퇴 30일 후 회원, 삭제 리뷰 파기 배치",
         "404, 405, 415까지 공통 에러 응답 형식 통일"
+      ],
+      "shots": [
+        {
+          "layout": "grid4",
+          "items": [
+            {
+              "src": "assets/bbang-1.jpg",
+              "alt": "빵범대 메인 화면",
+              "caption": "메인: 지금 인기있는 빵집"
+            },
+            {
+              "src": "assets/bbang-2.jpg",
+              "alt": "빵집 상세 화면",
+              "caption": "빵집 상세: 영수증 방문 인증과 AI 리뷰 요약"
+            },
+            {
+              "src": "assets/bbang-3.jpg",
+              "alt": "대시보드 화면",
+              "caption": "대시보드: 수집품 도감과 진행 중 미션"
+            },
+            {
+              "src": "assets/bbang-4.jpg",
+              "alt": "미션 현황 화면",
+              "caption": "미션 현황: 구별 방문 미션과 포인트"
+            }
+          ]
+        }
       ],
       "cases": [
         {
@@ -591,34 +619,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         "S3",
         "OAuth2",
         "Docker"
-      ],
-      "logoFit": "contain",
-      "shots": [
-        {
-          "layout": "grid4",
-          "items": [
-            {
-              "src": "assets/bbang-1.jpg",
-              "alt": "빵범대 메인 화면",
-              "caption": "메인: 지금 인기있는 빵집"
-            },
-            {
-              "src": "assets/bbang-2.jpg",
-              "alt": "빵집 상세 화면",
-              "caption": "빵집 상세: 영수증 방문 인증과 AI 리뷰 요약"
-            },
-            {
-              "src": "assets/bbang-3.jpg",
-              "alt": "대시보드 화면",
-              "caption": "대시보드: 수집품 도감과 진행 중 미션"
-            },
-            {
-              "src": "assets/bbang-4.jpg",
-              "alt": "미션 현황 화면",
-              "caption": "미션 현황: 구별 방문 미션과 포인트"
-            }
-          ]
-        }
       ]
     },
     {
@@ -637,7 +637,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "meta": [
         [
           "기간",
-          "2026.08 ~ 2026.09 (6주)"
+          "2026.08 ~ 2026.09 (약 6주)"
         ],
         [
           "인원",
@@ -648,17 +648,18 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "DB 적재, 조회 성능"
         ],
         [
-          "수상",
-          "특화 프로젝트 우수상"
+          "성과",
+          "SSAFY 특화 프로젝트 우수상"
         ]
       ],
       "role": [
-        "Kafka 컨슈머 기반 DB 적재 안정화",
-        "데이터 정합성과 조회 성능 개선"
+        "DB 적재 모듈: Kafka로 받은 기사를 빠짐없이 저장하도록 실패 처리 설계",
+        "조회 API: 대시보드가 읽는 조회 API와 인덱스 설계"
       ],
       "build": [
         "이슈 랭킹, 이슈 상세, 국가 메인, 수집 기사 수 조회 API",
-        "Flyway 기반 국가 기준 데이터 시드(249개국)"
+        "article 조회 인덱스 5개 설계, 설정을 고정한 측정 환경과 측정 스크립트 구축",
+        "Flyway로 스키마 관리와 국가 기준 데이터 시드(249개국), 저장 타임존 KST 통일"
       ],
       "shots": [
         {
@@ -794,7 +795,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "meta": [
         [
           "기간",
-          "2026.07 ~ 2026.08 (6주)"
+          "2026.07 ~ 2026.08 (약 6주)"
         ],
         [
           "인원",
@@ -805,13 +806,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "AI 파이프라인, 백엔드"
         ],
         [
-          "수상",
-          "공통 프로젝트 우수상"
+          "성과",
+          "SSAFY 공통 프로젝트 우수상"
         ]
       ],
       "role": [
-        "AI 음성 파이프라인 (Python)",
-        "백엔드 (Spring Boot), 최종 발표"
+        "AI 파이프라인: Python으로 STT 게이트와 골든셋 평가 체계 구축",
+        "백엔드: Spring Boot로 LiveKit 토큰, 주간 리포트 API 구현",
+        "발표: 최종 발표 담당"
       ],
       "build": [
         "STT 무음 게이트(SpeechGate)",
@@ -984,19 +986,19 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ],
         [
           "인원",
-          "2인 (팀장, BE / BE, AI)"
+          "2인 (BE 2)"
         ],
         [
           "담당",
           "팀장, 백엔드"
         ],
         [
-          "수상",
-          "1학기 프로젝트 우수상"
+          "성과",
+          "SSAFY 1학기 프로젝트 우수상"
         ]
       ],
       "role": [
-        "팀장: 일정과 역할 분담, 백엔드 담당",
+        "팀장: 일정과 역할 분담",
         "인증과 인가: Spring Security + JWT 이중 토큰, Redis 토큰 관리, HttpOnly Cookie 전환",
         "배포: Vercel(FE), AWS EC2(BE) 서비스 배포"
       ],
@@ -1114,7 +1116,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "meta": [
         [
           "기간",
-          "2025.03 ~ 2025.06 (4개월)"
+          "2025.03 ~ 2025.06 (약 4개월)"
         ],
         [
           "인원",
@@ -1128,6 +1130,16 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "성과",
           "Play 스토어 출시, 학회 논문"
         ]
+      ],
+      "role": [
+        "앱 인프라: 부팅 시퀀스와 백그라운드 리포트 요청 설계",
+        "서버 통신: Retrofit, Coroutine 기반 클라이언트와 서버 통신 담당"
+      ],
+      "build": [
+        "부팅 시퀀스 설계 (서버 핑 → 온보딩 확인 → FCM 토큰 등록 → 메인 화면)",
+        "FCM 연동과 알림 서비스",
+        "종목별 최신 레코드 조회 쿼리",
+        "Room 캐시로 오프라인 리포트 조회"
       ],
       "shots": [
         {
