@@ -38,6 +38,11 @@ img{display:block;max-width:100%}
 .side-nav a{display:block;text-align:center;padding:18px 0;font-size:15.5px;font-weight:600;color:rgba(255,255,255,.88);border-bottom:1px solid rgba(255,255,255,.12);transition:background .15s,color .15s}
 .side-nav a:hover{background:rgba(255,255,255,.08);color:#fff}
 .side-nav a.on{background:var(--bg);color:var(--brand-deep)}
+.side-sub{list-style:none;background:rgba(0,0,0,.16);border-bottom:1px solid rgba(255,255,255,.12);padding:6px 0}
+.side-sub[hidden]{display:none}
+.side-nav .side-sub a{padding:9px 0;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.66);border-bottom:0}
+.side-nav .side-sub a:hover{color:#fff}
+.side-nav .side-sub a.cur{color:#fff;font-weight:700}
 .side-links{margin-top:auto;display:flex;gap:14px;font-size:13px;padding-top:28px}
 .side-links a{color:rgba(255,255,255,.7)}
 .side-links a:hover{color:#fff}
@@ -273,6 +278,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   .side-nav{display:flex;width:auto;margin:0;border:0}
   .side-nav a{padding:8px 10px;font-size:13.5px;border:0;border-radius:8px}
   .content{margin-left:0}
+  .side-sub{display:none!important}
   html{scroll-padding-top:72px}
 }
 @media (max-width:560px){ .side-nav li:first-child{display:none} }
@@ -1341,7 +1347,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   <div class="side-role">Backend Engineer</div>
   <ul class="side-nav">
     <li><a href="#top" data-sec="top">Introduction</a></li>
-    <li><a href="#projects" data-sec="projects">Projects</a></li>
+    <li><a href="#projects" data-sec="projects" aria-expanded="false" aria-controls="side-sub">Projects</a><ul class="side-sub" id="side-sub" hidden></ul></li>
     <li><a href="#about" data-sec="about">About</a></li>
     <li class="m-only"><a href="#contact" data-sec="contact">Contact</a></li>
   </ul>
@@ -1570,7 +1576,16 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   }
 
   // 사이드바: 지금 보고 있는 영역을 표시한다
-  const sideLinks = [...document.querySelectorAll('.side-nav a')];
+  const sideLinks = [...document.querySelectorAll('.side-nav > li > a')];
+  // Projects를 누르면 프로젝트별 바로가기를 펼친다
+  const projLink = document.querySelector('.side-nav a[data-sec="projects"]');
+  const sideSub = document.getElementById('side-sub');
+  if (data && data.projects) sideSub.innerHTML = data.projects.map(p => `<li><a href="#${esc(p.id)}" data-pid="${esc(p.id)}">${tx(p.name)}</a></li>`).join('');
+  const subLinks = [...sideSub.querySelectorAll('a')];
+  projLink.addEventListener('click', () => {
+    sideSub.hidden = !sideSub.hidden;
+    projLink.setAttribute('aria-expanded', String(!sideSub.hidden));
+  });
   const secs = [['top', document.getElementById('intro')], ['projects', document.getElementById('projects')], ['about', document.getElementById('about')], ['contact', document.getElementById('contact')]];
   const markSide = () => {
     const y = innerHeight * 0.35;
@@ -1579,6 +1594,9 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     const contactShown = document.getElementById('contact').offsetParent !== null;
     if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = contactShown ? 'contact' : 'about';
     sideLinks.forEach(a => a.classList.toggle('on', a.dataset.sec === cur));
+    let pid = null;
+    if (cur === 'projects') for (const a of subLinks) { const el = document.getElementById(a.dataset.pid); if (el && el.getBoundingClientRect().top <= y) pid = a.dataset.pid; }
+    subLinks.forEach(a => a.classList.toggle('cur', a.dataset.pid === pid));
   };
   addEventListener('scroll', markSide, { passive: true }); markSide();
 
