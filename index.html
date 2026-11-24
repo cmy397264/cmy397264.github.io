@@ -182,7 +182,11 @@ section.band-alt .card{box-shadow:none;border:1px solid var(--line)}
 .other .go{font-size:13px;font-weight:700;color:var(--brand);margin-top:14px}
 
 /* about */
-.about{display:grid;grid-template-columns:300px 1fr;gap:16px;margin-top:32px}
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px;margin-top:32px}
+.info{padding:28px}
+.info h4,.skills h4{font-size:13.5px;font-weight:700;color:var(--brand);margin-bottom:14px;letter-spacing:0}
+.info .rows div{flex-direction:column;align-items:flex-start;gap:2px}
+.info .rows span{font-size:14px}
 .profile{padding:28px}
 .profile img{width:120px;height:160px;object-fit:cover;border-radius:12px}
 .profile .nm{font-size:22px;font-weight:800;margin-top:18px}
@@ -192,8 +196,8 @@ section.band-alt .card{box-shadow:none;border:1px solid var(--line)}
 .profile dt{font-weight:700;color:var(--text)}
 .profile dd{color:var(--mute);text-align:right}
 .skills{padding:28px}
-.skills h4{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand)}
-.sk{display:grid;grid-template-columns:200px 110px 1fr;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.skills h4{font-size:13.5px;font-weight:700;letter-spacing:0;color:var(--brand);margin-bottom:4px}
+.sk{display:grid;grid-template-columns:170px 100px 1fr;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
 .sk:first-of-type{border-top:0}
 .sk .nm{font-weight:700;font-size:15px}
 .sk .track{height:6px;background:#EEF0F4;border-radius:3px;overflow:hidden}
@@ -216,7 +220,7 @@ section.band-alt .card{box-shadow:none;border:1px solid var(--line)}
 .tl-note{font-size:12px;color:var(--caption);margin-top:8px}
 .twin{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
 .twin .card{padding:28px}
-.twin h4{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand);margin-bottom:14px}
+.twin h4{font-size:13.5px;font-weight:700;letter-spacing:0;color:var(--brand);margin-bottom:14px}
 .rows div{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
 .rows div:first-child{border-top:0}
 .rows b{font-weight:700}
@@ -1354,19 +1358,17 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <div class="sec-title">About</div>
 
     <div class="about">
-      <div class="card profile">
-        <div class="nm" style="margin-top:0">황우찬</div>
-        <div class="en">Hwang Woochan, Backend Engineer</div>
-        <dl>
-          <div><dt>생년월일</dt><dd>2001.12.10</dd></div>
-          <div><dt>경북대학교</dt><dd>컴퓨터공학 (부전공 전자), 3.80/4.5</dd></div>
-          <div><dt>창원대학교</dt><dd>정보통신공학과, 4.14/4.5</dd></div>
-          <div><dt>SSAFY</dt><dd>15기 Java/Spring</dd></div>
-          <div><dt>42 경산</dt><dd>3기</dd></div>
-        </dl>
+      <div class="card info">
+        <h4>학력과 교육</h4>
+        <div class="rows">
+          <div><b>경북대학교</b><span>컴퓨터공학 (부전공 전자), 3.80/4.5</span></div>
+          <div><b>창원대학교</b><span>정보통신공학, 4.14/4.5</span></div>
+          <div><b>SSAFY 15기</b><span>Java/Spring 백엔드, 2026.01 ~</span></div>
+          <div><b>42 경산 3기</b><span>라피신 4주, C와 Linux, 2025.01</span></div>
+        </div>
       </div>
       <div class="card skills">
-        <h4>SKILLS</h4>
+        <h4>기술</h4>
         <div class="sk"><div class="nm">Java, Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i class="top" style="width:100%"></i></div><span class="lv">상</span></div><div class="ds">트랜잭션 경계, 락 전략, Spring Security 인증 구조를 직접 설계</div></div>
         <div class="sk"><div class="nm">PostgreSQL, MySQL, JPA</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">데이터 모델링과 인덱스로 쿼리 성능 개선</div></div>
         <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">에러 핸들러, DLT 설계, Transactional Outbox</div></div>
@@ -1376,23 +1378,9 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       </div>
     </div>
 
-    <div class="card timeline">
-      <h4 class="label" style="font-size:12px">TIMELINE</h4>
-      <ul class="tl">
-        <li><span class="dt">2025.01</span><span class="ev">42 경산 3기<span>라피신 4주, C, Linux</span></span></li>
-        <li><span class="dt">2025.03</span><span class="ev">BigPicture<span>산학협력, Play 스토어 출시</span></span></li>
-        <li><span class="dt">2026.01</span><span class="ev">SSAFY 15기 입과<span>Java / Spring 백엔드</span></span></li>
-        <li class="award"><span class="dt">2026.06</span><span class="ev">1학기 우수상 2개<em class="badge" style="font-style:normal">수상</em><span>나랑등산이다 프로젝트, 성적 우수상</span></span></li>
-        <li class="award"><span class="dt">2026.08</span><span class="ev">Mandal-In 우수상<em class="badge" style="font-style:normal">수상</em><span>2학기 공통 프로젝트</span></span></li>
-        <li class="award"><span class="dt">2026.09</span><span class="ev">WITW 우수상<em class="badge" style="font-style:normal">수상</em><span>2학기 특화 프로젝트, 정보처리기사 취득</span></span></li>
-        <li><span class="dt">2026.10</span><span class="ev">빵범대<span>영수증 인증 빵집 탐방 서비스</span></span></li>
-        <li><span class="dt">2026.11</span><span class="ev">NEXA<span>2학기 자율, MSA HR ERP, 개발 서버 QA 완료</span></span></li>
-      </ul>
-    </div>
-
     <div class="twin">
       <div class="card">
-        <h4>CERTIFICATES</h4>
+        <h4>자격증</h4>
         <div class="rows">
           <div><b>정보처리기사</b><span>2026.09</span></div>
           <div><b>SQLD</b><span>2024.09</span></div>
@@ -1401,12 +1389,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         </div>
       </div>
       <div class="card">
-        <h4>AWARDS (SSAFY 우수상 4개)</h4>
+        <h4>수상</h4>
         <div class="rows">
-          <div><b>1학기 프로젝트 우수상</b><span>나랑등산이다</span></div>
-          <div><b>1학기 성적 우수상</b><span>2026.06</span></div>
-          <div><b>2학기 공통 프로젝트 우수상</b><span>Mandal-In</span></div>
-          <div><b>2학기 특화 프로젝트 우수상</b><span>What In the World</span></div>
+          <div><b>SSAFY 1학기 프로젝트 우수상</b><span>2026.06</span></div>
+          <div><b>SSAFY 1학기 성적 우수상</b><span>2026.06</span></div>
+          <div><b>SSAFY 2학기 공통 프로젝트 우수상</b><span>2026.08</span></div>
+          <div><b>SSAFY 2학기 특화 프로젝트 우수상</b><span>2026.09</span></div>
         </div>
       </div>
     </div>
