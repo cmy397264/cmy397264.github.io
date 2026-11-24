@@ -60,6 +60,12 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .btn.ghost:hover{color:var(--brand)}
 .btn:hover{transform:translateY(-1px)}
 
+.hero-top{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:48px;align-items:center}
+.hero-photo{margin:0}
+.hero-photo img{width:240px;height:300px;object-fit:cover;object-position:top;border-radius:20px;box-shadow:0 12px 32px rgba(0,28,100,.12)}
+.hero-photo figcaption{display:flex;flex-direction:column;align-items:center;margin-top:14px}
+.hero-photo b{font-size:17px;font-weight:800}
+.hero-photo span{font-size:13px;color:var(--mute)}
 /* kpi */
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
 .kpi{padding:26px 24px}
@@ -193,6 +199,10 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 @media (max-width:860px){
   nav ul{gap:16px}
   .kpis,.others{grid-template-columns:1fr}
+  .hero-top{grid-template-columns:1fr;gap:28px}
+  .hero-photo{order:-1;display:flex;align-items:center;gap:16px}
+  .hero-photo img{width:96px;height:120px;border-radius:14px}
+  .hero-photo figcaption{align-items:flex-start;margin-top:0}
   .p-meta{grid-template-columns:1fr 1fr}
   .p-role,.about,.twin{grid-template-columns:1fr}
   .shots.four{grid-template-columns:1fr 1fr}
@@ -235,6 +245,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
   <!-- HERO -->
   <header class="hero">
+    <div class="hero-top">
+    <div class="hero-text">
     <div class="eyebrow">BACKEND ENGINEER · PORTFOLIO 2026</div>
     <h1>데이터가 끊기지 않고<br><em>흐르게 하는</em> 백엔드 엔지니어입니다.</h1>
     <p class="lead">에러 없이 조용히 실패하는 곳을 먼저 찾습니다. 사라지던 기사, 몰래 쌓이던 과금, 서비스 사이에서 유실될 뻔한 결재 결과를 실측과 구조로 막아 왔습니다.</p>
@@ -246,6 +258,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       <a class="btn ghost" href="https://github.com/cmy397264" target="_blank" rel="noopener">GitHub</a>
       <a class="btn ghost" href="https://velog.io/@cmy397264" target="_blank" rel="noopener">Velog</a>
       <a class="btn ghost" href="mailto:cmy397264@naver.com">cmy397264@naver.com</a>
+    </div>
+    </div>
+    <figure class="hero-photo">
+      <img src="assets/profile.jpg" alt="황우찬 프로필 사진">
+      <figcaption><b>황우찬</b><span>Hwang Woochan · Backend</span></figcaption>
+    </figure>
     </div>
 
     <div class="kpis">
@@ -798,8 +816,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
     <div class="about">
       <div class="card profile reveal">
-        <img src="assets/profile.jpg" alt="황우찬 프로필 사진">
-        <div class="nm">황우찬</div>
+        <div class="nm" style="margin-top:0">황우찬</div>
         <div class="en">Hwang Woochan · Backend Engineer</div>
         <dl>
           <div><dt>경북대학교</dt><dd>컴퓨터공학 (부전공 전자) · 3.80/4.5</dd></div>
