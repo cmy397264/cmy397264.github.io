@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>황우찬 | Backend Engineer</title>
-<meta name="description" content="데이터가 끊기지 않고 흐르게 하는 백엔드 엔지니어 황우찬의 포트폴리오. Java · Spring Boot · PostgreSQL · Kafka.">
+<meta name="description" content="데이터가 끊기지 않고 흐르게 하는 백엔드 엔지니어 황우찬의 포트폴리오. Java, Spring Boot, PostgreSQL, Kafka.">
 <meta property="og:title" content="황우찬 | Backend Engineer">
 <meta property="og:description" content="데이터가 끊기지 않고 흐르게 하는 백엔드 엔지니어입니다.">
 <meta property="og:type" content="website">
@@ -78,6 +78,7 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .project{margin-top:40px;overflow:hidden}
 .p-head{display:flex;gap:20px;align-items:flex-start;padding:32px 32px 0}
 .p-logo{width:64px;height:64px;border-radius:14px;object-fit:cover;flex:none;background:var(--chip)}
+.p-no-n{margin-right:10px;color:var(--mute)}
 .p-no{font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--brand)}
 .p-head h3{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.3;margin-top:2px}
 .p-head .one{color:var(--text);font-size:15.5px;margin-top:2px}
@@ -276,7 +277,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "logoAlt": "NEXA 로고",
       "no": "SSAFY 2학기 자율",
       "name": "NEXA",
-      "summary": "근태 · 휴가 · 전자결재 · 급여 · 인사를 MSA로 제공하고, 엑셀 이관과 AI 업무 자동화를 갖춘 HR ERP",
+      "summary": "근태, 휴가, 전자결재, 급여, 인사를 MSA로 제공하고, 엑셀 이관과 AI 업무 자동화를 갖춘 HR ERP",
       "links": [
         {
           "label": "GitHub",
@@ -290,7 +291,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ],
         [
           "인원",
-          "6인 (BE 5 · Infra 1)"
+          "6인 (BE 5, Infra 1)"
         ],
         [
           "담당",
@@ -298,7 +299,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ],
         [
           "현황",
-          "개발 서버 배포 · QA 완료"
+          "개발 서버 배포, QA 완료"
         ]
       ],
       "role": [
@@ -319,7 +320,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             {
               "src": "assets/nexa-arch.jpg",
               "alt": "NEXA 시스템 구성도",
-              "caption": "시스템 구성도 · Spring Cloud Gateway · Eureka · Config 기반 MSA"
+              "caption": "시스템 구성도: Spring Cloud Gateway, Eureka, Config 기반 MSA"
             }
           ]
         },
@@ -329,12 +330,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             {
               "src": "assets/nexa-2.jpg",
               "alt": "AI 업무 자동화 워크플로 빌더 화면",
-              "caption": "AI 업무 자동화 빌더 · 영수증 경비 정산 워크플로"
+              "caption": "AI 업무 자동화 빌더: 영수증 경비 정산 워크플로"
             },
             {
               "src": "assets/nexa-1.jpg",
               "alt": "전자결재 결재 대기함과 문서 상세 화면",
-              "caption": "전자결재 · 자동 상신된 문서와 결재선"
+              "caption": "전자결재: 자동 상신된 문서와 결재선"
             }
           ]
         }
@@ -343,7 +344,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         "label": "결재 결과 흐름",
         "nodes": [
           {
-            "text": "휴가 · 근태 · 자동화",
+            "text": "휴가, 근태, 자동화",
             "mine": false
           },
           {
@@ -370,17 +371,17 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       },
       "cases": [
         {
-          "tag": "01 · 인증 구조",
+          "tag": "인증 구조",
           "title": "서비스마다 같은 비밀키를 들고 있어야 하는 문제",
           "rows": [
             {
               "label": "문제",
-              "text": "게이트웨이 1차 구현은 공유 비밀키(HS256)로 검증해, 게이트웨이와 결재 · 근태 · 휴가 · 급여 서비스가 모두 같은 키를 가져야 했습니다. 이 키는 발급에도 쓰여 한 곳만 새도 토큰을 위조할 수 있었고, 키를 바꾸면 전부 다시 배포해야 했습니다.",
+              "text": "게이트웨이 1차 구현은 공유 비밀키(HS256)로 검증해, 게이트웨이와 결재, 근태, 휴가, 급여 서비스가 모두 같은 키를 가져야 했습니다. 이 키는 발급에도 쓰여 한 곳만 새도 토큰을 위조할 수 있었고, 키를 바꾸면 전부 다시 배포해야 했습니다.",
               "key": false
             },
             {
               "label": "해결",
-              "text": "RS256을 택해 개인키는 직원 서비스에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명 · 만료 · 토큰 종류 검사와 401/403 응답은 nexa-security 라이브러리로 묶어 Package Registry로 배포했습니다.",
+              "text": "RS256을 택해 개인키는 직원 서비스에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명, 만료, 토큰 종류 검사와 401/403 응답은 nexa-security 라이브러리로 묶어 Package Registry로 배포했습니다.",
               "key": true
             }
           ],
@@ -400,12 +401,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           ]
         },
         {
-          "tag": "02 · 동시성",
+          "tag": "동시성",
           "title": "결재와 회수가 동시에 오면 둘 다 성공할 수 있는 문제",
           "rows": [
             {
               "label": "문제",
-              "text": "결재 처리와 결재선 변경은 문서 상태를 읽어 검증한 뒤 바꾸는데, 같은 문서에 결재 · 회수 · 결재자 추가가 동시에 오면 둘 다 옛 상태로 검증을 통과했습니다. 회수된 문서가 승인돼도 에러는 나지 않았습니다.",
+              "text": "결재 처리와 결재선 변경은 문서 상태를 읽어 검증한 뒤 바꾸는데, 같은 문서에 결재, 회수, 결재자 추가가 동시에 오면 둘 다 옛 상태로 검증을 통과했습니다. 회수된 문서가 승인돼도 에러는 나지 않았습니다.",
               "key": false
             },
             {
@@ -424,7 +425,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       ],
       "moreCases": [
         {
-          "tag": "03 · 이벤트 유실",
+          "tag": "이벤트 유실",
           "title": "결재가 승인돼도 휴가 서비스가 모를 수 있는 문제",
           "rows": [
             {
@@ -434,7 +435,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "해결",
-              "text": "결재 상태 변경과 아웃박스 기록을 같은 트랜잭션으로 커밋하고, 발행기는 `SKIP LOCKED`로 가져가 실패하면 그 자리에서 멈추게 했습니다. 프로듀서는 `acks=all` · idempotence, 문서별 키로 순서를 보장하고, 수신 측과 멱등 처리 · DLT 계약을 합의했습니다.",
+              "text": "결재 상태 변경과 아웃박스 기록을 같은 트랜잭션으로 커밋하고, 발행기는 `SKIP LOCKED`로 가져가 실패하면 그 자리에서 멈추게 했습니다. 프로듀서는 `acks=all`, idempotence, 문서별 키로 순서를 보장하고, 수신 측과 멱등 처리, DLT 계약을 합의했습니다.",
               "key": true
             }
           ],
@@ -468,7 +469,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "no": "팀 프로젝트",
       "name": "빵범대",
       "nameSub": "BBangPatrol",
-      "summary": "영수증 한 장으로 빵집 방문을 인증하고, 미션·포인트·수집품으로 이어지는 빵집 탐방 서비스",
+      "summary": "영수증 한 장으로 빵집 방문을 인증하고, 미션, 포인트, 수집품으로 이어지는 빵집 탐방 서비스",
       "links": [
         {
           "label": "Backend",
@@ -490,7 +491,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ],
         [
           "담당",
-          "백엔드 · 배포"
+          "백엔드, 배포"
         ],
         [
           "기여",
@@ -510,12 +511,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       ],
       "cases": [
         {
-          "tag": "01 · 트랜잭션 경계",
+          "tag": "트랜잭션 경계",
           "title": "방문 인증 후 미션이 갱신되지 않는 문제",
           "rows": [
             {
               "label": "문제",
-              "text": "영수증 인증 · 리뷰 작성 · 수집품 뽑기 안에서 미션까지 함께 갱신하다 보니, 한쪽이 실패하면 서로 영향을 주고 미션이 갱신되지 않는 경우가 생겼습니다.",
+              "text": "영수증 인증, 리뷰 작성, 수집품 뽑기 안에서 미션까지 함께 갱신하다 보니, 한쪽이 실패하면 서로 영향을 주고 미션이 갱신되지 않는 경우가 생겼습니다.",
               "key": false
             },
             {
@@ -526,7 +527,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           ]
         },
         {
-          "tag": "02 · 인증 정확도",
+          "tag": "인증 정확도",
           "title": "영수증 인증 실패 원인을 알 수 없는 문제",
           "rows": [
             {
@@ -560,22 +561,22 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             {
               "src": "assets/bbang-1.jpg",
               "alt": "빵범대 메인 화면",
-              "caption": "메인 · 지금 인기있는 빵집"
+              "caption": "메인: 지금 인기있는 빵집"
             },
             {
               "src": "assets/bbang-2.jpg",
               "alt": "빵집 상세 화면",
-              "caption": "빵집 상세 · 영수증 방문 인증과 AI 리뷰 요약"
+              "caption": "빵집 상세: 영수증 방문 인증과 AI 리뷰 요약"
             },
             {
               "src": "assets/bbang-3.jpg",
               "alt": "대시보드 화면",
-              "caption": "대시보드 · 수집품 도감과 진행 중 미션"
+              "caption": "대시보드: 수집품 도감과 진행 중 미션"
             },
             {
               "src": "assets/bbang-4.jpg",
               "alt": "미션 현황 화면",
-              "caption": "미션 현황 · 구별 방문 미션과 포인트"
+              "caption": "미션 현황: 구별 방문 미션과 포인트"
             }
           ]
         }
@@ -585,7 +586,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "id": "witw",
       "logo": "assets/logo-witw.png",
       "logoAlt": "What In the World 로고",
-      "no": "SSAFY 2학기 특화 · 우수상",
+      "no": "SSAFY 2학기 특화, 우수상",
       "name": "What In the World",
       "summary": "전 세계 뉴스 논조를 지구본 위에 실시간으로 보여 주는 글로벌 이슈 모니터링 서비스",
       "links": [
@@ -601,11 +602,11 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ],
         [
           "인원",
-          "6인 (BE 3 · AI 1 · FE 2)"
+          "6인 (BE 3, AI 1, FE 2)"
         ],
         [
           "담당",
-          "DB 적재 · 조회 성능"
+          "DB 적재, 조회 성능"
         ],
         [
           "수상",
@@ -627,17 +628,17 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             {
               "src": "assets/witw-1.jpg",
               "alt": "글로벌 대시보드 화면",
-              "caption": "글로벌 대시보드 · 실시간 이슈 TOP 5"
+              "caption": "글로벌 대시보드: 실시간 이슈 TOP 5"
             },
             {
               "src": "assets/witw-2.jpg",
               "alt": "국가 상세 화면",
-              "caption": "국가 상세 · 핫이슈 TOP 5"
+              "caption": "국가 상세: 핫이슈 TOP 5"
             },
             {
               "src": "assets/witw-3.jpg",
               "alt": "이슈 상세 논조 지구본 화면",
-              "caption": "이슈 상세 · 논조 지구본"
+              "caption": "이슈 상세: 논조 지구본"
             }
           ]
         }
@@ -669,7 +670,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       },
       "cases": [
         {
-          "tag": "01 · 데이터 유실",
+          "tag": "데이터 유실",
           "title": "기사 10,794건이 에러 없이 사라지는 문제",
           "rows": [
             {
@@ -679,7 +680,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "해결",
-              "text": "실패를 \"재시도로 풀리는가\"로 나눴습니다. DB 연결 부족 · 데드락 같은 일시 오류는 0.5초~8초 지수 백오프(무작위 편차 포함)로 재시도하고, 미등록 국가 · 형식 오류 같은 영구 오류는 원인과 위치를 기록해 즉시 DLT로 보존합니다. 국가 데이터는 Flyway 시드로 채우고, 새 컨슈머가 쌓인 메시지를 건너뛰지 않도록 오프셋 설정을 바꿨습니다.",
+              "text": "실패를 \"재시도로 풀리는가\"로 나눴습니다. DB 연결 부족, 데드락 같은 일시 오류는 0.5초~8초 지수 백오프(무작위 편차 포함)로 재시도하고, 미등록 국가, 형식 오류 같은 영구 오류는 원인과 위치를 기록해 즉시 DLT로 보존합니다. 국가 데이터는 Flyway 시드로 채우고, 새 컨슈머가 쌓인 메시지를 건너뛰지 않도록 오프셋 설정을 바꿨습니다.",
               "key": true
             },
             {
@@ -690,7 +691,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           ]
         },
         {
-          "tag": "02 · 조회 성능",
+          "tag": "조회 성능",
           "title": "어떤 인덱스가 실제로 효과 있는지 수치로 골라야 하는 문제",
           "rows": [
             {
@@ -700,7 +701,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "해결",
-              "text": "설정을 고정한 측정 전용 컨테이너에서 후보를 비교했고, 측정이 틀릴 수 있는 지점 3가지(캐시 워밍 오염, 표본 부족, 단독 판정)를 먼저 걸러 냈습니다. 2배 이상 빨라진 후보만 채택해 인덱스 5개 채택 · 2개 기각, 가장 느린 쿼리는 재작성했습니다.",
+              "text": "설정을 고정한 측정 전용 컨테이너에서 후보를 비교했고, 측정이 틀릴 수 있는 지점 3가지(캐시 워밍 오염, 표본 부족, 단독 판정)를 먼저 걸러 냈습니다. 2배 이상 빨라진 후보만 채택해 인덱스 5개 채택, 2개 기각, 가장 느린 쿼리는 재작성했습니다.",
               "key": true
             }
           ],
@@ -711,7 +712,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             ],
             [
               "1,485 → 536ms",
-              "조회 합계 · 인덱스 5개"
+              "조회 합계, 인덱스 5개"
             ],
             [
               "+19.9%",
@@ -732,7 +733,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "id": "mandalin",
       "logo": "assets/logo-mandalin.png",
       "logoAlt": "Mandal-In 로고",
-      "no": "SSAFY 2학기 공통 · 우수상",
+      "no": "SSAFY 2학기 공통, 우수상",
       "name": "Mandal-In",
       "summary": "음성 대화로 만다라트를 채우는 AI 코치 웹",
       "links": [
@@ -748,11 +749,11 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ],
         [
           "인원",
-          "6인 (팀장 1 · BE 3 · FE 2)"
+          "6인 (팀장 1, BE 3, FE 2)"
         ],
         [
           "담당",
-          "AI 파이프라인 · 백엔드"
+          "AI 파이프라인, 백엔드"
         ],
         [
           "수상",
@@ -775,7 +776,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             {
               "src": "assets/md-1.jpg",
               "alt": "홈 화면",
-              "caption": "홈 · 오늘의 할 일과 내 마을"
+              "caption": "홈: 오늘의 할 일과 내 마을"
             },
             {
               "src": "assets/md-2.jpg",
@@ -797,7 +798,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       ],
       "cases": [
         {
-          "tag": "01 · 과금 구조",
+          "tag": "과금 구조",
           "title": "말하지 않아도 STT 요금이 쌓이는 문제",
           "rows": [
             {
@@ -827,7 +828,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           ]
         },
         {
-          "tag": "02 · 프롬프트 회귀",
+          "tag": "프롬프트 회귀",
           "title": "프롬프트를 줄이자 출력 정상률이 떨어지는 문제",
           "rows": [
             {
@@ -852,14 +853,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             ],
             [
               "-21%",
-              "프롬프트 길이 · 호출당 약 400토큰 절감"
+              "프롬프트 길이, 호출당 약 400토큰 절감"
             ]
           ]
         }
       ],
       "moreCases": [
         {
-          "tag": "03 · 서버 한도",
+          "tag": "서버 한도",
           "title": "1GiB 서버의 동시 대화방 한도를 알 수 없는 문제",
           "rows": [
             {
@@ -899,9 +900,9 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "id": "hiking",
       "logo": "assets/logo-hiking.png",
       "logoAlt": "나랑등산이다 로고",
-      "no": "SSAFY 1학기 · 우수상",
+      "no": "SSAFY 1학기, 우수상",
       "name": "나랑등산이다",
-      "summary": "100대 명산 GPX 코스를 지도로 미리 걷고, 후기 · 게시판 · AI 챗봇으로 등산 정보를 나누는 웹 서비스",
+      "summary": "100대 명산 GPX 코스를 지도로 미리 걷고, 후기, 게시판, AI 챗봇으로 등산 정보를 나누는 웹 서비스",
       "links": [
         {
           "label": "서비스",
@@ -919,11 +920,11 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ],
         [
           "인원",
-          "2인 (팀장 · BE / BE · AI)"
+          "2인 (팀장, BE / BE, AI)"
         ],
         [
           "담당",
-          "팀장 · 백엔드"
+          "팀장, 백엔드"
         ],
         [
           "수상",
@@ -952,7 +953,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             {
               "src": "assets/hike-2.jpg",
               "alt": "산 목록 화면",
-              "caption": "산 목록 · 지역 필터와 정렬"
+              "caption": "산 목록: 지역 필터와 정렬"
             },
             {
               "src": "assets/hike-3.jpg",
@@ -964,7 +965,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       ],
       "cases": [
         {
-          "tag": "01 · 의존 방향",
+          "tag": "의존 방향",
           "title": "순환 참조로 서버가 뜨지 않는 문제",
           "rows": [
             {
@@ -974,7 +975,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "해결",
-              "text": "`@Lazy`는 구조를 그대로 남긴다고 보고, 두 서비스가 실제로 함께 쓰던 토큰 저장 · 삭제를 Redis와 JwtUtil만 의존하는 TokenService로 분리해 의존을 한 방향으로 정리했습니다.",
+              "text": "`@Lazy`는 구조를 그대로 남긴다고 보고, 두 서비스가 실제로 함께 쓰던 토큰 저장, 삭제를 Redis와 JwtUtil만 의존하는 TokenService로 분리해 의존을 한 방향으로 정리했습니다.",
               "key": true
             }
           ],
@@ -986,7 +987,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           ]
         },
         {
-          "tag": "02 · 외부 저장소와 트랜잭션",
+          "tag": "외부 저장소와 트랜잭션",
           "title": "DB와 R2 파일이 어긋나는 문제",
           "rows": [
             {
@@ -1043,15 +1044,15 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ],
         [
           "인원",
-          "5인 (BE 2 · 모바일 2 · 기획 1)"
+          "5인 (BE 2, 모바일 2, 기획 1)"
         ],
         [
           "담당",
-          "앱 인프라 · 서버 통신"
+          "앱 인프라, 서버 통신"
         ],
         [
           "성과",
-          "Play 스토어 출시 · 학회 논문"
+          "Play 스토어 출시, 학회 논문"
         ]
       ],
       "shots": [
@@ -1083,7 +1084,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       ],
       "cases": [
         {
-          "tag": "01 · 응답 대기",
+          "tag": "응답 대기",
           "title": "리포트를 다 받을 때까지 앱에 들어갈 수 없는 문제",
           "rows": [
             {
@@ -1109,7 +1110,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           ]
         },
         {
-          "tag": "02 · 조용한 실패",
+          "tag": "조용한 실패",
           "title": "에러 로그 없이 알림이 오지 않는 문제",
           "rows": [
             {
@@ -1137,7 +1138,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   ],
   "others": [
     {
-      "kind": "사이드 · 도구",
+      "kind": "사이드 프로젝트",
       "name": "Velog Grass",
       "desc": "Velog 글 작성일을 GraphQL로 모아 GitHub 잔디 같은 SVG로 그리고, GitHub Actions로 자동 갱신합니다.",
       "stack": [
@@ -1147,7 +1148,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "url": "https://github.com/cmy397264/Velog_grass"
     },
     {
-      "kind": "사이드 · 실험",
+      "kind": "사이드 프로젝트",
       "name": "Pororo OCR 테스트",
       "desc": "Kakao Brain Pororo로 영수증 OCR을 실험했습니다. 호환되지 않는 의존성은 패치로 걷어 내고 OCR만 동작하게 구성했습니다.",
       "stack": [
@@ -1158,9 +1159,9 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "url": "https://github.com/cmy397264/KakaoPororo"
     },
     {
-      "kind": "사이드 · 안드로이드",
+      "kind": "사이드 프로젝트",
       "name": "POS App",
-      "desc": "테이블 · 주문 · 결제 · 영수증 흐름을 Jetpack Compose와 Room으로 구현한 매장용 POS 앱입니다.",
+      "desc": "테이블, 주문, 결제, 영수증 흐름을 Jetpack Compose와 Room으로 구현한 매장용 POS 앱입니다.",
       "stack": [
         "Kotlin",
         "Compose",
@@ -1189,7 +1190,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   <header class="hero">
     <div class="hero-top">
     <div class="hero-text">
-    <div class="eyebrow">BACKEND ENGINEER · PORTFOLIO 2026</div>
+    <div class="eyebrow">BACKEND ENGINEER PORTFOLIO 2026</div>
     <h1>데이터가 끊기지 않고<br><em>흐르게 하는</em> 백엔드 엔지니어입니다.</h1>
     <p class="lead">에러 없이 조용히 실패하는 곳을 먼저 찾습니다. 사라지던 기사, 몰래 쌓이던 과금, 서비스 사이에서 유실될 뻔한 결재 결과를 실측과 구조로 막아 왔습니다.</p>
     <div class="chips" style="margin-top:22px">
@@ -1204,7 +1205,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     </div>
     <figure class="hero-photo">
       <img src="assets/profile.jpg" alt="황우찬 프로필 사진">
-      <figcaption><b>황우찬</b><span>Hwang Woochan · Backend</span></figcaption>
+      <figcaption><b>황우찬</b><span>Hwang Woochan</span></figcaption>
     </figure>
     </div>
 
@@ -1229,22 +1230,22 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <div class="about">
       <div class="card profile">
         <div class="nm" style="margin-top:0">황우찬</div>
-        <div class="en">Hwang Woochan · Backend Engineer</div>
+        <div class="en">Hwang Woochan, Backend Engineer</div>
         <dl>
-          <div><dt>경북대학교</dt><dd>컴퓨터공학 (부전공 전자) · 3.80/4.5</dd></div>
-          <div><dt>창원대학교</dt><dd>정보통신공학과 · 4.14/4.5</dd></div>
+          <div><dt>경북대학교</dt><dd>컴퓨터공학 (부전공 전자), 3.80/4.5</dd></div>
+          <div><dt>창원대학교</dt><dd>정보통신공학과, 4.14/4.5</dd></div>
           <div><dt>SSAFY</dt><dd>15기 Java/Spring</dd></div>
           <div><dt>42 경산</dt><dd>3기</dd></div>
         </dl>
       </div>
       <div class="card skills">
         <h4>SKILLS</h4>
-        <div class="sk"><div class="nm">Java · Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i class="top" style="width:100%"></i></div><span class="lv">상</span></div><div class="ds">트랜잭션 경계 · 락 전략 · Spring Security 인증 구조를 직접 설계</div></div>
-        <div class="sk"><div class="nm">PostgreSQL · MySQL · JPA</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">데이터 모델링과 인덱스로 쿼리 성능 개선</div></div>
-        <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">에러 핸들러 · DLT 설계, Transactional Outbox</div></div>
+        <div class="sk"><div class="nm">Java, Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i class="top" style="width:100%"></i></div><span class="lv">상</span></div><div class="ds">트랜잭션 경계, 락 전략, Spring Security 인증 구조를 직접 설계</div></div>
+        <div class="sk"><div class="nm">PostgreSQL, MySQL, JPA</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">데이터 모델링과 인덱스로 쿼리 성능 개선</div></div>
+        <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">에러 핸들러, DLT 설계, Transactional Outbox</div></div>
         <div class="sk"><div class="nm">Redis</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">토큰 저장소 구축과 데이터 캐싱</div></div>
-        <div class="sk"><div class="nm">Kotlin · Android</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Retrofit · Coroutine 비동기 통신</div></div>
-        <div class="sk"><div class="nm">Linux · Docker</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">컨테이너 배포, Crontab 스케줄링</div></div>
+        <div class="sk"><div class="nm">Kotlin, Android</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Retrofit, Coroutine 비동기 통신</div></div>
+        <div class="sk"><div class="nm">Linux, Docker</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">컨테이너 배포, Crontab 스케줄링</div></div>
         <p class="note">기술 수준은 본인 평가입니다.</p>
       </div>
     </div>
@@ -1252,14 +1253,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <div class="card timeline">
       <h4 class="label" style="font-size:12px">TIMELINE</h4>
       <ul class="tl">
-        <li><span class="dt">2025.01</span><span class="ev">42 경산 3기<span>라피신 4주 · C · Linux</span></span></li>
-        <li><span class="dt">2025.03</span><span class="ev">BigPicture<span>산학협력 · Play 스토어 출시</span></span></li>
+        <li><span class="dt">2025.01</span><span class="ev">42 경산 3기<span>라피신 4주, C, Linux</span></span></li>
+        <li><span class="dt">2025.03</span><span class="ev">BigPicture<span>산학협력, Play 스토어 출시</span></span></li>
         <li><span class="dt">2026.01</span><span class="ev">SSAFY 15기 입과<span>Java / Spring 백엔드</span></span></li>
-        <li class="award"><span class="dt">2026.06</span><span class="ev">1학기 우수상 2개<em class="badge" style="font-style:normal">수상</em><span>나랑등산이다 프로젝트 · 성적 우수상</span></span></li>
+        <li class="award"><span class="dt">2026.06</span><span class="ev">1학기 우수상 2개<em class="badge" style="font-style:normal">수상</em><span>나랑등산이다 프로젝트, 성적 우수상</span></span></li>
         <li class="award"><span class="dt">2026.08</span><span class="ev">Mandal-In 우수상<em class="badge" style="font-style:normal">수상</em><span>2학기 공통 프로젝트</span></span></li>
-        <li class="award"><span class="dt">2026.09</span><span class="ev">WITW 우수상<em class="badge" style="font-style:normal">수상</em><span>2학기 특화 프로젝트 · 정보처리기사 취득</span></span></li>
+        <li class="award"><span class="dt">2026.09</span><span class="ev">WITW 우수상<em class="badge" style="font-style:normal">수상</em><span>2학기 특화 프로젝트, 정보처리기사 취득</span></span></li>
         <li><span class="dt">2026.10</span><span class="ev">빵범대<span>영수증 인증 빵집 탐방 서비스</span></span></li>
-        <li><span class="dt">2026.11</span><span class="ev">NEXA<span>2학기 자율 · MSA HR ERP · 개발 서버 QA 완료</span></span></li>
+        <li><span class="dt">2026.11</span><span class="ev">NEXA<span>2학기 자율, MSA HR ERP, 개발 서버 QA 완료</span></span></li>
       </ul>
     </div>
 
@@ -1274,7 +1275,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         </div>
       </div>
       <div class="card">
-        <h4>AWARDS · SSAFY 우수상 4개</h4>
+        <h4>AWARDS (SSAFY 우수상 4개)</h4>
         <div class="rows">
           <div><b>1학기 프로젝트 우수상</b><span>나랑등산이다</span></div>
           <div><b>1학기 성적 우수상</b><span>2026.06</span></div>
@@ -1301,7 +1302,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   </section>
 </main>
 
-<footer>© 2026 황우찬 · Built with plain HTML &amp; CSS, hosted on GitHub Pages</footer>
+<footer>© 2026 황우찬. Built with plain HTML &amp; CSS, hosted on GitHub Pages</footer>
 
 <div id="lb" role="dialog" aria-label="이미지 확대"><img alt=""></div>
 
@@ -1360,7 +1361,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       <div class="p-head">
         <img class="p-logo${p.logoFit === 'contain' ? ' contain' : ''}" src="${url(p.logo)}" alt="${esc(p.logoAlt)}">
         <div>
-          <div class="p-no">프로젝트 ${two(i + 1)} · ${tx(p.no)}</div>
+          <div class="p-no"><span class="p-no-n">프로젝트 ${two(i + 1)}</span>${tx(p.no)}</div>
           <h3>${tx(p.name)}${p.nameSub ? ` <span class="name-sub">${tx(p.nameSub)}</span>` : ''}</h3>
           <p class="one">${tx(p.summary)}</p>
         </div>
