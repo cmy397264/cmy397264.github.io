@@ -293,7 +293,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ],
         [
           "담당",
-          "user · approval · nexa-security"
+          "인증, 직원, 결재 서비스"
         ],
         [
           "현황",
@@ -301,11 +301,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ]
       ],
       "role": [
-        "인증 서버(user-service): RS256 JWT, JWKS 공개키, Redis 로그인 실패 잠금, 로그아웃 블랙리스트",
-        "토큰 검증 공통 라이브러리 nexa-security 제작, 4개 서비스 적용",
-        "전자결재(approval-service) 설계와 구현"
+        "인증, 인가",
+        "직원 서비스",
+        "결재 서비스"
       ],
       "build": [
+        "토큰 서명을 공유 비밀키(HS256)에서 RS256 + JWKS 공개키 방식으로 전환",
+        "토큰 검증을 공통 라이브러리 nexa-security로 묶어 4개 서비스에 적용",
+        "Redis 기반 로그인 실패 잠금, 로그아웃 블랙리스트",
         "결재 결과를 Transactional Outbox → Kafka로 발행, 발행 지연 메트릭 감시"
       ],
       "shots": [
@@ -376,7 +379,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "해결",
-              "text": "RS256을 택해 개인키는 user-service에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명 · 만료 · 토큰 종류 검사와 401/403 응답은 nexa-security 라이브러리로 묶어 Package Registry로 배포했습니다.",
+              "text": "RS256을 택해 개인키는 직원 서비스에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명 · 만료 · 토큰 종류 검사와 401/403 응답은 nexa-security 라이브러리로 묶어 Package Registry로 배포했습니다.",
               "key": true
             }
           ],
