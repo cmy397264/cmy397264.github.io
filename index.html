@@ -9,7 +9,7 @@
 <meta property="og:description" content="데이터가 끊기지 않고 흐르게 하는 백엔드 엔지니어입니다.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23002FA7'/><circle cx='16' cy='16' r='5' fill='white'/></svg>">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/fonts/pretendard.css">
 <style>
 :root{
   --brand:#002FA7; --brand-deep:#001C64; --accent:#4D6DC1;
@@ -113,7 +113,6 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .flow .f-label{width:100%;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand);margin-bottom:4px}
 .node{font-size:13.5px;font-weight:700;padding:9px 14px;border-radius:8px;background:var(--chip);color:var(--ink);position:relative}
 .node.mine{background:var(--brand);color:#fff}
-.arrow{color:var(--caption);font-size:14px}
 .flow .hint{width:100%;font-size:12px;color:var(--caption);margin-top:10px}
 .p-top-links{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;flex:none;max-width:40%}
 .p-top-links a{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:var(--brand);padding:8px 14px;border-radius:8px;background:var(--pale);transition:background .15s}
@@ -130,6 +129,18 @@ details.more summary::after{content:"+";font-size:16px}
 details.more[open] summary::after{content:"−"}
 details.more .cases{margin-top:14px}
 
+.p-logo.contain{object-fit:contain;background:#fff}
+.name-sub{font-size:15px;font-weight:600;color:var(--mute)}
+.other h4{margin-top:6px}
+.flow .arr{width:26px;height:12px;flex:none}
+.flow .arr path{fill:none;stroke:var(--caption);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.anim .flow .node{opacity:0;transform:translateY(4px);transition:opacity .35s ease var(--d),transform .35s ease var(--d)}
+.anim .flow .arr path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .3s ease var(--d)}
+.anim .flow.drawn .node{opacity:1;transform:none}
+.anim .flow.drawn .arr path{stroke-dashoffset:0}
+.data-error{margin:24px 0 0;padding:20px 24px;border-radius:12px;background:#FFF4F4;border:1px solid #F1C6C6;color:#7A1F1F;font-size:14.5px}
+.data-error b{font-size:16px}
+.data-error ul{margin:8px 0 0 18px}
 /* other */
 .others{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
 .other{padding:24px;display:flex;flex-direction:column;transition:transform .15s}
@@ -191,9 +202,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 #lb.on{display:flex}
 #lb img{max-width:100%;max-height:100%;border-radius:10px}
 
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-.reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 @media (max-width:860px){
   nav ul{gap:16px}
@@ -228,6 +237,910 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 </style>
 </head>
 <body>
+<!--
+  포트폴리오 내용 수정 안내
+  - 핵심 수치(kpis), 프로젝트(projects), 사이드 프로젝트(others)는 아래 portfolio-data JSON 한 곳만 고치면 됩니다.
+  - 프로젝트 번호(PROJECT 01…)는 projects 배열 순서대로 자동으로 붙습니다. 순서를 바꾸면 번호도 바뀝니다.
+  - 글은 모두 일반 텍스트로 처리됩니다. HTML 태그는 쓰지 말고, 코드 표기는 `백틱`으로 감싸면 됩니다.
+  - 프로젝트 필드: id, logo, logoAlt, logoFit(선택: contain), no, name, nameSub(선택), summary,
+    links[{label,url}], meta[[항목,값]], role[], build[], shots[{layout: one|two|three|four|grid4, items[{src,alt,caption}]}](선택),
+    flow{label, nodes[{text, mine}]}(선택), cases[{tag,title,rows[{label,text,key}],results[[수치,설명]](선택)}],
+    moreCases[](선택: "트러블슈팅 더 보기" 안에 접힘), stack[]
+  - 형식이 틀리면 화면 맨 위에 어느 칸이 문제인지 안내가 뜹니다.
+-->
+<script type="application/json" id="portfolio-data">
+{
+  "kpis": [
+    {
+      "label": "NEXA",
+      "value": "동시 요청 3종 → 1건",
+      "desc": "결재 · 회수 · 결재자 추가가 겹쳐도 한 요청만 반영"
+    },
+    {
+      "label": "WHAT IN THE WORLD",
+      "value": "252.7 → 12.4ms",
+      "desc": "가장 느린 조회 쿼리 · 특화 프로젝트 우수상"
+    },
+    {
+      "label": "MANDAL-IN",
+      "value": "900초 → 0초",
+      "desc": "말하지 않는 15분의 STT 과금 · 공통 프로젝트 우수상"
+    }
+  ],
+  "projects": [
+    {
+      "id": "nexa",
+      "logo": "assets/logo-nexa.png",
+      "logoAlt": "NEXA 로고",
+      "no": "SSAFY 2학기 자율",
+      "name": "NEXA",
+      "summary": "근태 · 휴가 · 전자결재 · 급여 · 인사를 MSA로 제공하고, 엑셀 이관과 AI 업무 자동화를 갖춘 HR ERP",
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/cmy397264/nexa"
+        }
+      ],
+      "meta": [
+        [
+          "기간",
+          "2026.10 ~ 2026.11 (약 5주)"
+        ],
+        [
+          "인원",
+          "6인 (BE 5 · Infra 1)"
+        ],
+        [
+          "담당",
+          "user · approval · nexa-security"
+        ],
+        [
+          "현황",
+          "개발 서버 배포 · QA 완료"
+        ]
+      ],
+      "role": [
+        "인증 서버(user-service): RS256 JWT · JWKS 공개키, Redis 로그인 실패 잠금 · 로그아웃 블랙리스트",
+        "토큰 검증 공통 라이브러리 nexa-security 제작, 4개 서비스 적용",
+        "전자결재(approval-service) 설계 · 구현"
+      ],
+      "build": [
+        "위임전결 규정(금액 · 휴가 일수 · 초과근무) + 조직도로 결재선 자동 생성",
+        "결재 결과를 Transactional Outbox → Kafka로 발행, 발행 지연 메트릭 감시",
+        "approval 162개 · user 98개 테스트로 결재 · 인증 흐름 검증"
+      ],
+      "shots": [
+        {
+          "layout": "one",
+          "items": [
+            {
+              "src": "assets/nexa-arch.jpg",
+              "alt": "NEXA 시스템 구성도",
+              "caption": "시스템 구성도 · Spring Cloud Gateway · Eureka · Config 기반 MSA"
+            }
+          ]
+        },
+        {
+          "layout": "two",
+          "items": [
+            {
+              "src": "assets/nexa-2.jpg",
+              "alt": "업무 자동화 워크플로 빌더 화면",
+              "caption": "AI 업무 자동화 빌더"
+            },
+            {
+              "src": "assets/nexa-1.jpg",
+              "alt": "자동 상신된 결재 문서 화면",
+              "caption": "자동 상신된 결재 문서"
+            }
+          ]
+        }
+      ],
+      "flow": {
+        "label": "RESULT FLOW",
+        "nodes": [
+          {
+            "text": "휴가 · 근태 · 자동화",
+            "mine": false
+          },
+          {
+            "text": "결재 생성",
+            "mine": true
+          },
+          {
+            "text": "결재 처리",
+            "mine": true
+          },
+          {
+            "text": "아웃박스",
+            "mine": true
+          },
+          {
+            "text": "Kafka",
+            "mine": false
+          },
+          {
+            "text": "원본 서비스",
+            "mine": false
+          }
+        ]
+      },
+      "cases": [
+        {
+          "tag": "01 · 인증 구조",
+          "title": "서비스마다 같은 비밀키를 들고 있어야 했다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "게이트웨이 1차 구현은 공유 비밀키(HS256)로 검증해, 게이트웨이와 결재 · 근태 · 휴가 · 급여 서비스가 모두 같은 키를 가져야 했습니다. 이 키는 발급에도 쓰여 한 곳만 새도 토큰을 위조할 수 있었고, 키를 바꾸면 전부 다시 배포해야 했습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "RS256을 택해 개인키는 user-service에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명 · 만료 · 토큰 종류 검사와 401/403 응답은 nexa-security 라이브러리로 묶어 Package Registry로 배포했습니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "모든 서비스 → 1곳",
+              "개인키 보관 지점"
+            ],
+            [
+              "4개 서비스",
+              "같은 규칙으로 토큰 검증"
+            ],
+            [
+              "재배포 0회",
+              "키 ID(kid)로 키 교체"
+            ]
+          ]
+        },
+        {
+          "tag": "02 · 동시성",
+          "title": "결재와 회수가 동시에 오면 둘 다 성공할 수 있었다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "결재 처리와 결재선 변경은 문서 상태를 읽어 검증한 뒤 바꾸는데, 같은 문서에 결재 · 회수 · 결재자 추가가 동시에 오면 둘 다 옛 상태로 검증을 통과했습니다. 회수된 문서가 승인돼도 에러는 나지 않았습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "낙관적 락은 실제로 겹치는 요청마다 재시도 로직이 필요하고, 결재자 추가는 approval_line 행 INSERT라 문서의 `@Version`으로 잡히지도 않았습니다. 그래서 문서 행을 `FOR UPDATE`로 잠가 늦은 요청이 바뀐 상태로 다시 검증되게 했습니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "동시 요청 3종",
+              "한 요청만 반영, 늦은 요청은 업무 오류 응답"
+            ]
+          ]
+        }
+      ],
+      "moreCases": [
+        {
+          "tag": "03 · 이벤트 유실",
+          "title": "결재는 승인됐는데, 휴가 서비스가 모를 수 있었다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "상태 저장과 Kafka 발행을 따로 하면, 커밋 뒤 발행이 실패할 때 승인된 휴가가 계속 '결재 대기'로 남는 구조였습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "결재 상태 변경과 아웃박스 기록을 같은 트랜잭션으로 커밋하고, 발행기는 `SKIP LOCKED`로 가져가 실패하면 그 자리에서 멈추게 했습니다. 프로듀서는 `acks=all` · idempotence, 문서별 키로 순서를 보장하고, 수신 측과 멱등 처리 · DLT 계약을 합의했습니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "0건",
+              "결재 롤백 시 남는 이벤트"
+            ],
+            [
+              "5분",
+              "미발행 이벤트 지연 경보 기준"
+            ]
+          ]
+        }
+      ],
+      "stack": [
+        "Java 21",
+        "Spring Boot 4",
+        "Spring Cloud",
+        "JPA",
+        "Flyway",
+        "PostgreSQL",
+        "Redis",
+        "Kafka"
+      ]
+    },
+    {
+      "id": "bbang",
+      "logo": "assets/logo-bbang.png",
+      "logoAlt": "빵범대 로고",
+      "no": "팀 프로젝트",
+      "name": "빵범대",
+      "nameSub": "BBangPatrol",
+      "summary": "영수증 한 장으로 빵집 방문을 인증하고, 미션·포인트·수집품으로 이어지는 빵집 탐방 서비스",
+      "links": [
+        {
+          "label": "Backend",
+          "url": "https://github.com/BBangPatrol/Backend"
+        },
+        {
+          "label": "OCR",
+          "url": "https://github.com/BBangPatrol/OCR"
+        }
+      ],
+      "meta": [
+        [
+          "기간",
+          "2026.07 ~ 2026.10"
+        ],
+        [
+          "인원",
+          "팀 프로젝트 (BE 3)"
+        ],
+        [
+          "담당",
+          "백엔드 · 배포"
+        ],
+        [
+          "기여",
+          "백엔드 커밋 203/293"
+        ]
+      ],
+      "role": [
+        "백엔드 메인 개발 (인증 · 빵집 · 방문 · 리뷰 · 미션 · 포인트)",
+        "Docker · GHCR 기반 운영/개발 배포 환경 분리",
+        "2026 대전빵축제 참여 빵집 정보를 직접 수집해 서비스에 등록"
+      ],
+      "build": [
+        "영수증 사진만으로 가게를 찾는 방문 인증 API",
+        "이미지 업로드 시 리사이즈 · 썸네일 생성 (S3)",
+        "탈퇴 30일 후 회원 · 삭제 리뷰 파기 배치",
+        "404 · 405 · 415까지 공통 에러 응답 형식 통일"
+      ],
+      "cases": [
+        {
+          "tag": "01 · 트랜잭션 경계",
+          "title": "인증은 됐는데 미션이 갱신되지 않았다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "영수증 인증 · 리뷰 작성 · 수집품 뽑기 안에서 미션까지 함께 갱신하다 보니, 한쪽이 실패하면 서로 영향을 주고 미션이 갱신되지 않는 경우가 생겼습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "미션 갱신을 본 작업 커밋 이후로 분리하고 포인트 적립 흐름을 정리했습니다. 이미 누락된 사용자 데이터는 백필 스크립트로 채웠습니다.",
+              "key": true
+            }
+          ]
+        },
+        {
+          "tag": "02 · 인증 정확도",
+          "title": "영수증을 올려도 가게를 못 찾는 이유가 제각각이었다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "주소의 띄어쓰기, 다른 지점 영수증, 중복 영수증이 모두 같은 실패로 처리돼 사용자가 무엇이 잘못됐는지 알 수 없었습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "주소 정규화로 인식 실패를 고치고, 실패 원인별 안내 문구(다른 지점 안내 포함)를 분리했습니다. 영수증 중복 검사 범위는 전체/사용자 단위로 전환할 수 있게 했습니다.",
+              "key": true
+            }
+          ]
+        }
+      ],
+      "stack": [
+        "Spring Boot",
+        "JPA",
+        "MySQL",
+        "Flyway",
+        "Redis",
+        "S3",
+        "OAuth2",
+        "Docker"
+      ],
+      "logoFit": "contain"
+    },
+    {
+      "id": "witw",
+      "logo": "assets/logo-witw.png",
+      "logoAlt": "What In the World 로고",
+      "no": "SSAFY 2학기 특화 · 우수상",
+      "name": "What In the World",
+      "summary": "전 세계 뉴스 논조를 지구본 위에 실시간으로 보여 주는 글로벌 이슈 모니터링 서비스",
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/cmy397264/witw"
+        }
+      ],
+      "meta": [
+        [
+          "기간",
+          "2026.08 ~ 2026.09 (6주)"
+        ],
+        [
+          "인원",
+          "6인 (BE 3 · AI 1 · FE 2)"
+        ],
+        [
+          "담당",
+          "DB 적재 · 조회 성능"
+        ],
+        [
+          "수상",
+          "특화 프로젝트 우수상"
+        ]
+      ],
+      "role": [
+        "Kafka 컨슈머 기반 DB 적재 안정화",
+        "데이터 정합성 · 조회 성능 개선"
+      ],
+      "build": [
+        "이슈 랭킹 · 이슈 상세 · 국가 메인 · 수집 기사 수 조회 API",
+        "Flyway 기반 국가 기준 데이터 시드(249개국)"
+      ],
+      "shots": [
+        {
+          "layout": "three",
+          "items": [
+            {
+              "src": "assets/witw-1.jpg",
+              "alt": "글로벌 대시보드 화면",
+              "caption": "글로벌 대시보드 · 실시간 이슈 TOP 5"
+            },
+            {
+              "src": "assets/witw-2.jpg",
+              "alt": "국가 상세 화면",
+              "caption": "국가 상세 · 핫이슈 TOP 5"
+            },
+            {
+              "src": "assets/witw-3.jpg",
+              "alt": "이슈 상세 논조 지구본 화면",
+              "caption": "이슈 상세 · 논조 지구본"
+            }
+          ]
+        }
+      ],
+      "flow": {
+        "label": "DATA FLOW",
+        "nodes": [
+          {
+            "text": "뉴스 수집",
+            "mine": false
+          },
+          {
+            "text": "Kafka",
+            "mine": false
+          },
+          {
+            "text": "DB 적재 모듈",
+            "mine": true
+          },
+          {
+            "text": "PostgreSQL",
+            "mine": false
+          },
+          {
+            "text": "조회 API",
+            "mine": true
+          }
+        ]
+      },
+      "cases": [
+        {
+          "tag": "01 · 데이터 유실",
+          "title": "기사 10,794건이 에러 없이 사라졌다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "국가 기준 데이터가 5개국뿐이라 저장이 롤백됐고, 기본 에러 핸들러가 1초 안에 재시도 9번을 소진한 뒤 오프셋까지 커밋해 기사가 기록 없이 사라졌습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "실패를 \"재시도로 풀리는가\"로 나눴습니다. DB 연결 부족 · 데드락 같은 일시 오류는 0.5초~8초 지수 백오프(무작위 편차 포함)로 재시도하고, 미등록 국가 · 형식 오류 같은 영구 오류는 원인과 위치를 기록해 즉시 DLT로 보존합니다. 국가 데이터는 Flyway 시드로 채우고, 새 컨슈머가 쌓인 메시지를 건너뛰지 않도록 오프셋 설정을 바꿨습니다.",
+              "key": true
+            },
+            {
+              "label": "한계",
+              "text": "메시지 형식이 바뀌기 전의 약 2만 4천 건은 별도 재계산이 필요해 복구하지 못했습니다.",
+              "key": false
+            }
+          ]
+        },
+        {
+          "tag": "02 · 조회 성능",
+          "title": "PK 외 인덱스가 0개, 숫자부터 의심했다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "일부 조회가 50만 행 중 67%를 읽고 버리고 있었습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "설정을 고정한 측정 전용 컨테이너에서 후보를 비교했고, 측정이 틀릴 수 있는 지점 3가지(캐시 워밍 오염, 표본 부족, 단독 판정)를 먼저 걸러 냈습니다. 2배 이상 빨라진 후보만 채택해 인덱스 5개 채택 · 2개 기각, 가장 느린 쿼리는 재작성했습니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "252.7 → 12.4ms",
+              "가장 느린 쿼리"
+            ],
+            [
+              "1,485 → 536ms",
+              "조회 합계 · 인덱스 5개"
+            ],
+            [
+              "+19.9%",
+              "쓰기 비용, 감수하고 수치로 기록"
+            ]
+          ]
+        }
+      ],
+      "stack": [
+        "Spring Boot 4",
+        "JPA",
+        "Kafka",
+        "PostgreSQL",
+        "Flyway"
+      ]
+    },
+    {
+      "id": "mandalin",
+      "logo": "assets/logo-mandalin.png",
+      "logoAlt": "Mandal-In 로고",
+      "no": "SSAFY 2학기 공통 · 우수상",
+      "name": "Mandal-In",
+      "summary": "음성 대화로 만다라트를 채우는 AI 코치 웹",
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/cmy397264/Mandalin"
+        }
+      ],
+      "meta": [
+        [
+          "기간",
+          "2026.07 ~ 2026.08 (6주)"
+        ],
+        [
+          "인원",
+          "6인 (팀장 1 · BE 3 · FE 2)"
+        ],
+        [
+          "담당",
+          "AI 파이프라인 · 백엔드"
+        ],
+        [
+          "수상",
+          "공통 프로젝트 우수상"
+        ]
+      ],
+      "role": [
+        "AI 음성 파이프라인 (Python)",
+        "백엔드 (Spring Boot) · 최종 발표"
+      ],
+      "build": [
+        "STT 무음 게이트(SpeechGate)",
+        "골든셋 기반 프롬프트 회귀 평가",
+        "LiveKit 토큰 발급, LLM 호출을 트랜잭션 밖에 둔 주간 리포트 API"
+      ],
+      "shots": [
+        {
+          "layout": "grid4",
+          "items": [
+            {
+              "src": "assets/md-1.jpg",
+              "alt": "홈 화면",
+              "caption": "홈 · 오늘의 할 일과 내 마을"
+            },
+            {
+              "src": "assets/md-2.jpg",
+              "alt": "새 만다라트 작성 화면",
+              "caption": "새 만다라트 작성"
+            },
+            {
+              "src": "assets/md-3.jpg",
+              "alt": "AI 코치 음성 대화 화면",
+              "caption": "AI 코치 음성 대화"
+            },
+            {
+              "src": "assets/md-4.jpg",
+              "alt": "3D 마을 성장 화면",
+              "caption": "3D 마을 성장"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "tag": "01 · 과금 구조",
+          "title": "말하지 않아도 STT 요금이 쌓였다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "Deepgram은 말한 양이 아니라 소켓이 열린 시간으로 과금합니다. 15분 마이크 창 대부분이 침묵이어도 900초 전부가 청구되는 구조였습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "\"말하지 않으면 과금 0초, 사용 경험은 그대로\"를 기준으로 세 방식을 비교했습니다. 버튼 방식은 UX 때문에, 음성 판별 모델(silero)은 서버 메모리 때문에 기각하고, 프레임 RMS로 소리 유무만 보는 게이트를 채택했습니다. 800ms 이하의 쉼은 그대로 보내고, 800ms 침묵에 발화를 끝내고, 5초 침묵에 소켓을 직접 닫습니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "900초 → 0초",
+              "15분 침묵 시 과금 시간"
+            ],
+            [
+              "10.5초 → 0.6초",
+              "소켓 종료 시간"
+            ],
+            [
+              "34초 중 13.8초",
+              "마이크 34초 동안 소켓 개방"
+            ]
+          ]
+        }
+      ],
+      "moreCases": [
+        {
+          "tag": "02 · 프롬프트 회귀",
+          "title": "정확도는 그대로인데 출력 정상률이 떨어졌다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "캐시 적중이 3%뿐이라, 지시문의 49%를 차지하던 예시를 줄이기로 했습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "실제 파이프라인에 62개 케이스를 3회씩 태워 짝지은 정확 이항검정으로 비교했습니다. action 정확도는 차이가 없었지만(p=0.5) 출력 정상률이 100%에서 88.71%로 떨어졌고(p=0.0156), 원인은 예시가 가리던 글자 수 규칙 충돌(60자 vs 40자)이었습니다. 40자로 통일하고, 꼭 지켜야 할 규칙은 6단계 서버 가드로 옮겼습니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "88.71% → 98.39%",
+              "출력 정상률 회복"
+            ],
+            [
+              "7건 → 1건",
+              "같은 62개 케이스 결함"
+            ],
+            [
+              "-21%",
+              "프롬프트 길이 · 호출당 약 400토큰 절감"
+            ]
+          ]
+        },
+        {
+          "tag": "03 · 서버 한도",
+          "title": "1GiB 서버에 대화방을 몇 개까지 받을 것인가",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "기본 부하 기준 0.7이 t3.micro baseline(0.2 vCPU)의 7배여서, 에러 없이 CPU 크레딧 초과로만 드러날 상황이었습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "배포 구성 그대로 메모리(PSS)를 실측해 동시 대화방 상한을 정하고, 사양이 바뀌면 실패하는 테스트로 기준값을 고정했습니다. 배포 중 메모리 몰림에 대비해 2GB 스왑을 추가했습니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "4개",
+              "동시 대화방 상한"
+            ],
+            [
+              "0.7 → 0.1",
+              "부하 기준"
+            ]
+          ]
+        }
+      ],
+      "stack": [
+        "Python",
+        "LiveKit",
+        "Deepgram",
+        "Gemini",
+        "Spring Boot",
+        "PostgreSQL",
+        "GitLab CI"
+      ]
+    },
+    {
+      "id": "hiking",
+      "logo": "assets/logo-hiking.png",
+      "logoAlt": "나랑등산이다 로고",
+      "no": "SSAFY 1학기 · 우수상",
+      "name": "나랑등산이다",
+      "summary": "100대 명산 GPX 코스를 지도로 미리 걷고, 후기 · 게시판 · AI 챗봇으로 등산 정보를 나누는 웹 서비스",
+      "links": [
+        {
+          "label": "서비스",
+          "url": "https://narang-hiking.vercel.app"
+        },
+        {
+          "label": "GitHub",
+          "url": "https://github.com/NarangHiking/BE"
+        }
+      ],
+      "meta": [
+        [
+          "기간",
+          "2026.05 ~ 2026.06 (약 6주)"
+        ],
+        [
+          "인원",
+          "2인 (팀장 · BE / BE · AI)"
+        ],
+        [
+          "담당",
+          "팀장 · 백엔드"
+        ],
+        [
+          "수상",
+          "1학기 프로젝트 우수상"
+        ]
+      ],
+      "role": [
+        "팀장: 일정 · 역할 분담",
+        "인증/인가: Spring Security + JWT 이중 토큰, Redis 토큰 관리, HttpOnly Cookie 전환",
+        "Vercel(FE) · AWS EC2(BE) 서비스 배포"
+      ],
+      "build": [
+        "산 · 코스 CRUD, GPX 일괄 등록, 즐겨찾기 · 추천순 정렬",
+        "Cloudflare R2 파일 스토리지, 업로드 실패 시 보상 삭제",
+        "기상청 단기예보 연동 (위경도 → LCC 격자 변환)"
+      ],
+      "shots": [
+        {
+          "layout": "three",
+          "items": [
+            {
+              "src": "assets/hike-1.jpg",
+              "alt": "메인 화면",
+              "caption": "메인 화면"
+            },
+            {
+              "src": "assets/hike-2.jpg",
+              "alt": "산 목록 화면",
+              "caption": "산 목록"
+            },
+            {
+              "src": "assets/hike-3.jpg",
+              "alt": "GPX 코스 지도 화면",
+              "caption": "GPX 코스 지도"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "tag": "01 · 의존 방향",
+          "title": "AI가 제안한 코드로 서버가 뜨지 않았다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "AuthService는 사용자 조회를 위해 UserService를, UserService는 탈퇴 시 토큰을 지우려고 AuthService를 주입받아 순환 참조로 기동이 멈췄습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "`@Lazy`는 구조를 그대로 남긴다고 보고, 두 서비스가 실제로 함께 쓰던 토큰 저장 · 삭제를 Redis와 JwtUtil만 의존하는 TokenService로 분리해 의존을 한 방향으로 정리했습니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "Auth ↔ User → 한 방향",
+              "이후 AI 코드는 의존 방향부터 확인"
+            ]
+          ]
+        },
+        {
+          "tag": "02 · 외부 저장소와 트랜잭션",
+          "title": "DB id로 R2 폴더를 만들다 파일과 DB가 어긋났다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "id 폴더를 쓰려면 INSERT 후 업로드해야 했고, 뒤 단계가 실패하면 DB는 롤백돼도 R2에 올라간 파일은 그대로 남았습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "고정 폴더 + UUID 키로 바꿔 업로드 → DB 저장 순서로 바꾸고, DB 저장이 실패하면 올린 파일을 보상 삭제했습니다. GPX 일괄 등록은 올린 키를 모아 두었다가 실패 시 한꺼번에 정리합니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "고아 파일 방지",
+              "DB에 없는 파일이 R2에 남지 않음"
+            ]
+          ]
+        }
+      ],
+      "stack": [
+        "Java 21",
+        "Spring Boot 4",
+        "Spring Security",
+        "MyBatis",
+        "MySQL (RDS)",
+        "Redis",
+        "Cloudflare R2",
+        "AWS EC2"
+      ]
+    },
+    {
+      "id": "bigpicture",
+      "logo": "assets/logo-bigpicture.png",
+      "logoAlt": "BigPicture 로고",
+      "no": "산학협력",
+      "name": "BigPicture",
+      "summary": "종목을 등록하면 AI 주간 경제 리포트가 푸시로 도착하는 안드로이드 앱",
+      "links": [
+        {
+          "label": "App",
+          "url": "https://github.com/knu-datastreams/BigPicture-APP"
+        },
+        {
+          "label": "Backend",
+          "url": "https://github.com/knu-datastreams/BigPicture-BE"
+        }
+      ],
+      "meta": [
+        [
+          "기간",
+          "2025.03 ~ 2025.06 (4개월)"
+        ],
+        [
+          "인원",
+          "5인 (BE 2 · 모바일 2 · 기획 1)"
+        ],
+        [
+          "담당",
+          "앱 인프라 · 서버 통신"
+        ],
+        [
+          "성과",
+          "Play 스토어 출시 · 학회 논문"
+        ]
+      ],
+      "shots": [
+        {
+          "layout": "four",
+          "items": [
+            {
+              "src": "assets/bp-1.jpg",
+              "alt": "포트폴리오 입력 전 화면",
+              "caption": "포트폴리오 (입력 전)"
+            },
+            {
+              "src": "assets/bp-2.jpg",
+              "alt": "포트폴리오 입력 후 화면",
+              "caption": "포트폴리오 (입력 후)"
+            },
+            {
+              "src": "assets/bp-3.jpg",
+              "alt": "경제 리포트 화면",
+              "caption": "경제 리포트"
+            },
+            {
+              "src": "assets/bp-4.jpg",
+              "alt": "뉴스 탭 화면",
+              "caption": "뉴스 탭"
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "tag": "01 · 응답 대기",
+          "title": "리포트를 다 받을 때까지 앱에 들어갈 수 없었다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "부팅 시퀀스 안에서 종목별 리포트를 콜백으로 순차 요청해, 첫 화면이 리포트 완료를 기다렸습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "콜백을 suspend 함수로 바꿔 종목별 async 병렬 요청으로 전환하고, 리포트 갱신은 부팅에서 떼어 별도 코루틴으로 받아 Room에 저장한 뒤 알리도록 했습니다.",
+              "key": true
+            }
+          ],
+          "results": [
+            [
+              "90초 → 40초",
+              "리포트 응답 (56% 단축)"
+            ],
+            [
+              "즉시",
+              "홈 화면 진입"
+            ]
+          ]
+        },
+        {
+          "tag": "02 · 조용한 실패",
+          "title": "알림이 안 오는데 에러 로그가 없었다",
+          "rows": [
+            {
+              "label": "문제",
+              "text": "FCM 토큰 콜백 전에 서버 등록이 실행돼, 첫 실행 기기에는 토큰 대신 \"-1\"이 저장되고 있었습니다.",
+              "key": false
+            },
+            {
+              "label": "해결",
+              "text": "`suspendCancellableCoroutine`으로 토큰을 받은 뒤 등록하도록 순서를 바로잡고, 온보딩 경로의 등록 누락까지 수정했습니다.",
+              "key": true
+            }
+          ]
+        }
+      ],
+      "stack": [
+        "Kotlin",
+        "Compose",
+        "Coroutine",
+        "Retrofit",
+        "Room",
+        "FCM"
+      ]
+    }
+  ],
+  "others": [
+    {
+      "kind": "Side · Tool",
+      "name": "Velog Grass",
+      "desc": "Velog 글 작성일을 GraphQL로 모아 GitHub 잔디 같은 SVG로 그리고, GitHub Actions로 자동 갱신합니다.",
+      "stack": [
+        "Node.js",
+        "GitHub Actions"
+      ],
+      "url": "https://github.com/cmy397264/Velog_grass"
+    },
+    {
+      "kind": "Side · Experiment",
+      "name": "Pororo OCR 테스트",
+      "desc": "Kakao Brain Pororo로 영수증 OCR을 실험했습니다. 호환되지 않는 의존성은 패치로 걷어 내고 OCR만 동작하게 구성했습니다.",
+      "stack": [
+        "Python",
+        "PyTorch",
+        "OCR"
+      ],
+      "url": "https://github.com/cmy397264/KakaoPororo"
+    },
+    {
+      "kind": "Side · Android",
+      "name": "POS App",
+      "desc": "테이블 · 주문 · 결제 · 영수증 흐름을 Jetpack Compose와 Room으로 구현한 매장용 POS 앱입니다.",
+      "stack": [
+        "Kotlin",
+        "Compose",
+        "Room"
+      ],
+      "url": "https://github.com/cmy397264/App_POS_compose"
+    }
+  ]
+}
+</script>
 
 <nav id="nav">
   <div class="wrap">
@@ -265,543 +1178,15 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     </figure>
     </div>
 
-    <div class="kpis">
-      <div class="card kpi">
-        <div class="p">NEXA</div>
-        <div class="v">동시 요청 3종 → 1건</div>
-        <div class="d">결재 · 회수 · 결재자 추가가 겹쳐도 한 요청만 반영</div>
-      </div>
-      <div class="card kpi">
-        <div class="p">WHAT IN THE WORLD</div>
-        <div class="v">252.7 → 12.4ms</div>
-        <div class="d">가장 느린 조회 쿼리 · 특화 프로젝트 우수상</div>
-      </div>
-      <div class="card kpi">
-        <div class="p">MANDAL-IN</div>
-        <div class="v">900초 → 0초</div>
-        <div class="d">말하지 않는 15분의 STT 과금 · 공통 프로젝트 우수상</div>
-      </div>
-    </div>
+    <div class="kpis" id="kpis"></div>
   </header>
 
   <!-- PROJECTS -->
   <section id="projects">
     <div class="label">Projects</div>
     <h2>AI 파이프라인에서 서비스 사이의 이벤트까지,<br>점점 서버 쪽으로 깊어졌습니다.</h2>
-
-    <!-- NEXA -->
-    <article class="card project" id="nexa">
-      <div class="p-head">
-        <img class="p-logo" src="assets/logo-nexa.png" alt="NEXA 로고">
-        <div>
-          <div class="p-no">PROJECT 01 · SSAFY 2학기 자율</div>
-          <h3>NEXA</h3>
-          <p class="one">근태 · 휴가 · 전자결재 · 급여 · 인사를 MSA로 제공하고, 엑셀 이관과 AI 업무 자동화를 갖춘 HR ERP</p>
-        </div>
-        <div class="p-top-links">
-          <a href="https://github.com/cmy397264/nexa" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub ↗</a>
-        </div>
-      </div>
-      <dl class="p-meta">
-        <div><dt>기간</dt><dd>2026.10 ~ 2026.11 (약 5주)</dd></div>
-        <div><dt>인원</dt><dd>6인 (BE 5 · Infra 1)</dd></div>
-        <div><dt>담당</dt><dd>user · approval · nexa-security</dd></div>
-        <div><dt>현황</dt><dd>개발 서버 배포 · QA 완료</dd></div>
-      </dl>
-      <div class="p-body">
-        <div class="p-role">
-          <div>
-            <h4>ROLE</h4>
-            <ul>
-              <li>인증 서버(user-service): RS256 JWT · JWKS 공개키, Redis 로그인 실패 잠금 · 로그아웃 블랙리스트</li>
-              <li>토큰 검증 공통 라이브러리 nexa-security 제작, 4개 서비스 적용</li>
-              <li>전자결재(approval-service) 설계 · 구현</li>
-            </ul>
-          </div>
-          <div>
-            <h4>BUILD</h4>
-            <ul>
-              <li>위임전결 규정(금액 · 휴가 일수 · 초과근무) + 조직도로 결재선 자동 생성</li>
-              <li>결재 결과를 Transactional Outbox → Kafka로 발행, 발행 지연 메트릭 감시</li>
-              <li>approval 162개 · user 98개 테스트로 결재 · 인증 흐름 검증</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="shots">
-          <figure><img src="assets/nexa-arch.jpg" alt="NEXA 시스템 구성도"><figcaption>시스템 구성도 · Spring Cloud Gateway · Eureka · Config 기반 MSA</figcaption></figure>
-        </div>
-        <div class="shots two" style="margin-top:12px">
-          <figure><img src="assets/nexa-2.jpg" alt="업무 자동화 워크플로 빌더 화면"><figcaption>AI 업무 자동화 빌더</figcaption></figure>
-          <figure><img src="assets/nexa-1.jpg" alt="자동 상신된 결재 문서 화면"><figcaption>자동 상신된 결재 문서</figcaption></figure>
-        </div>
-
-        <div class="flow">
-          <div class="f-label">RESULT FLOW</div>
-          <span class="node">휴가 · 근태 · 자동화</span><span class="arrow">→</span>
-          <span class="node mine">결재 생성</span><span class="arrow">→</span>
-          <span class="node mine">결재 처리</span><span class="arrow">→</span>
-          <span class="node mine">아웃박스</span><span class="arrow">→</span>
-          <span class="node">Kafka</span><span class="arrow">→</span>
-          <span class="node">원본 서비스</span>
-        </div>
-
-        <div class="cases">
-          <h4>TROUBLESHOOTING</h4>
-          <div class="case">
-            <div class="tag">01 · 인증 구조</div>
-            <h5>서비스마다 같은 비밀키를 들고 있어야 했다</h5>
-            <div class="pse">
-              <b>문제</b><span>게이트웨이 1차 구현은 공유 비밀키(HS256)로 검증해, 게이트웨이와 결재 · 근태 · 휴가 · 급여 서비스가 모두 같은 키를 가져야 했습니다. 이 키는 발급에도 쓰여 한 곳만 새도 토큰을 위조할 수 있었고, 키를 바꾸면 전부 다시 배포해야 했습니다.</span>
-              <b class="sol">해결</b><span>RS256을 택해 개인키는 user-service에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명 · 만료 · 토큰 종류 검사와 401/403 응답은 nexa-security 라이브러리로 묶어 Package Registry로 배포했습니다.</span>
-            </div>
-            <div class="result">
-              <div class="r"><div class="n">모든 서비스 → 1곳</div><div class="l">개인키 보관 지점</div></div>
-              <div class="r"><div class="n">4개 서비스</div><div class="l">같은 규칙으로 토큰 검증</div></div>
-              <div class="r"><div class="n">재배포 0회</div><div class="l">키 ID(kid)로 키 교체</div></div>
-            </div>
-          </div>
-          <div class="case">
-            <div class="tag">02 · 동시성</div>
-            <h5>결재와 회수가 동시에 오면 둘 다 성공할 수 있었다</h5>
-            <div class="pse">
-              <b>문제</b><span>결재 처리와 결재선 변경은 문서 상태를 읽어 검증한 뒤 바꾸는데, 같은 문서에 결재 · 회수 · 결재자 추가가 동시에 오면 둘 다 옛 상태로 검증을 통과했습니다. 회수된 문서가 승인돼도 에러는 나지 않았습니다.</span>
-              <b class="sol">해결</b><span>낙관적 락은 실제로 겹치는 요청마다 재시도 로직이 필요하고, 결재자 추가는 approval_line 행 INSERT라 문서의 <code>@Version</code>으로 잡히지도 않았습니다. 그래서 문서 행을 <code>FOR UPDATE</code>로 잠가 늦은 요청이 바뀐 상태로 다시 검증되게 했습니다.</span>
-            </div>
-            <div class="result">
-              <div class="r"><div class="n">동시 요청 3종</div><div class="l">한 요청만 반영, 늦은 요청은 업무 오류 응답</div></div>
-            </div>
-          </div>
-          <details class="more">
-            <summary>트러블슈팅 더 보기</summary>
-            <div class="cases">
-              <div class="case">
-                <div class="tag">03 · 이벤트 유실</div>
-                <h5>결재는 승인됐는데, 휴가 서비스가 모를 수 있었다</h5>
-                <div class="pse">
-                  <b>문제</b><span>상태 저장과 Kafka 발행을 따로 하면, 커밋 뒤 발행이 실패할 때 승인된 휴가가 계속 '결재 대기'로 남는 구조였습니다.</span>
-                  <b class="sol">해결</b><span>결재 상태 변경과 아웃박스 기록을 같은 트랜잭션으로 커밋하고, 발행기는 <code>SKIP LOCKED</code>로 가져가 실패하면 그 자리에서 멈추게 했습니다. 프로듀서는 <code>acks=all</code> · idempotence, 문서별 키로 순서를 보장하고, 수신 측과 멱등 처리 · DLT 계약을 합의했습니다.</span>
-                </div>
-                <div class="result">
-                  <div class="r"><div class="n">0건</div><div class="l">결재 롤백 시 남는 이벤트</div></div>
-                  <div class="r"><div class="n">5분</div><div class="l">미발행 이벤트 지연 경보 기준</div></div>
-                </div>
-              </div>
-            </div>
-          </details>
-        </div>
-
-        <div class="p-links">
-          <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot 4</span><span class="chip">Spring Cloud</span><span class="chip">JPA</span><span class="chip">Flyway</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">Kafka</span></div>
-        </div>
-      </div>
-    </article>
-    <!-- BBangPatrol -->
-    <article class="card project" id="bbang">
-      <div class="p-head">
-        <img class="p-logo" src="assets/logo-bbang.png" alt="빵범대 로고" style="object-fit:contain;background:#fff">
-        <div>
-          <div class="p-no">PROJECT 02 · 팀 프로젝트</div>
-          <h3>빵범대 <span style="font-size:15px;font-weight:600;color:var(--mute)">BBangPatrol</span></h3>
-          <p class="one">영수증 한 장으로 빵집 방문을 인증하고, 미션·포인트·수집품으로 이어지는 빵집 탐방 서비스</p>
-        </div>
-        <div class="p-top-links">
-          <a href="https://github.com/BBangPatrol/Backend" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Backend ↗</a>
-          <a href="https://github.com/BBangPatrol/OCR" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>OCR ↗</a>
-        </div>
-      </div>
-      <dl class="p-meta">
-        <div><dt>기간</dt><dd>2026.07 ~ 2026.10</dd></div>
-        <div><dt>인원</dt><dd>팀 프로젝트 (BE 3)</dd></div>
-        <div><dt>담당</dt><dd>백엔드 · 배포</dd></div>
-        <div><dt>기여</dt><dd>백엔드 커밋 203/293</dd></div>
-      </dl>
-      <div class="p-body">
-        <div class="p-role">
-          <div>
-            <h4>ROLE</h4>
-            <ul>
-              <li>백엔드 메인 개발 (인증 · 빵집 · 방문 · 리뷰 · 미션 · 포인트)</li>
-              <li>Docker · GHCR 기반 운영/개발 배포 환경 분리</li>
-              <li>2026 대전빵축제 참여 빵집 정보를 직접 수집해 서비스에 등록</li>
-            </ul>
-          </div>
-          <div>
-            <h4>BUILD</h4>
-            <ul>
-              <li>영수증 사진만으로 가게를 찾는 방문 인증 API</li>
-              <li>이미지 업로드 시 리사이즈 · 썸네일 생성 (S3)</li>
-              <li>탈퇴 30일 후 회원 · 삭제 리뷰 파기 배치</li>
-              <li>404 · 405 · 415까지 공통 에러 응답 형식 통일</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cases">
-          <h4>TROUBLESHOOTING</h4>
-          <div class="case">
-            <div class="tag">01 · 트랜잭션 경계</div>
-            <h5>인증은 됐는데 미션이 갱신되지 않았다</h5>
-            <div class="pse">
-              <b>문제</b><span>영수증 인증 · 리뷰 작성 · 수집품 뽑기 안에서 미션까지 함께 갱신하다 보니, 한쪽이 실패하면 서로 영향을 주고 미션이 갱신되지 않는 경우가 생겼습니다.</span>
-              <b class="sol">해결</b><span>미션 갱신을 본 작업 커밋 이후로 분리하고 포인트 적립 흐름을 정리했습니다. 이미 누락된 사용자 데이터는 백필 스크립트로 채웠습니다.</span>
-            </div>
-          </div>
-          <div class="case">
-            <div class="tag">02 · 인증 정확도</div>
-            <h5>영수증을 올려도 가게를 못 찾는 이유가 제각각이었다</h5>
-            <div class="pse">
-              <b>문제</b><span>주소의 띄어쓰기, 다른 지점 영수증, 중복 영수증이 모두 같은 실패로 처리돼 사용자가 무엇이 잘못됐는지 알 수 없었습니다.</span>
-              <b class="sol">해결</b><span>주소 정규화로 인식 실패를 고치고, 실패 원인별 안내 문구(다른 지점 안내 포함)를 분리했습니다. 영수증 중복 검사 범위는 전체/사용자 단위로 전환할 수 있게 했습니다.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-links">
-          <div class="chips"><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">MySQL</span><span class="chip">Flyway</span><span class="chip">Redis</span><span class="chip">S3</span><span class="chip">OAuth2</span><span class="chip">Docker</span></div>
-        </div>
-      </div>
-    </article>
-
-    <!-- WITW -->
-    <article class="card project" id="witw">
-      <div class="p-head">
-        <img class="p-logo" src="assets/logo-witw.png" alt="What In the World 로고">
-        <div>
-          <div class="p-no">PROJECT 03 · SSAFY 2학기 특화 · 우수상</div>
-          <h3>What In the World</h3>
-          <p class="one">전 세계 뉴스 논조를 지구본 위에 실시간으로 보여 주는 글로벌 이슈 모니터링 서비스</p>
-        </div>
-        <div class="p-top-links">
-          <a href="https://github.com/cmy397264/witw" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub ↗</a>
-        </div>
-      </div>
-      <dl class="p-meta">
-        <div><dt>기간</dt><dd>2026.08 ~ 2026.09 (6주)</dd></div>
-        <div><dt>인원</dt><dd>6인 (BE 3 · AI 1 · FE 2)</dd></div>
-        <div><dt>담당</dt><dd>DB 적재 · 조회 성능</dd></div>
-        <div><dt>수상</dt><dd>특화 프로젝트 우수상</dd></div>
-      </dl>
-      <div class="p-body">
-        <div class="p-role">
-          <div>
-            <h4>ROLE</h4>
-            <ul>
-              <li>Kafka 컨슈머 기반 DB 적재 안정화</li>
-              <li>데이터 정합성 · 조회 성능 개선</li>
-            </ul>
-          </div>
-          <div>
-            <h4>BUILD</h4>
-            <ul>
-              <li>이슈 랭킹 · 이슈 상세 · 국가 메인 · 수집 기사 수 조회 API</li>
-              <li>Flyway 기반 국가 기준 데이터 시드(249개국)</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="shots three">
-          <figure><img src="assets/witw-1.jpg" alt="글로벌 대시보드 화면"><figcaption>글로벌 대시보드 · 실시간 이슈 TOP 5</figcaption></figure>
-          <figure><img src="assets/witw-2.jpg" alt="국가 상세 화면"><figcaption>국가 상세 · 핫이슈 TOP 5</figcaption></figure>
-          <figure><img src="assets/witw-3.jpg" alt="이슈 상세 논조 지구본 화면"><figcaption>이슈 상세 · 논조 지구본</figcaption></figure>
-        </div>
-
-        <div class="flow">
-          <div class="f-label">DATA FLOW</div>
-          <span class="node">뉴스 수집</span><span class="arrow">→</span>
-          <span class="node">Kafka</span><span class="arrow">→</span>
-          <span class="node mine">DB 적재 모듈</span><span class="arrow">→</span>
-          <span class="node">PostgreSQL</span><span class="arrow">→</span>
-          <span class="node mine">조회 API</span>
-        </div>
-
-        <div class="cases">
-          <h4>TROUBLESHOOTING</h4>
-          <div class="case">
-            <div class="tag">01 · 데이터 유실</div>
-            <h5>기사 10,794건이 에러 없이 사라졌다</h5>
-            <div class="pse">
-              <b>문제</b><span>국가 기준 데이터가 5개국뿐이라 저장이 롤백됐고, 기본 에러 핸들러가 1초 안에 재시도 9번을 소진한 뒤 오프셋까지 커밋해 기사가 기록 없이 사라졌습니다.</span>
-              <b class="sol">해결</b><span>실패를 "재시도로 풀리는가"로 나눴습니다. DB 연결 부족 · 데드락 같은 일시 오류는 0.5초~8초 지수 백오프(무작위 편차 포함)로 재시도하고, 미등록 국가 · 형식 오류 같은 영구 오류는 원인과 위치를 기록해 즉시 DLT로 보존합니다. 국가 데이터는 Flyway 시드로 채우고, 새 컨슈머가 쌓인 메시지를 건너뛰지 않도록 오프셋 설정을 바꿨습니다.</span>
-              <b>한계</b><span>메시지 형식이 바뀌기 전의 약 2만 4천 건은 별도 재계산이 필요해 복구하지 못했습니다.</span>
-            </div>
-          </div>
-          <div class="case">
-            <div class="tag">02 · 조회 성능</div>
-            <h5>PK 외 인덱스가 0개, 숫자부터 의심했다</h5>
-            <div class="pse">
-              <b>문제</b><span>일부 조회가 50만 행 중 67%를 읽고 버리고 있었습니다.</span>
-              <b class="sol">해결</b><span>설정을 고정한 측정 전용 컨테이너에서 후보를 비교했고, 측정이 틀릴 수 있는 지점 3가지(캐시 워밍 오염, 표본 부족, 단독 판정)를 먼저 걸러 냈습니다. 2배 이상 빨라진 후보만 채택해 인덱스 5개 채택 · 2개 기각, 가장 느린 쿼리는 재작성했습니다.</span>
-            </div>
-            <div class="result">
-              <div class="r"><div class="n">252.7 → 12.4ms</div><div class="l">가장 느린 쿼리</div></div>
-              <div class="r"><div class="n">1,485 → 536ms</div><div class="l">조회 합계 · 인덱스 5개</div></div>
-              <div class="r"><div class="n">+19.9%</div><div class="l">쓰기 비용, 감수하고 수치로 기록</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-links">
-          <div class="chips"><span class="chip">Spring Boot 4</span><span class="chip">JPA</span><span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">Flyway</span></div>
-        </div>
-      </div>
-    </article>
-
-    <!-- Mandal-In -->
-    <article class="card project" id="mandalin">
-      <div class="p-head">
-        <img class="p-logo" src="assets/logo-mandalin.png" alt="Mandal-In 로고">
-        <div>
-          <div class="p-no">PROJECT 04 · SSAFY 2학기 공통 · 우수상</div>
-          <h3>Mandal-In</h3>
-          <p class="one">음성 대화로 만다라트를 채우는 AI 코치 웹</p>
-        </div>
-        <div class="p-top-links">
-          <a href="https://github.com/cmy397264/Mandalin" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub ↗</a>
-        </div>
-      </div>
-      <dl class="p-meta">
-        <div><dt>기간</dt><dd>2026.07 ~ 2026.08 (6주)</dd></div>
-        <div><dt>인원</dt><dd>6인 (팀장 1 · BE 3 · FE 2)</dd></div>
-        <div><dt>담당</dt><dd>AI 파이프라인 · 백엔드</dd></div>
-        <div><dt>수상</dt><dd>공통 프로젝트 우수상</dd></div>
-      </dl>
-      <div class="p-body">
-        <div class="p-role">
-          <div>
-            <h4>ROLE</h4>
-            <ul>
-              <li>AI 음성 파이프라인 (Python)</li>
-              <li>백엔드 (Spring Boot) · 최종 발표</li>
-            </ul>
-          </div>
-          <div>
-            <h4>BUILD</h4>
-            <ul>
-              <li>STT 무음 게이트(SpeechGate)</li>
-              <li>골든셋 기반 프롬프트 회귀 평가</li>
-              <li>LiveKit 토큰 발급, LLM 호출을 트랜잭션 밖에 둔 주간 리포트 API</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="shots grid4">
-          <figure><img src="assets/md-1.jpg" alt="홈 화면"><figcaption>홈 · 오늘의 할 일과 내 마을</figcaption></figure>
-          <figure><img src="assets/md-2.jpg" alt="새 만다라트 작성 화면"><figcaption>새 만다라트 작성</figcaption></figure>
-          <figure><img src="assets/md-3.jpg" alt="AI 코치 음성 대화 화면"><figcaption>AI 코치 음성 대화</figcaption></figure>
-          <figure><img src="assets/md-4.jpg" alt="3D 마을 성장 화면"><figcaption>3D 마을 성장</figcaption></figure>
-        </div>
-
-        <div class="cases">
-          <h4>TROUBLESHOOTING</h4>
-          <div class="case">
-            <div class="tag">01 · 과금 구조</div>
-            <h5>말하지 않아도 STT 요금이 쌓였다</h5>
-            <div class="pse">
-              <b>문제</b><span>Deepgram은 말한 양이 아니라 소켓이 열린 시간으로 과금합니다. 15분 마이크 창 대부분이 침묵이어도 900초 전부가 청구되는 구조였습니다.</span>
-              <b class="sol">해결</b><span>"말하지 않으면 과금 0초, 사용 경험은 그대로"를 기준으로 세 방식을 비교했습니다. 버튼 방식은 UX 때문에, 음성 판별 모델(silero)은 서버 메모리 때문에 기각하고, 프레임 RMS로 소리 유무만 보는 게이트를 채택했습니다. 800ms 이하의 쉼은 그대로 보내고, 800ms 침묵에 발화를 끝내고, 5초 침묵에 소켓을 직접 닫습니다.</span>
-            </div>
-            <div class="result">
-              <div class="r"><div class="n">900초 → 0초</div><div class="l">15분 침묵 시 과금 시간</div></div>
-              <div class="r"><div class="n">10.5초 → 0.6초</div><div class="l">소켓 종료 시간</div></div>
-              <div class="r"><div class="n">34초 중 13.8초</div><div class="l">마이크 34초 동안 소켓 개방</div></div>
-            </div>
-          </div>
-          <details class="more">
-            <summary>트러블슈팅 더 보기</summary>
-            <div class="cases">
-              <div class="case">
-                <div class="tag">02 · 프롬프트 회귀</div>
-                <h5>정확도는 그대로인데 출력 정상률이 떨어졌다</h5>
-                <div class="pse">
-                  <b>문제</b><span>캐시 적중이 3%뿐이라, 지시문의 49%를 차지하던 예시를 줄이기로 했습니다.</span>
-                  <b class="sol">해결</b><span>실제 파이프라인에 62개 케이스를 3회씩 태워 짝지은 정확 이항검정으로 비교했습니다. action 정확도는 차이가 없었지만(p=0.5) 출력 정상률이 100%에서 88.71%로 떨어졌고(p=0.0156), 원인은 예시가 가리던 글자 수 규칙 충돌(60자 vs 40자)이었습니다. 40자로 통일하고, 꼭 지켜야 할 규칙은 6단계 서버 가드로 옮겼습니다.</span>
-                </div>
-                <div class="result">
-                  <div class="r"><div class="n">88.71% → 98.39%</div><div class="l">출력 정상률 회복</div></div>
-                  <div class="r"><div class="n">7건 → 1건</div><div class="l">같은 62개 케이스 결함</div></div>
-                  <div class="r"><div class="n">-21%</div><div class="l">프롬프트 길이 · 호출당 약 400토큰 절감</div></div>
-                </div>
-              </div>
-              <div class="case">
-                <div class="tag">03 · 서버 한도</div>
-                <h5>1GiB 서버에 대화방을 몇 개까지 받을 것인가</h5>
-                <div class="pse">
-                  <b>문제</b><span>기본 부하 기준 0.7이 t3.micro baseline(0.2 vCPU)의 7배여서, 에러 없이 CPU 크레딧 초과로만 드러날 상황이었습니다.</span>
-                  <b class="sol">해결</b><span>배포 구성 그대로 메모리(PSS)를 실측해 동시 대화방 상한을 정하고, 사양이 바뀌면 실패하는 테스트로 기준값을 고정했습니다. 배포 중 메모리 몰림에 대비해 2GB 스왑을 추가했습니다.</span>
-                </div>
-                <div class="result">
-                  <div class="r"><div class="n">4개</div><div class="l">동시 대화방 상한</div></div>
-                  <div class="r"><div class="n">0.7 → 0.1</div><div class="l">부하 기준</div></div>
-                </div>
-              </div>
-            </div>
-          </details>
-        </div>
-
-        <div class="p-links">
-          <div class="chips"><span class="chip">Python</span><span class="chip">LiveKit</span><span class="chip">Deepgram</span><span class="chip">Gemini</span><span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span><span class="chip">GitLab CI</span></div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 나랑등산 -->
-    <article class="card project" id="hiking">
-      <div class="p-head">
-        <img class="p-logo" src="assets/logo-hiking.png" alt="나랑등산이다 로고">
-        <div>
-          <div class="p-no">PROJECT 05 · SSAFY 1학기 · 우수상</div>
-          <h3>나랑등산이다</h3>
-          <p class="one">100대 명산 GPX 코스를 지도로 미리 걷고, 후기 · 게시판 · AI 챗봇으로 등산 정보를 나누는 웹 서비스</p>
-        </div>
-        <div class="p-top-links">
-          <a href="https://narang-hiking.vercel.app" target="_blank" rel="noopener">서비스 ↗</a>
-          <a href="https://github.com/NarangHiking/BE" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub ↗</a>
-        </div>
-      </div>
-      <dl class="p-meta">
-        <div><dt>기간</dt><dd>2026.05 ~ 2026.06 (약 6주)</dd></div>
-        <div><dt>인원</dt><dd>2인 (팀장 · BE / BE · AI)</dd></div>
-        <div><dt>담당</dt><dd>팀장 · 백엔드</dd></div>
-        <div><dt>수상</dt><dd>1학기 프로젝트 우수상</dd></div>
-      </dl>
-      <div class="p-body">
-        <div class="p-role">
-          <div>
-            <h4>ROLE</h4>
-            <ul>
-              <li>팀장: 일정 · 역할 분담</li>
-              <li>인증/인가: Spring Security + JWT 이중 토큰, Redis 토큰 관리, HttpOnly Cookie 전환</li>
-              <li>Vercel(FE) · AWS EC2(BE) 서비스 배포</li>
-            </ul>
-          </div>
-          <div>
-            <h4>BUILD</h4>
-            <ul>
-              <li>산 · 코스 CRUD, GPX 일괄 등록, 즐겨찾기 · 추천순 정렬</li>
-              <li>Cloudflare R2 파일 스토리지, 업로드 실패 시 보상 삭제</li>
-              <li>기상청 단기예보 연동 (위경도 → LCC 격자 변환)</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="shots three">
-          <figure><img src="assets/hike-1.jpg" alt="메인 화면"><figcaption>메인 화면</figcaption></figure>
-          <figure><img src="assets/hike-2.jpg" alt="산 목록 화면"><figcaption>산 목록</figcaption></figure>
-          <figure><img src="assets/hike-3.jpg" alt="GPX 코스 지도 화면"><figcaption>GPX 코스 지도</figcaption></figure>
-        </div>
-
-        <div class="cases">
-          <h4>TROUBLESHOOTING</h4>
-          <div class="case">
-            <div class="tag">01 · 의존 방향</div>
-            <h5>AI가 제안한 코드로 서버가 뜨지 않았다</h5>
-            <div class="pse">
-              <b>문제</b><span>AuthService는 사용자 조회를 위해 UserService를, UserService는 탈퇴 시 토큰을 지우려고 AuthService를 주입받아 순환 참조로 기동이 멈췄습니다.</span>
-              <b class="sol">해결</b><span><code>@Lazy</code>는 구조를 그대로 남긴다고 보고, 두 서비스가 실제로 함께 쓰던 토큰 저장 · 삭제를 Redis와 JwtUtil만 의존하는 TokenService로 분리해 의존을 한 방향으로 정리했습니다.</span>
-            </div>
-            <div class="result">
-              <div class="r"><div class="n">Auth ↔ User → 한 방향</div><div class="l">이후 AI 코드는 의존 방향부터 확인</div></div>
-            </div>
-          </div>
-          <div class="case">
-            <div class="tag">02 · 외부 저장소와 트랜잭션</div>
-            <h5>DB id로 R2 폴더를 만들다 파일과 DB가 어긋났다</h5>
-            <div class="pse">
-              <b>문제</b><span>id 폴더를 쓰려면 INSERT 후 업로드해야 했고, 뒤 단계가 실패하면 DB는 롤백돼도 R2에 올라간 파일은 그대로 남았습니다.</span>
-              <b class="sol">해결</b><span>고정 폴더 + UUID 키로 바꿔 업로드 → DB 저장 순서로 바꾸고, DB 저장이 실패하면 올린 파일을 보상 삭제했습니다. GPX 일괄 등록은 올린 키를 모아 두었다가 실패 시 한꺼번에 정리합니다.</span>
-            </div>
-            <div class="result">
-              <div class="r"><div class="n">고아 파일 방지</div><div class="l">DB에 없는 파일이 R2에 남지 않음</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-links">
-          <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot 4</span><span class="chip">Spring Security</span><span class="chip">MyBatis</span><span class="chip">MySQL (RDS)</span><span class="chip">Redis</span><span class="chip">Cloudflare R2</span><span class="chip">AWS EC2</span></div>
-        </div>
-      </div>
-    </article>
-    <!-- BigPicture -->
-    <article class="card project" id="bigpicture">
-      <div class="p-head">
-        <img class="p-logo" src="assets/logo-bigpicture.png" alt="BigPicture 로고">
-        <div>
-          <div class="p-no">PROJECT 06 · 산학협력</div>
-          <h3>BigPicture</h3>
-          <p class="one">종목을 등록하면 AI 주간 경제 리포트가 푸시로 도착하는 안드로이드 앱</p>
-        </div>
-        <div class="p-top-links">
-          <a href="https://github.com/knu-datastreams/BigPicture-APP" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>App ↗</a>
-          <a href="https://github.com/knu-datastreams/BigPicture-BE" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Backend ↗</a>
-        </div>
-      </div>
-      <dl class="p-meta">
-        <div><dt>기간</dt><dd>2025.03 ~ 2025.06 (4개월)</dd></div>
-        <div><dt>인원</dt><dd>5인 (BE 2 · 모바일 2 · 기획 1)</dd></div>
-        <div><dt>담당</dt><dd>앱 인프라 · 서버 통신</dd></div>
-        <div><dt>성과</dt><dd>Play 스토어 출시 · 학회 논문</dd></div>
-      </dl>
-      <div class="p-body">
-        <div class="shots four">
-          <figure><img src="assets/bp-1.jpg" alt="포트폴리오 입력 전 화면"><figcaption>포트폴리오 (입력 전)</figcaption></figure>
-          <figure><img src="assets/bp-2.jpg" alt="포트폴리오 입력 후 화면"><figcaption>포트폴리오 (입력 후)</figcaption></figure>
-          <figure><img src="assets/bp-3.jpg" alt="경제 리포트 화면"><figcaption>경제 리포트</figcaption></figure>
-          <figure><img src="assets/bp-4.jpg" alt="뉴스 탭 화면"><figcaption>뉴스 탭</figcaption></figure>
-        </div>
-        <div class="cases">
-          <h4>TROUBLESHOOTING</h4>
-          <div class="case">
-            <div class="tag">01 · 응답 대기</div>
-            <h5>리포트를 다 받을 때까지 앱에 들어갈 수 없었다</h5>
-            <div class="pse">
-              <b>문제</b><span>부팅 시퀀스 안에서 종목별 리포트를 콜백으로 순차 요청해, 첫 화면이 리포트 완료를 기다렸습니다.</span>
-              <b class="sol">해결</b><span>콜백을 suspend 함수로 바꿔 종목별 async 병렬 요청으로 전환하고, 리포트 갱신은 부팅에서 떼어 별도 코루틴으로 받아 Room에 저장한 뒤 알리도록 했습니다.</span>
-            </div>
-            <div class="result">
-              <div class="r"><div class="n">90초 → 40초</div><div class="l">리포트 응답 (56% 단축)</div></div>
-              <div class="r"><div class="n">즉시</div><div class="l">홈 화면 진입</div></div>
-            </div>
-          </div>
-          <div class="case">
-            <div class="tag">02 · 조용한 실패</div>
-            <h5>알림이 안 오는데 에러 로그가 없었다</h5>
-            <div class="pse">
-              <b>문제</b><span>FCM 토큰 콜백 전에 서버 등록이 실행돼, 첫 실행 기기에는 토큰 대신 "-1"이 저장되고 있었습니다.</span>
-              <b class="sol">해결</b><span><code>suspendCancellableCoroutine</code>으로 토큰을 받은 뒤 등록하도록 순서를 바로잡고, 온보딩 경로의 등록 누락까지 수정했습니다.</span>
-            </div>
-          </div>
-        </div>
-        <div class="p-links">
-          <div class="chips"><span class="chip">Kotlin</span><span class="chip">Compose</span><span class="chip">Coroutine</span><span class="chip">Retrofit</span><span class="chip">Room</span><span class="chip">FCM</span></div>
-        </div>
-      </div>
-    </article>
-
-    <!-- OTHERS -->
-    <div class="others">
-      <a class="card other" href="https://github.com/cmy397264/Velog_grass" target="_blank" rel="noopener">
-        <div class="label">Side · Tool</div>
-        <h4 style="margin-top:6px">Velog Grass</h4>
-        <p>Velog 글 작성일을 GraphQL로 모아 GitHub 잔디 같은 SVG로 그리고, GitHub Actions로 자동 갱신합니다.</p>
-        <div class="chips"><span class="chip">Node.js</span><span class="chip">GitHub Actions</span></div>
-        <div class="go">GitHub ↗</div>
-      </a>
-      <a class="card other" href="https://github.com/cmy397264/KakaoPororo" target="_blank" rel="noopener">
-        <div class="label">Side · Experiment</div>
-        <h4 style="margin-top:6px">Pororo OCR 테스트</h4>
-        <p>Kakao Brain Pororo로 영수증 OCR을 실험했습니다. 호환되지 않는 의존성은 패치로 걷어 내고 OCR만 동작하게 구성했습니다.</p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OCR</span></div>
-        <div class="go">GitHub ↗</div>
-      </a>
-      <a class="card other" href="https://github.com/cmy397264/App_POS_compose" target="_blank" rel="noopener">
-        <div class="label">Side · Android</div>
-        <h4 style="margin-top:6px">POS App</h4>
-        <p>테이블 · 주문 · 결제 · 영수증 흐름을 Jetpack Compose와 Room으로 구현한 매장용 POS 앱입니다.</p>
-        <div class="chips"><span class="chip">Kotlin</span><span class="chip">Compose</span><span class="chip">Room</span></div>
-        <div class="go">GitHub ↗</div>
-      </a>
-    </div>
+    <div id="projects-list"></div>
+    <div class="others" id="others"></div>
   </section>
 
   <!-- ABOUT -->
@@ -890,13 +1275,119 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 <div id="lb" role="dialog" aria-label="이미지 확대"><img alt=""></div>
 
 <script>
+{
+  const GH = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
+  const ARROW = '<svg class="arr" viewBox="0 0 26 12" aria-hidden="true"><path pathLength="1" d="M1 6H24M19 1.5L24 6L19 10.5"/></svg>';
+
+  // 모든 글은 텍스트로 이스케이프하고, `백틱`만 <code>로 바꾼다.
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const tx = s => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>');
+  const url = u => /^(https?:\/\/|assets\/|mailto:)/.test(u) ? esc(u) : '#';
+  const two = n => String(n).padStart(2, '0');
+
+  // 형식 검사: 문제가 있으면 어느 칸인지 알려 준다.
+  function check(d) {
+    const errs = [];
+    const need = (cond, where) => { if (!cond) errs.push(where); };
+    const str = v => typeof v === 'string' && v.trim() !== '';
+    const arr = v => Array.isArray(v);
+    need(arr(d.kpis), 'kpis');
+    (d.kpis || []).forEach((k, i) => need(str(k.label) && str(k.value) && str(k.desc), `kpis[${i}]`));
+    need(arr(d.projects) && d.projects.length > 0, 'projects');
+    (d.projects || []).forEach((p, i) => {
+      const w = `projects[${i}]${p && p.name ? ' (' + p.name + ')' : ''}`;
+      ['id', 'logo', 'logoAlt', 'no', 'name', 'summary'].forEach(k => need(str(p[k]), `${w}.${k}`));
+      need(arr(p.meta) && p.meta.every(m => arr(m) && m.length === 2), `${w}.meta`);
+      need(arr(p.links), `${w}.links`);
+      need(arr(p.cases), `${w}.cases`);
+      [...(p.cases || []), ...(p.moreCases || [])].forEach((c, j) =>
+        need(str(c.tag) && str(c.title) && arr(c.rows), `${w}.cases[${j}]`));
+      need(arr(p.stack), `${w}.stack`);
+    });
+    need(arr(d.others), 'others');
+    return errs;
+  }
+
+  function caseHTML(c) {
+    return `<div class="case">
+      <div class="tag">${tx(c.tag)}</div>
+      <h5>${tx(c.title)}</h5>
+      <div class="pse">${c.rows.map(r => `<b${r.key ? ' class="sol"' : ''}>${tx(r.label)}</b><span>${tx(r.text)}</span>`).join('')}</div>
+      ${c.results && c.results.length ? `<div class="result">${c.results.map(r => `<div class="r"><div class="n">${tx(r[0])}</div><div class="l">${tx(r[1])}</div></div>`).join('')}</div>` : ''}
+    </div>`;
+  }
+
+  function projectHTML(p, i) {
+    const list = (title, items) => items && items.length ? `<div><h4>${title}</h4><ul>${items.map(x => `<li>${tx(x)}</li>`).join('')}</ul></div>` : '';
+    const shots = (p.shots || []).map(g => `<div class="shots ${g.layout === 'one' ? '' : esc(g.layout)}">${g.items.map(s =>
+      `<figure><img src="${url(s.src)}" alt="${esc(s.alt)}"><figcaption>${tx(s.caption)}</figcaption></figure>`).join('')}</div>`).join('');
+    const flow = p.flow ? `<div class="flow"><div class="f-label">${tx(p.flow.label)}</div>${p.flow.nodes.map((n, k) =>
+      (k ? ARROW : '') + `<span class="node${n.mine ? ' mine' : ''}">${tx(n.text)}</span>`).join('')}</div>` : '';
+    const more = p.moreCases && p.moreCases.length ? `<details class="more"><summary>트러블슈팅 더 보기</summary><div class="cases">${p.moreCases.map(caseHTML).join('')}</div></details>` : '';
+    return `<article class="card project" id="${esc(p.id)}">
+      <div class="p-head">
+        <img class="p-logo${p.logoFit === 'contain' ? ' contain' : ''}" src="${url(p.logo)}" alt="${esc(p.logoAlt)}">
+        <div>
+          <div class="p-no">PROJECT ${two(i + 1)} · ${tx(p.no)}</div>
+          <h3>${tx(p.name)}${p.nameSub ? ` <span class="name-sub">${tx(p.nameSub)}</span>` : ''}</h3>
+          <p class="one">${tx(p.summary)}</p>
+        </div>
+        ${p.links.length ? `<div class="p-top-links">${p.links.map(l =>
+          `<a href="${url(l.url)}" target="_blank" rel="noopener">${/github\.com/.test(l.url) ? GH : ''}${tx(l.label)} ↗</a>`).join('')}</div>` : ''}
+      </div>
+      <dl class="p-meta">${p.meta.map(m => `<div><dt>${tx(m[0])}</dt><dd>${tx(m[1])}</dd></div>`).join('')}</dl>
+      <div class="p-body">
+        ${p.role || p.build ? `<div class="p-role">${list('ROLE', p.role)}${list('BUILD', p.build)}</div>` : ''}
+        ${shots}${flow}
+        <div class="cases"><h4>TROUBLESHOOTING</h4>${p.cases.map(caseHTML).join('')}${more}</div>
+        <div class="p-links"><div class="chips">${p.stack.map(s => `<span class="chip">${tx(s)}</span>`).join('')}</div></div>
+      </div>
+    </article>`;
+  }
+
+  function showError(msg, items) {
+    const box = document.createElement('div');
+    box.className = 'data-error'; box.setAttribute('role', 'alert');
+    box.innerHTML = `<b>포트폴리오 자료를 확인해 주세요</b><p>${esc(msg)}</p>${items ? `<ul>${items.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}`;
+    document.querySelector('main').prepend(box);
+  }
+
+  let data = null;
+  try { data = JSON.parse(document.getElementById('portfolio-data').textContent); }
+  catch (e) { showError('JSON을 읽지 못했습니다. 쉼표, 따옴표, 괄호 짝을 확인해 주세요. (' + e.message + ')'); }
+
+  if (data) {
+    const errs = check(data);
+    if (errs.length) showError('아래 칸이 비었거나 형식이 맞지 않습니다.', errs);
+    else {
+      document.getElementById('kpis').innerHTML = data.kpis.map(k =>
+        `<div class="card kpi"><div class="p">${tx(k.label)}</div><div class="v">${tx(k.value)}</div><div class="d">${tx(k.desc)}</div></div>`).join('');
+      document.getElementById('projects-list').innerHTML = data.projects.map(projectHTML).join('');
+      document.getElementById('others').innerHTML = data.others.map(o =>
+        `<a class="card other" href="${url(o.url)}" target="_blank" rel="noopener">
+          <div class="label">${tx(o.kind)}</div><h4>${tx(o.name)}</h4><p>${tx(o.desc)}</p>
+          <div class="chips">${o.stack.map(s => `<span class="chip">${tx(s)}</span>`).join('')}</div>
+          <div class="go">GitHub ↗</div></a>`).join('');
+    }
+  }
+
+  // 데이터 흐름도: 화면에 들어오면 칸과 화살표가 순서대로 그어진다.
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const flows = document.querySelectorAll('.flow');
+  flows.forEach(f => [...f.querySelectorAll('.node, .arr')].forEach((el, k) => el.style.setProperty('--d', (k * 0.11) + 's')));
+  if (!still && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('anim');
+    const flowObs = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('drawn'); flowObs.unobserve(e.target); }
+    }), { threshold: 0.4 });
+    flows.forEach(f => flowObs.observe(f));
+  }
+
   const nav = document.getElementById('nav');
   addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });
 
-  const io = new IntersectionObserver((es) => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  // 해시로 바로 들어왔을 때(예: #nexa) 그려진 뒤 다시 위치를 맞춘다.
+  if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView(); }
 
   const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
   document.querySelectorAll('.shots img').forEach(img => img.addEventListener('click', () => {
@@ -904,6 +1395,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   }));
   lb.addEventListener('click', () => lb.classList.remove('on'));
   addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('on'); });
+}
 </script>
 </body>
 </html>
