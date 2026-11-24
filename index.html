@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>황우찬 | Backend Engineer</title>
+<meta name="description" content="데이터가 끊기지 않고 흐르게 하는 백엔드 엔지니어 황우찬의 포트폴리오. Java · Spring Boot · PostgreSQL · Kafka.">
+<meta property="og:title" content="황우찬 | Backend Engineer">
+<meta property="og:description" content="데이터가 끊기지 않고 흐르게 하는 백엔드 엔지니어입니다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23002FA7'/><rect x='9' y='21' width='14' height='3' fill='%23FF7A00'/></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --brand:#002FA7; --brand-deep:#001C64; --accent:#FF7A00;
+  --t2:#4D6DC1; --t4:#D9E0F2; --pale:#EAEEF8;
+  --ink:#222222; --text:#3A4654; --mute:#5A6678; --caption:#8A94A2;
+  --bg:#F7F8FA; --card:#FFFFFF; --chip:#F2F4F8; --line:#E4E7EC;
+  --shadow:0 2px 12px rgba(0,0,0,.05);
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(247,248,250,.85);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+nav.scrolled{border-bottom-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:800;font-size:17px;letter-spacing:-.01em}
+.logo span{display:inline-block;width:14px;height:3px;background:var(--accent);margin-left:6px;vertical-align:middle}
+nav ul{display:flex;gap:28px;list-style:none;font-size:14px;font-weight:600;color:var(--mute)}
+nav ul a:hover{color:var(--brand)}
+
+/* common */
+section{padding:96px 0 0}
+.label{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--brand);text-transform:uppercase}
+h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-height:1.35}
+.sub{color:var(--text);font-size:16px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;font-weight:700;color:var(--brand-deep);background:var(--pale);padding:4px 10px;border-radius:6px}
+.bar{display:block;width:28px;height:3px;background:var(--accent);margin:10px 0}
+
+/* hero */
+.hero{padding:88px 0 0}
+.hero .eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;color:var(--brand)}
+.hero h1{font-size:clamp(32px,5vw,50px);font-weight:800;letter-spacing:-.03em;line-height:1.28;margin:18px 0 20px}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.hero p.lead{font-size:18px;color:var(--text);max-width:640px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;padding:11px 18px;border-radius:10px;transition:transform .15s,background .15s}
+.btn.primary{background:var(--brand);color:#fff}
+.btn.primary:hover{background:var(--brand-deep)}
+.btn.ghost{background:var(--card);box-shadow:var(--shadow);color:var(--ink)}
+.btn.ghost:hover{color:var(--brand)}
+.btn:hover{transform:translateY(-1px)}
+
+/* kpi */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.kpi{padding:26px 24px}
+.kpi .p{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand)}
+.kpi .v{font-size:28px;font-weight:800;color:var(--brand-deep);letter-spacing:-.02em;margin-top:8px;line-height:1.3}
+.kpi .d{font-size:14px;color:var(--mute)}
+
+/* projects */
+.project{margin-top:40px;overflow:hidden}
+.p-head{display:flex;gap:20px;align-items:flex-start;padding:32px 32px 0}
+.p-logo{width:64px;height:64px;border-radius:14px;object-fit:cover;flex:none;background:var(--chip)}
+.p-no{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--brand)}
+.p-head h3{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.3;margin-top:2px}
+.p-head .one{color:var(--text);font-size:15.5px;margin-top:2px}
+.p-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin:24px 32px 0;border-radius:10px;overflow:hidden}
+.p-meta div{background:var(--chip);padding:12px 14px}
+.p-meta dt{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--brand)}
+.p-meta dd{font-size:14px;font-weight:600;color:var(--text);margin-top:2px}
+.p-body{padding:24px 32px 32px}
+.p-role{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.p-role h4,.cases>h4{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand);margin-bottom:8px}
+.p-role ul{list-style:none}
+.p-role li{position:relative;padding-left:14px;font-size:15px;color:var(--text);margin-bottom:4px}
+.p-role li::before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:var(--t2)}
+.shots{display:grid;gap:12px;margin:28px 0 0}
+.shots.two{grid-template-columns:1fr 1fr}
+.shots.four{grid-template-columns:repeat(4,1fr)}
+.shots.grid4{grid-template-columns:1fr 1fr}
+.shots figure{margin:0}
+.shots img{width:100%;border-radius:10px;border:1px solid var(--line);background:var(--chip);cursor:zoom-in}
+.shots figcaption{font-size:12.5px;color:var(--mute);text-align:center;margin-top:6px}
+.cases{margin-top:32px;display:grid;gap:14px}
+.case{border:1px solid var(--line);border-radius:12px;padding:22px 24px}
+.case .tag{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--caption)}
+.case h5{font-size:17.5px;font-weight:800;letter-spacing:-.01em;margin:4px 0 14px;line-height:1.45}
+.pse{display:grid;grid-template-columns:72px 1fr;gap:6px 14px;font-size:14.5px;color:var(--text)}
+.pse b{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:.06em;padding-top:2px}
+.pse b.sol{color:var(--brand)}
+.result{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.r{background:var(--pale);border-radius:10px;padding:12px 16px;min-width:150px;position:relative}
+.r::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;background:var(--accent);border-radius:0 2px 2px 0}
+.r .n{font-size:20px;font-weight:800;color:var(--brand-deep);letter-spacing:-.02em;line-height:1.3}
+.r .l{font-size:12.5px;color:var(--mute)}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:28px}
+.flow .f-label{width:100%;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand);margin-bottom:4px}
+.node{font-size:13.5px;font-weight:700;padding:9px 14px;border-radius:8px;background:var(--chip);color:var(--ink);position:relative}
+.node.mine{background:var(--t4);color:var(--brand-deep)}
+.node.mine::after{content:"";position:absolute;left:14px;right:14px;bottom:-5px;height:3px;background:var(--accent);border-radius:2px}
+.arrow{color:var(--caption);font-size:14px}
+.flow .hint{width:100%;font-size:12px;color:var(--caption);margin-top:10px}
+.p-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;align-items:center}
+.p-links a{font-size:13.5px;font-weight:700;color:var(--brand);padding:7px 12px;border-radius:8px;background:var(--pale)}
+.p-links a:hover{background:var(--t4)}
+.p-links .chips{margin-left:auto}
+details.more{margin-top:14px}
+details.more summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--brand);list-style:none;display:inline-flex;align-items:center;gap:6px}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";font-size:16px}
+details.more[open] summary::after{content:"−"}
+details.more .cases{margin-top:14px}
+
+/* other */
+.others{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.other{padding:24px;display:flex;flex-direction:column;transition:transform .15s}
+.other:hover{transform:translateY(-2px)}
+.other h4{font-size:17px;font-weight:800}
+.other p{font-size:14.5px;color:var(--text);margin:6px 0 16px;flex:1}
+.other .go{font-size:13px;font-weight:700;color:var(--brand);margin-top:14px}
+
+/* about */
+.about{display:grid;grid-template-columns:300px 1fr;gap:16px;margin-top:32px}
+.profile{padding:28px}
+.profile img{width:120px;height:160px;object-fit:cover;border-radius:12px}
+.profile .nm{font-size:22px;font-weight:800;margin-top:18px}
+.profile .en{font-size:14px;color:var(--mute)}
+.profile dl{margin-top:18px;font-size:14px}
+.profile dl div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.profile dt{font-weight:700;color:var(--text)}
+.profile dd{color:var(--mute);text-align:right}
+.skills{padding:28px}
+.skills h4{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand)}
+.sk{display:grid;grid-template-columns:200px 110px 1fr;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.sk:first-of-type{border-top:0}
+.sk .nm{font-weight:700;font-size:15px}
+.sk .track{height:6px;background:#EEF0F4;border-radius:3px;overflow:hidden}
+.sk .track i{display:block;height:100%;background:var(--t2);border-radius:3px}
+.sk .track i.top{background:var(--brand)}
+.sk .ds{font-size:14px;color:var(--text)}
+.sk .lv{font-size:12px;font-weight:700;color:var(--brand-deep);margin-left:6px}
+.skills .note{font-size:12px;color:var(--caption);margin-top:10px}
+
+.timeline{margin-top:16px;padding:28px 28px 20px}
+.tl{list-style:none;position:relative;margin-top:18px}
+.tl::before{content:"";position:absolute;left:88px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.tl li{display:grid;grid-template-columns:72px 1fr;gap:32px;padding:8px 0;position:relative}
+.tl li::before{content:"";position:absolute;left:84px;top:16px;width:9px;height:9px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 3px #fff}
+.tl li.award::before{background:var(--accent)}
+.tl .dt{font-size:14px;font-weight:700;color:var(--brand)}
+.tl .ev{font-size:15px;font-weight:700}
+.tl .ev span{font-weight:400;color:var(--mute);margin-left:8px;font-size:14px}
+.tl-note{font-size:12px;color:var(--caption);margin-top:8px}
+.twin{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.twin .card{padding:28px}
+.twin h4{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand);margin-bottom:14px}
+.rows div{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
+.rows div:first-child{border-top:0}
+.rows b{font-weight:700}
+.rows span{color:var(--mute);font-size:14px}
+
+/* closing */
+.closing{margin-top:32px;padding:40px;text-align:left}
+.closing p.big{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.45}
+.closing p.big em{font-style:normal;color:var(--brand)}
+.contact{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center}
+
+/* lightbox */
+#lb{position:fixed;inset:0;background:rgba(10,16,32,.86);display:none;align-items:center;justify-content:center;z-index:50;padding:24px;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:100%;border-radius:10px}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media (max-width:860px){
+  nav ul{gap:16px}
+  .kpis,.others{grid-template-columns:1fr}
+  .p-meta{grid-template-columns:1fr 1fr}
+  .p-role,.about,.twin{grid-template-columns:1fr}
+  .shots.four{grid-template-columns:1fr 1fr}
+  .sk{grid-template-columns:1fr;gap:6px}
+  .p-links .chips{margin-left:0;width:100%}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  nav ul li:not(:last-child){display:none}
+  section{padding-top:72px}
+  .p-head,.p-body{padding-left:20px;padding-right:20px}
+  .p-meta{margin-left:20px;margin-right:20px}
+  .p-head{flex-direction:column;gap:12px}
+  .shots.two,.shots.grid4{grid-template-columns:1fr}
+  .pse{grid-template-columns:1fr;gap:2px}
+  .pse b{padding-top:8px}
+  .case{padding:18px}
+  .closing{padding:28px 22px}
+  .closing p.big{font-size:20px}
+  .tl::before,.tl li::before{display:none}
+  .tl li{grid-template-columns:64px 1fr;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo">황우찬<span></span></a>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top" class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow">BACKEND ENGINEER · PORTFOLIO 2026</div>
+    <h1>데이터가 끊기지 않고<br><em>흐르게 하는</em> 백엔드 엔지니어입니다.</h1>
+    <p class="lead">에러 없이 조용히 실패하는 곳을 먼저 찾습니다. 사라지던 기사, 몰래 쌓이던 과금, 서비스 사이에서 유실될 뻔한 결재 결과를 실측과 구조로 막아 왔습니다.</p>
+    <div class="chips" style="margin-top:22px">
+      <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Kafka</span><span class="chip">Redis</span><span class="chip">Docker</span>
+    </div>
+    <div class="meta">
+      <a class="btn primary" href="#projects">프로젝트 보기</a>
+      <a class="btn ghost" href="https://github.com/cmy397264" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="https://velog.io/@cmy397264" target="_blank" rel="noopener">Velog</a>
+      <a class="btn ghost" href="mailto:cmy397264@naver.com">cmy397264@naver.com</a>
+    </div>
+
+    <div class="kpis">
+      <div class="card kpi reveal">
+        <div class="p">NEXA</div>
+        <div class="v">동시 5건 → 문서 1건</div>
+        <div class="d">같은 요청 키로 동시 상신해도 결재 문서는 하나</div>
+      </div>
+      <div class="card kpi reveal">
+        <div class="p">WHAT IN THE WORLD</div>
+        <div class="v">252.7 → 12.4ms</div>
+        <div class="d">가장 느린 조회 쿼리 · 특화 프로젝트 우수상</div>
+      </div>
+      <div class="card kpi reveal">
+        <div class="p">MANDAL-IN</div>
+        <div class="v">900초 → 0초</div>
+        <div class="d">말하지 않는 15분의 STT 과금 · 공통 프로젝트 우수상</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="label">Projects</div>
+    <h2>AI 파이프라인에서 서비스 사이의 이벤트까지,<br>점점 서버 쪽으로 깊어졌습니다.</h2>
+    <p class="sub">최근 프로젝트부터 정리했습니다. 각 프로젝트는 맡은 일과 실제로 부딪힌 문제를 중심으로 썼습니다.</p>
+
+    <!-- NEXA -->
+    <article class="card project reveal" id="nexa">
+      <div class="p-head">
+        <img class="p-logo" src="assets/logo-nexa.png" alt="NEXA 로고">
+        <div>
+          <div class="p-no">PROJECT 01 · SSAFY 2학기 자율</div>
+          <h3>NEXA</h3>
+          <p class="one">엑셀 이관과 AI 업무 자동화를 갖춘 MSA 인사 ERP</p>
+        </div>
+      </div>
+      <dl class="p-meta">
+        <div><dt>기간</dt><dd>2026.10 ~ 2026.11 (5주)</dd></div>
+        <div><dt>인원</dt><dd>6인 (BE 5 · Infra 1)</dd></div>
+        <div><dt>담당</dt><dd>전자결재 서비스 단독</dd></div>
+        <div><dt>기여</dt><dd>결재 서비스 커밋 43/44</dd></div>
+      </dl>
+      <div class="p-body">
+        <div class="p-role">
+          <div>
+            <h4>ROLE</h4>
+            <ul>
+              <li>전자결재 서비스(approval-service) 설계·구현</li>
+              <li>서비스 공통 인증 라이브러리</li>
+              <li>결재 화면 프론트엔드 (커밋 36/58)</li>
+            </ul>
+          </div>
+          <div>
+            <h4>BUILD</h4>
+            <ul>
+              <li>위임전결 규칙에 따른 결재선 자동 생성</li>
+              <li>트랜잭셔널 아웃박스로 결재 결과 이벤트 발행</li>
+              <li>요청 키 기반 멱등 생성 API · 동시성 안전 채번</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="shots two">
+          <figure><img src="assets/nexa-1.jpg" alt="자동 상신된 결재 문서 화면" loading="lazy"><figcaption>자동 상신된 결재 문서 · 실행 원본 연결</figcaption></figure>
+          <figure><img src="assets/nexa-2.jpg" alt="업무 자동화 워크플로 빌더 화면" loading="lazy"><figcaption>업무 자동화 워크플로 빌더</figcaption></figure>
+        </div>
+
+        <div class="flow">
+          <div class="f-label">RESULT FLOW</div>
+          <span class="node">휴가 · 근태 · 자동화</span><span class="arrow">→</span>
+          <span class="node mine">결재 생성</span><span class="arrow">→</span>
+          <span class="node mine">결재 처리</span><span class="arrow">→</span>
+          <span class="node mine">아웃박스</span><span class="arrow">→</span>
+          <span class="node">Kafka</span><span class="arrow">→</span>
+          <span class="node">원본 서비스</span>
+          <div class="hint">주황 밑줄 = 담당 구간</div>
+        </div>
+
+        <div class="cases">
+          <h4>TROUBLESHOOTING</h4>
+          <div class="case">
+            <div class="tag">01 · 이벤트 유실</div>
+            <h5>결재는 승인됐는데, 휴가 서비스가 모를 수 있었다</h5>
+            <div class="pse">
+              <b>문제</b><span>상태 저장과 Kafka 발행을 따로 하면, 커밋 뒤 발행이 실패할 때 승인된 휴가가 계속 '결재 대기'로 남는 구조였습니다.</span>
+              <b class="sol">해결</b><span>결재 상태 변경과 아웃박스 기록을 같은 트랜잭션으로 커밋하고, 발행기는 1초 주기 · <code>SKIP LOCKED</code>로 가져가 실패하면 그 자리에서 멈추게 했습니다. 프로듀서는 <code>acks=all</code> · idempotence, 문서별 키로 순서를 보장하고, 수신 측은 상태 기반 멱등 처리 후 3회 재시도 · DLT로 보냅니다.</span>
+            </div>
+            <div class="result">
+              <div class="r"><div class="n">0건</div><div class="l">결재 롤백 시 남는 이벤트</div></div>
+              <div class="r"><div class="n">5분</div><div class="l">미발행 이벤트 지연 경보 기준</div></div>
+              <div class="r"><div class="n">7개</div><div class="l">Kafka 통합 4 · 발행기 단위 3 테스트</div></div>
+            </div>
+          </div>
+          <div class="case">
+            <div class="tag">02 · 중복 생성</div>
+            <h5>재시도하면 결재 문서가 두 개 생길 수 있었다</h5>
+            <div class="pse">
+              <b>문제</b><span>원본 서비스가 응답을 못 받고 다시 요청하면, 같은 기안이 두 번 상신될 수 있었습니다.</span>
+              <b class="sol">해결</b><span>같은 <code>requestKey</code>는 PostgreSQL advisory lock으로 하나씩 처리하고, 이미 있으면 처음 만든 문서를 돌려줍니다. 결과를 알 수 없을 때는 다시 만들지 않고 요청 키 조회 API로 상태를 맞춥니다.</span>
+            </div>
+            <div class="result">
+              <div class="r"><div class="n">5건 → 1건</div><div class="l">같은 키 동시 요청 (201 ×1 · 200 ×4)</div></div>
+              <div class="r"><div class="n">동시 10건</div><div class="l">문서번호 겹침 · 빈칸 없이 채번</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-links">
+          <a href="https://github.com/cmy397264/nexa" target="_blank" rel="noopener">GitHub ↗</a>
+          <div class="chips"><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">React</span><span class="chip">Testcontainers</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- BBangPatrol -->
+    <article class="card project reveal" id="bbang">
+      <div class="p-head">
+        <div class="p-logo" style="display:flex;align-items:center;justify-content:center;font-size:30px" aria-hidden="true">🥐</div>
+        <div>
+          <div class="p-no">PROJECT 02 · 팀 프로젝트</div>
+          <h3>BBangPatrol</h3>
+          <p class="one">영수증 한 장으로 빵집 방문을 인증하고, 미션·포인트·수집품으로 이어지는 빵집 탐방 서비스</p>
+        </div>
+      </div>
+      <dl class="p-meta">
+        <div><dt>기간</dt><dd>2026.07 ~ 2026.10</dd></div>
+        <div><dt>인원</dt><dd>팀 프로젝트 (BE 3)</dd></div>
+        <div><dt>담당</dt><dd>백엔드 · 배포</dd></div>
+        <div><dt>기여</dt><dd>백엔드 커밋 203/293</dd></div>
+      </dl>
+      <div class="p-body">
+        <div class="p-role">
+          <div>
+            <h4>ROLE</h4>
+            <ul>
+              <li>백엔드 메인 개발 (인증 · 빵집 · 방문 · 리뷰 · 미션 · 포인트)</li>
+              <li>Docker · GHCR 기반 운영/개발 배포 환경 분리</li>
+              <li>2026 대전빵축제 참여 빵집 데이터 시드</li>
+            </ul>
+          </div>
+          <div>
+            <h4>BUILD</h4>
+            <ul>
+              <li>영수증 사진만으로 가게를 찾는 방문 인증 API</li>
+              <li>이미지 업로드 시 리사이즈 · 썸네일 생성 (S3)</li>
+              <li>탈퇴 30일 후 회원 · 삭제 리뷰 파기 배치</li>
+              <li>404 · 405 · 415까지 공통 에러 응답 형식 통일</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cases">
+          <h4>TROUBLESHOOTING</h4>
+          <div class="case">
+            <div class="tag">01 · 트랜잭션 경계</div>
+            <h5>인증은 됐는데 미션이 갱신되지 않았다</h5>
+            <div class="pse">
+              <b>문제</b><span>영수증 인증 · 리뷰 작성 · 수집품 뽑기 안에서 미션까지 함께 갱신하다 보니, 한쪽이 실패하면 서로 영향을 주고 미션이 갱신되지 않는 경우가 생겼습니다.</span>
+              <b class="sol">해결</b><span>미션 갱신을 본 작업 커밋 이후로 분리하고 포인트 적립 흐름을 정리했습니다. 이미 누락된 사용자 데이터는 백필 스크립트로 채웠습니다.</span>
+            </div>
+          </div>
+          <div class="case">
+            <div class="tag">02 · 인증 정확도</div>
+            <h5>영수증을 올려도 가게를 못 찾는 이유가 제각각이었다</h5>
+            <div class="pse">
+              <b>문제</b><span>주소의 띄어쓰기, 다른 지점 영수증, 중복 영수증이 모두 같은 실패로 처리돼 사용자가 무엇이 잘못됐는지 알 수 없었습니다.</span>
+              <b class="sol">해결</b><span>주소 정규화로 인식 실패를 고치고, 실패 원인별 안내 문구(다른 지점 안내 포함)를 분리했습니다. 영수증 중복 검사 범위는 전체/사용자 단위로 전환할 수 있게 했습니다.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-links">
+          <a href="https://github.com/BBangPatrol/Backend" target="_blank" rel="noopener">Backend ↗</a>
+          <a href="https://github.com/BBangPatrol/OCR" target="_blank" rel="noopener">OCR ↗</a>
+          <div class="chips"><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">MySQL</span><span class="chip">Flyway</span><span class="chip">Redis</span><span class="chip">S3</span><span class="chip">OAuth2</span><span class="chip">Docker</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- WITW -->
+    <article class="card project reveal" id="witw">
+      <div class="p-head">
+        <img class="p-logo" src="assets/logo-witw.png" alt="What In the World 로고">
+        <div>
+          <div class="p-no">PROJECT 03 · SSAFY 2학기 특화 · 우수상</div>
+          <h3>What In the World</h3>
+          <p class="one">전 세계 뉴스 논조를 지구본 위에 실시간으로 보여 주는 글로벌 이슈 모니터링 서비스</p>
+        </div>
+      </div>
+      <dl class="p-meta">
+        <div><dt>기간</dt><dd>2026.08 ~ 2026.09 (6주)</dd></div>
+        <div><dt>인원</dt><dd>6인 (BE 3 · AI 1 · FE 2)</dd></div>
+        <div><dt>담당</dt><dd>DB 적재 · 조회 성능</dd></div>
+        <div><dt>수상</dt><dd>특화 프로젝트 우수상</dd></div>
+      </dl>
+      <div class="p-body">
+        <div class="p-role">
+          <div>
+            <h4>ROLE</h4>
+            <ul>
+              <li>Kafka 컨슈머 기반 DB 적재 안정화</li>
+              <li>데이터 정합성 · 조회 성능 개선</li>
+            </ul>
+          </div>
+          <div>
+            <h4>BUILD</h4>
+            <ul>
+              <li>이슈 랭킹 · 이슈 상세 · 국가 메인 · 수집 기사 수 조회 API</li>
+              <li>Flyway 기반 국가 기준 데이터 시드(249개국)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="shots two">
+          <figure><img src="assets/witw-1.jpg" alt="글로벌 대시보드 화면" loading="lazy"><figcaption>글로벌 대시보드 · 실시간 이슈 TOP 5</figcaption></figure>
+          <figure><img src="assets/witw-2.jpg" alt="국가 상세 화면" loading="lazy"><figcaption>국가 상세 · 핫이슈 TOP 5</figcaption></figure>
+        </div>
+
+        <div class="flow">
+          <div class="f-label">DATA FLOW</div>
+          <span class="node">뉴스 수집</span><span class="arrow">→</span>
+          <span class="node">Kafka</span><span class="arrow">→</span>
+          <span class="node mine">DB 적재 모듈</span><span class="arrow">→</span>
+          <span class="node">PostgreSQL</span><span class="arrow">→</span>
+          <span class="node mine">조회 API</span>
+          <div class="hint">주황 밑줄 = 담당 구간</div>
+        </div>
+
+        <div class="cases">
+          <h4>TROUBLESHOOTING</h4>
+          <div class="case">
+            <div class="tag">01 · 데이터 유실</div>
+            <h5>기사 10,794건이 에러 없이 사라졌다</h5>
+            <div class="pse">
+              <b>문제</b><span>국가 기준 데이터가 5개국뿐이라 저장이 롤백됐고, 기본 에러 핸들러가 1초 안에 재시도 9번을 소진한 뒤 오프셋까지 커밋해 기사가 기록 없이 사라졌습니다.</span>
+              <b class="sol">해결</b><span>실패를 "재시도로 풀리는가"로 나눴습니다. DB 연결 부족 · 데드락 같은 일시 오류는 0.5초~8초 지수 백오프(무작위 편차 포함)로 재시도하고, 미등록 국가 · 형식 오류 같은 영구 오류는 원인과 위치를 기록해 즉시 DLT로 보존합니다. 국가 데이터는 Flyway 시드로 채우고, 새 컨슈머가 쌓인 메시지를 건너뛰지 않도록 오프셋 설정을 바꿨습니다.</span>
+              <b>한계</b><span>메시지 형식이 바뀌기 전의 약 2만 4천 건은 별도 재계산이 필요해 복구하지 못했습니다.</span>
+            </div>
+          </div>
+          <div class="case">
+            <div class="tag">02 · 조회 성능</div>
+            <h5>PK 외 인덱스가 0개, 숫자부터 의심했다</h5>
+            <div class="pse">
+              <b>문제</b><span>일부 조회가 50만 행 중 67%를 읽고 버리고 있었습니다.</span>
+              <b class="sol">해결</b><span>설정을 고정한 측정 전용 컨테이너에서 후보를 비교했고, 측정이 틀릴 수 있는 지점 3가지(캐시 워밍 오염, 표본 부족, 단독 판정)를 먼저 걸러 냈습니다. 2배 이상 빨라진 후보만 채택해 인덱스 5개 채택 · 2개 기각, 가장 느린 쿼리는 재작성했습니다.</span>
+            </div>
+            <div class="result">
+              <div class="r"><div class="n">252.7 → 12.4ms</div><div class="l">가장 느린 쿼리</div></div>
+              <div class="r"><div class="n">1,485 → 536ms</div><div class="l">조회 합계 · 인덱스 5개</div></div>
+              <div class="r"><div class="n">+19.9%</div><div class="l">쓰기 비용, 감수하고 수치로 기록</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-links">
+          <div class="chips"><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">Flyway</span><span class="chip">Testcontainers</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Mandal-In -->
+    <article class="card project reveal" id="mandalin">
+      <div class="p-head">
+        <img class="p-logo" src="assets/logo-mandalin.png" alt="Mandal-In 로고">
+        <div>
+          <div class="p-no">PROJECT 04 · SSAFY 2학기 공통 · 우수상</div>
+          <h3>Mandal-In</h3>
+          <p class="one">음성 대화로 만다라트를 채우는 AI 코치 웹</p>
+        </div>
+      </div>
+      <dl class="p-meta">
+        <div><dt>기간</dt><dd>2026.07 ~ 2026.08 (6주)</dd></div>
+        <div><dt>인원</dt><dd>6인 (팀장 1 · BE 3 · FE 2)</dd></div>
+        <div><dt>담당</dt><dd>AI 파이프라인 · 백엔드</dd></div>
+        <div><dt>수상</dt><dd>공통 프로젝트 우수상</dd></div>
+      </dl>
+      <div class="p-body">
+        <div class="p-role">
+          <div>
+            <h4>ROLE</h4>
+            <ul>
+              <li>AI 음성 파이프라인 (Python)</li>
+              <li>백엔드 (Spring Boot) · 최종 발표</li>
+            </ul>
+          </div>
+          <div>
+            <h4>BUILD</h4>
+            <ul>
+              <li>STT 무음 게이트(SpeechGate)</li>
+              <li>골든셋 기반 프롬프트 회귀 평가</li>
+              <li>LiveKit 토큰 발급 API</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="shots grid4">
+          <figure><img src="assets/md-1.jpg" alt="홈 화면" loading="lazy"><figcaption>홈 · 오늘의 할 일과 내 마을</figcaption></figure>
+          <figure><img src="assets/md-2.jpg" alt="새 만다라트 작성 화면" loading="lazy"><figcaption>새 만다라트 작성</figcaption></figure>
+          <figure><img src="assets/md-3.jpg" alt="AI 코치 음성 대화 화면" loading="lazy"><figcaption>AI 코치 음성 대화</figcaption></figure>
+          <figure><img src="assets/md-4.jpg" alt="3D 마을 성장 화면" loading="lazy"><figcaption>3D 마을 성장</figcaption></figure>
+        </div>
+
+        <div class="cases">
+          <h4>TROUBLESHOOTING</h4>
+          <div class="case">
+            <div class="tag">01 · 과금 구조</div>
+            <h5>말하지 않아도 STT 요금이 쌓였다</h5>
+            <div class="pse">
+              <b>문제</b><span>Deepgram은 말한 양이 아니라 소켓이 열린 시간으로 과금합니다. 15분 마이크 창 대부분이 침묵이어도 900초 전부가 청구되는 구조였습니다.</span>
+              <b class="sol">해결</b><span>"말하지 않으면 과금 0초, 사용 경험은 그대로"를 기준으로 세 방식을 비교했습니다. 버튼 방식은 UX 때문에, 음성 판별 모델(silero)은 서버 메모리 때문에 기각하고, 프레임 RMS로 소리 유무만 보는 게이트를 채택했습니다. 800ms 이하의 쉼은 그대로 보내고, 800ms 침묵에 발화를 끝내고, 5초 침묵에 소켓을 직접 닫습니다.</span>
+            </div>
+            <div class="result">
+              <div class="r"><div class="n">900초 → 0초</div><div class="l">15분 침묵 시 과금 시간</div></div>
+              <div class="r"><div class="n">10.5초 → 0.6초</div><div class="l">소켓 종료 시간</div></div>
+              <div class="r"><div class="n">34초 중 13.8초</div><div class="l">마이크 34초 동안 소켓 개방</div></div>
+            </div>
+          </div>
+          <details class="more">
+            <summary>트러블슈팅 더 보기</summary>
+            <div class="cases">
+              <div class="case">
+                <div class="tag">02 · 프롬프트 회귀</div>
+                <h5>정확도는 그대로인데 출력 정상률이 떨어졌다</h5>
+                <div class="pse">
+                  <b>문제</b><span>캐시 적중이 3%뿐이라, 지시문의 49%를 차지하던 예시를 줄이기로 했습니다.</span>
+                  <b class="sol">해결</b><span>실제 파이프라인에 62개 케이스를 3회씩 태워 짝지은 정확 이항검정으로 비교했습니다. action 정확도는 차이가 없었지만(p=0.5) 출력 정상률이 100%에서 88.71%로 떨어졌고(p=0.0156), 원인은 예시가 가리던 글자 수 규칙 충돌(60자 vs 40자)이었습니다. 40자로 통일하고, 꼭 지켜야 할 규칙은 6단계 서버 가드로 옮겼습니다.</span>
+                </div>
+                <div class="result">
+                  <div class="r"><div class="n">88.71% → 98.39%</div><div class="l">출력 정상률 회복</div></div>
+                  <div class="r"><div class="n">7건 → 1건</div><div class="l">같은 62개 케이스 결함</div></div>
+                </div>
+              </div>
+              <div class="case">
+                <div class="tag">03 · 서버 한도</div>
+                <h5>1GiB 서버에 대화방을 몇 개까지 받을 것인가</h5>
+                <div class="pse">
+                  <b>문제</b><span>기본 부하 기준 0.7이 t3.micro baseline(0.2 vCPU)의 7배여서, 에러 없이 CPU 크레딧 초과로만 드러날 상황이었습니다.</span>
+                  <b class="sol">해결</b><span>배포 구성 그대로 메모리(PSS)를 실측해 동시 대화방 상한을 정하고, 사양이 바뀌면 실패하는 테스트로 기준값을 고정했습니다. 배포 중 메모리 몰림에 대비해 2GB 스왑을 추가했습니다.</span>
+                </div>
+                <div class="result">
+                  <div class="r"><div class="n">4개</div><div class="l">동시 대화방 상한</div></div>
+                  <div class="r"><div class="n">0.7 → 0.1</div><div class="l">부하 기준</div></div>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="p-links">
+          <div class="chips"><span class="chip">Python</span><span class="chip">LiveKit</span><span class="chip">Deepgram</span><span class="chip">Gemini</span><span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 나랑등산 -->
+    <article class="card project reveal" id="hiking">
+      <div class="p-head">
+        <div class="p-logo" style="display:flex;align-items:center;justify-content:center;font-size:30px" aria-hidden="true">⛰️</div>
+        <div>
+          <div class="p-no">PROJECT 05 · SSAFY 1학기 · 우수상</div>
+          <h3>나랑등산이다</h3>
+          <p class="one">산과 코스 정보, 날씨, 후기를 한곳에서 보는 등산 코스 서비스</p>
+        </div>
+      </div>
+      <dl class="p-meta">
+        <div><dt>기간</dt><dd>2026 상반기</dd></div>
+        <div><dt>인원</dt><dd>팀 프로젝트 (BE 2)</dd></div>
+        <div><dt>담당</dt><dd>인증 · 산/코스 · 인프라</dd></div>
+        <div><dt>수상</dt><dd>1학기 프로젝트 우수상</dd></div>
+      </dl>
+      <div class="p-body">
+        <div class="p-role">
+          <div>
+            <h4>ROLE</h4>
+            <ul>
+              <li>JWT 인증/인가 · Spring Security 권한 제어</li>
+              <li>산 · 코스 · 즐겨찾기 · 추천 API</li>
+              <li>Cloudflare R2 이미지 스토리지 · CORS</li>
+            </ul>
+          </div>
+          <div>
+            <h4>BUILD</h4>
+            <ul>
+              <li>accessToken + refreshToken 이중 토큰, 저장소를 LocalStorage → HttpOnly Cookie로 전환</li>
+              <li>기상청 단기예보 연동, 위경도 → 격자좌표(LCC) 변환</li>
+              <li>GPX 일괄 등록 · 응답 DTO 분리로 비밀번호 노출 방지</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-links">
+          <a href="https://github.com/NarangHiking/BE" target="_blank" rel="noopener">GitHub ↗</a>
+          <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot</span><span class="chip">Spring Security</span><span class="chip">MyBatis</span><span class="chip">Redis</span><span class="chip">JWT</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- BigPicture -->
+    <article class="card project reveal" id="bigpicture">
+      <div class="p-head">
+        <img class="p-logo" src="assets/logo-bigpicture.png" alt="BigPicture 로고">
+        <div>
+          <div class="p-no">PROJECT 06 · 산학협력</div>
+          <h3>BigPicture</h3>
+          <p class="one">종목을 등록하면 AI 주간 경제 리포트가 푸시로 도착하는 안드로이드 앱</p>
+        </div>
+      </div>
+      <dl class="p-meta">
+        <div><dt>기간</dt><dd>2025.03 ~ 2025.06 (4개월)</dd></div>
+        <div><dt>인원</dt><dd>5인 (BE 2 · 모바일 2 · 기획 1)</dd></div>
+        <div><dt>담당</dt><dd>앱 인프라 · 서버 통신</dd></div>
+        <div><dt>성과</dt><dd>Play 스토어 출시 · 학회 논문</dd></div>
+      </dl>
+      <div class="p-body">
+        <div class="shots four">
+          <figure><img src="assets/bp-1.jpg" alt="포트폴리오 입력 전 화면" loading="lazy"><figcaption>포트폴리오 (입력 전)</figcaption></figure>
+          <figure><img src="assets/bp-2.jpg" alt="포트폴리오 입력 후 화면" loading="lazy"><figcaption>포트폴리오 (입력 후)</figcaption></figure>
+          <figure><img src="assets/bp-3.jpg" alt="경제 리포트 화면" loading="lazy"><figcaption>경제 리포트</figcaption></figure>
+          <figure><img src="assets/bp-4.jpg" alt="뉴스 탭 화면" loading="lazy"><figcaption>뉴스 탭</figcaption></figure>
+        </div>
+        <div class="cases">
+          <h4>TROUBLESHOOTING</h4>
+          <div class="case">
+            <div class="tag">01 · 응답 대기</div>
+            <h5>리포트를 다 받을 때까지 앱에 들어갈 수 없었다</h5>
+            <div class="pse">
+              <b>문제</b><span>부팅 시퀀스 안에서 종목별 리포트를 콜백으로 순차 요청해, 첫 화면이 리포트 완료를 기다렸습니다.</span>
+              <b class="sol">해결</b><span>콜백을 suspend 함수로 바꿔 종목별 async 병렬 요청으로 전환하고, 리포트 갱신은 부팅에서 떼어 별도 코루틴으로 받아 Room에 저장한 뒤 알리도록 했습니다.</span>
+            </div>
+            <div class="result">
+              <div class="r"><div class="n">90초 → 40초</div><div class="l">리포트 응답 (56% 단축)</div></div>
+              <div class="r"><div class="n">즉시</div><div class="l">홈 화면 진입</div></div>
+            </div>
+          </div>
+          <div class="case">
+            <div class="tag">02 · 조용한 실패</div>
+            <h5>알림이 안 오는데 에러 로그가 없었다</h5>
+            <div class="pse">
+              <b>문제</b><span>FCM 토큰 콜백 전에 서버 등록이 실행돼, 첫 실행 기기에는 토큰 대신 "-1"이 저장되고 있었습니다.</span>
+              <b class="sol">해결</b><span><code>suspendCancellableCoroutine</code>으로 토큰을 받은 뒤 등록하도록 순서를 바로잡고, 온보딩 경로의 등록 누락까지 수정했습니다.</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-links">
+          <a href="https://github.com/knu-datastreams/BigPicture-APP" target="_blank" rel="noopener">App ↗</a>
+          <a href="https://github.com/knu-datastreams/BigPicture-BE" target="_blank" rel="noopener">Backend ↗</a>
+          <div class="chips"><span class="chip">Kotlin</span><span class="chip">Compose</span><span class="chip">Coroutine</span><span class="chip">Retrofit</span><span class="chip">Room</span><span class="chip">FCM</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- OTHERS -->
+    <div class="others">
+      <a class="card other reveal" href="https://github.com/cmy397264/Velog_grass" target="_blank" rel="noopener">
+        <div class="label">Side · Tool</div>
+        <h4 style="margin-top:6px">Velog Grass</h4>
+        <p>Velog 글 작성일을 GraphQL로 모아 GitHub 잔디 같은 SVG로 그리고, GitHub Actions로 자동 갱신합니다.</p>
+        <div class="chips"><span class="chip">Node.js</span><span class="chip">GitHub Actions</span></div>
+        <div class="go">GitHub ↗</div>
+      </a>
+      <a class="card other reveal" href="https://github.com/cmy397264/KakaoPororo" target="_blank" rel="noopener">
+        <div class="label">Side · Experiment</div>
+        <h4 style="margin-top:6px">Pororo OCR 테스트</h4>
+        <p>Kakao Brain Pororo로 영수증 OCR을 실험했습니다. 호환되지 않는 의존성은 패치로 걷어 내고 OCR만 동작하게 구성했습니다.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OCR</span></div>
+        <div class="go">GitHub ↗</div>
+      </a>
+      <a class="card other reveal" href="https://github.com/cmy397264/App_POS_compose" target="_blank" rel="noopener">
+        <div class="label">Side · Android</div>
+        <h4 style="margin-top:6px">POS App</h4>
+        <p>테이블 · 주문 · 결제 · 영수증 흐름을 Jetpack Compose와 Room으로 구현한 매장용 POS 앱입니다.</p>
+        <div class="chips"><span class="chip">Kotlin</span><span class="chip">Compose</span><span class="chip">Room</span></div>
+        <div class="go">GitHub ↗</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="label">About</div>
+    <h2>API 설계부터 쿼리 성능까지 직접 책임집니다.</h2>
+    <p class="sub">C와 Linux에서 시작해 모바일 앱을 거쳐, 지금은 Java와 Spring 백엔드에 집중하고 있습니다.</p>
+
+    <div class="about">
+      <div class="card profile reveal">
+        <img src="assets/profile.jpg" alt="황우찬 프로필 사진">
+        <div class="nm">황우찬</div>
+        <div class="en">Hwang Woochan · Backend Engineer</div>
+        <dl>
+          <div><dt>경북대학교</dt><dd>컴퓨터공학과 · 3.80/4.5</dd></div>
+          <div><dt>창원대학교</dt><dd>정보통신공학과 · 4.14/4.5</dd></div>
+          <div><dt>SSAFY</dt><dd>15기 Java/Spring</dd></div>
+          <div><dt>42 경산</dt><dd>3기</dd></div>
+        </dl>
+      </div>
+      <div class="card skills reveal">
+        <h4>SKILLS</h4>
+        <div class="sk"><div class="nm">Java · Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i class="top" style="width:100%"></i></div><span class="lv">상</span></div><div class="ds">JPA 기반 RESTful API 설계 및 구현</div></div>
+        <div class="sk"><div class="nm">PostgreSQL · MySQL · JPA</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">데이터 모델링과 인덱스로 쿼리 성능 개선</div></div>
+        <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">DLT · 재시도 설계, 트랜잭셔널 아웃박스</div></div>
+        <div class="sk"><div class="nm">Redis</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">토큰 저장소 구축과 데이터 캐싱</div></div>
+        <div class="sk"><div class="nm">Kotlin · Android</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Retrofit · Coroutine 비동기 통신</div></div>
+        <div class="sk"><div class="nm">Linux · Docker</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">컨테이너 배포, Crontab 스케줄링</div></div>
+        <p class="note">기술 수준은 본인 평가입니다.</p>
+      </div>
+    </div>
+
+    <div class="card timeline reveal">
+      <h4 class="label" style="font-size:12px">TIMELINE</h4>
+      <ul class="tl">
+        <li><span class="dt">2025.01</span><span class="ev">42 경산 3기<span>라피신 4주 · C · Linux</span></span></li>
+        <li><span class="dt">2025.03</span><span class="ev">BigPicture<span>산학협력 · Play 스토어 출시</span></span></li>
+        <li><span class="dt">2026.01</span><span class="ev">SSAFY 15기 입과<span>Java / Spring 백엔드</span></span></li>
+        <li class="award"><span class="dt">2026.06</span><span class="ev">1학기 우수상 2개<span>나랑등산이다 프로젝트 · 성적 우수상</span></span></li>
+        <li class="award"><span class="dt">2026.08</span><span class="ev">Mandal-In 우수상<span>2학기 공통 프로젝트</span></span></li>
+        <li class="award"><span class="dt">2026.09</span><span class="ev">WITW 우수상<span>2학기 특화 프로젝트 · 정보처리기사 취득</span></span></li>
+        <li><span class="dt">2026.10</span><span class="ev">BBangPatrol<span>2026 대전빵축제 빵집 데이터 반영</span></span></li>
+        <li><span class="dt">2026.11</span><span class="ev">NEXA<span>2학기 자율 · MSA 인사 ERP</span></span></li>
+      </ul>
+      <p class="tl-note">주황 점 = 수상</p>
+    </div>
+
+    <div class="twin">
+      <div class="card reveal">
+        <h4>CERTIFICATES</h4>
+        <div class="rows">
+          <div><b>정보처리기사</b><span>2026.09</span></div>
+          <div><b>SQLD</b><span>2024.09</span></div>
+          <div><b>TOEIC 885</b><span>2025.08</span></div>
+          <div><b>OPIc IM1</b><span>2026.03</span></div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <h4>AWARDS · SSAFY 우수상 4개</h4>
+        <div class="rows">
+          <div><b>1학기 프로젝트 우수상</b><span>나랑등산이다</span></div>
+          <div><b>1학기 성적 우수상</b><span>2026.06</span></div>
+          <div><b>2학기 공통 프로젝트 우수상</b><span>Mandal-In</span></div>
+          <div><b>2학기 특화 프로젝트 우수상</b><span>What In the World</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="label">Contact</div>
+    <div class="card closing reveal">
+      <p class="big">데이터가 끊기지 않고 신뢰성 있게 흐르는지<br><em>끝까지 확인하는 엔지니어</em>가 되겠습니다.</p>
+      <span class="bar"></span>
+      <p class="sub">함께 이야기 나누고 싶으시면 편하게 연락 주세요.</p>
+      <div class="contact">
+        <a class="btn primary" href="mailto:cmy397264@naver.com">cmy397264@naver.com</a>
+        <a class="btn ghost" href="https://github.com/cmy397264" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn ghost" href="https://velog.io/@cmy397264" target="_blank" rel="noopener">Velog</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 황우찬 · Built with plain HTML &amp; CSS, hosted on GitHub Pages</footer>
+
+<div id="lb" role="dialog" aria-label="이미지 확대"><img alt=""></div>
+
+<script>
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+  const io = new IntersectionObserver((es) => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+  document.querySelectorAll('.shots img').forEach(img => img.addEventListener('click', () => {
+    lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add('on');
+  }));
+  lb.addEventListener('click', () => lb.classList.remove('on'));
+  addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('on'); });
+</script>
+</body>
+</html>
