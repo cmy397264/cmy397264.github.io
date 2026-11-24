@@ -368,7 +368,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "cases": [
         {
           "tag": "01 · 인증 구조",
-          "title": "서비스마다 같은 비밀키를 들고 있어야 했다",
+          "title": "서비스마다 같은 비밀키를 들고 있어야 하는 문제",
           "rows": [
             {
               "label": "문제",
@@ -398,7 +398,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         },
         {
           "tag": "02 · 동시성",
-          "title": "결재와 회수가 동시에 오면 둘 다 성공할 수 있었다",
+          "title": "결재와 회수가 동시에 오면 둘 다 성공할 수 있는 문제",
           "rows": [
             {
               "label": "문제",
@@ -422,7 +422,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "moreCases": [
         {
           "tag": "03 · 이벤트 유실",
-          "title": "결재는 승인됐는데, 휴가 서비스가 모를 수 있었다",
+          "title": "결재가 승인돼도 휴가 서비스가 모를 수 있는 문제",
           "rows": [
             {
               "label": "문제",
@@ -508,7 +508,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "cases": [
         {
           "tag": "01 · 트랜잭션 경계",
-          "title": "인증은 됐는데 미션이 갱신되지 않았다",
+          "title": "방문 인증 후 미션이 갱신되지 않는 문제",
           "rows": [
             {
               "label": "문제",
@@ -524,7 +524,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         },
         {
           "tag": "02 · 인증 정확도",
-          "title": "영수증을 올려도 가게를 못 찾는 이유가 제각각이었다",
+          "title": "영수증 인증 실패 원인을 알 수 없는 문제",
           "rows": [
             {
               "label": "문제",
@@ -667,7 +667,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "cases": [
         {
           "tag": "01 · 데이터 유실",
-          "title": "기사 10,794건이 에러 없이 사라졌다",
+          "title": "기사 10,794건이 에러 없이 사라지는 문제",
           "rows": [
             {
               "label": "문제",
@@ -688,7 +688,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         },
         {
           "tag": "02 · 조회 성능",
-          "title": "PK 외 인덱스가 0개, 숫자부터 의심했다",
+          "title": "PK 외 인덱스가 없어 조회가 느린 문제",
           "rows": [
             {
               "label": "문제",
@@ -795,7 +795,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "cases": [
         {
           "tag": "01 · 과금 구조",
-          "title": "말하지 않아도 STT 요금이 쌓였다",
+          "title": "말하지 않아도 STT 요금이 쌓이는 문제",
           "rows": [
             {
               "label": "문제",
@@ -822,12 +822,10 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "마이크 34초 동안 소켓 개방"
             ]
           ]
-        }
-      ],
-      "moreCases": [
+        },
         {
           "tag": "02 · 프롬프트 회귀",
-          "title": "정확도는 그대로인데 출력 정상률이 떨어졌다",
+          "title": "프롬프트를 줄이자 출력 정상률이 떨어지는 문제",
           "rows": [
             {
               "label": "문제",
@@ -854,10 +852,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "프롬프트 길이 · 호출당 약 400토큰 절감"
             ]
           ]
-        },
+        }
+      ],
+      "moreCases": [
         {
           "tag": "03 · 서버 한도",
-          "title": "1GiB 서버에 대화방을 몇 개까지 받을 것인가",
+          "title": "1GiB 서버의 동시 대화방 한도를 알 수 없는 문제",
           "rows": [
             {
               "label": "문제",
@@ -962,7 +962,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "cases": [
         {
           "tag": "01 · 의존 방향",
-          "title": "AI가 제안한 코드로 서버가 뜨지 않았다",
+          "title": "순환 참조로 서버가 뜨지 않는 문제",
           "rows": [
             {
               "label": "문제",
@@ -984,7 +984,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         },
         {
           "tag": "02 · 외부 저장소와 트랜잭션",
-          "title": "DB id로 R2 폴더를 만들다 파일과 DB가 어긋났다",
+          "title": "DB와 R2 파일이 어긋나는 문제",
           "rows": [
             {
               "label": "문제",
@@ -1081,7 +1081,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "cases": [
         {
           "tag": "01 · 응답 대기",
-          "title": "리포트를 다 받을 때까지 앱에 들어갈 수 없었다",
+          "title": "리포트를 다 받을 때까지 앱에 들어갈 수 없는 문제",
           "rows": [
             {
               "label": "문제",
@@ -1107,7 +1107,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         },
         {
           "tag": "02 · 조용한 실패",
-          "title": "알림이 안 오는데 에러 로그가 없었다",
+          "title": "에러 로그 없이 알림이 오지 않는 문제",
           "rows": [
             {
               "label": "문제",
