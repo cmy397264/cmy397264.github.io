@@ -180,7 +180,7 @@ section.band-alt .card{box-shadow:none;border:1px solid var(--line)}
 .profile dd{color:var(--mute);text-align:right}
 .skills{padding:28px}
 .skills h4{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand)}
-.sk{display:grid;grid-template-columns:130px 110px 1fr;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.sk{display:grid;grid-template-columns:200px 110px 1fr;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
 .sk:first-of-type{border-top:0}
 .sk .nm{font-weight:700;font-size:15px}
 .sk .track{height:6px;background:#EEF0F4;border-radius:3px;overflow:hidden}
@@ -498,12 +498,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "summary": "영수증 한 장으로 빵집 방문을 인증하고, 미션, 포인트, 수집품으로 이어지는 빵집 탐방 서비스",
       "links": [
         {
-          "label": "Backend",
-          "url": "https://github.com/BBangPatrol/Backend"
-        },
-        {
-          "label": "OCR",
-          "url": "https://github.com/BBangPatrol/OCR"
+          "label": "GitHub",
+          "url": "https://github.com/BBangPatrol"
         }
       ],
       "meta": [
@@ -979,12 +975,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "summary": "100대 명산 GPX 코스를 지도로 미리 걷고, 후기, 게시판, AI 챗봇으로 등산 정보를 나누는 웹 서비스",
       "links": [
         {
-          "label": "서비스",
-          "url": "https://narang-hiking.vercel.app"
-        },
-        {
           "label": "GitHub",
-          "url": "https://github.com/NarangHiking/BE"
+          "url": "https://github.com/NarangHiking"
         }
       ],
       "meta": [
@@ -1116,12 +1108,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       "summary": "종목을 등록하면 AI 주간 경제 리포트가 푸시로 도착하는 안드로이드 앱",
       "links": [
         {
-          "label": "App",
-          "url": "https://github.com/knu-datastreams/BigPicture-APP"
-        },
-        {
-          "label": "Backend",
-          "url": "https://github.com/knu-datastreams/BigPicture-BE"
+          "label": "GitHub",
+          "url": "https://github.com/knu-datastreams"
         }
       ],
       "meta": [
@@ -1350,17 +1338,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       </div>
       <div class="card skills">
         <h4>SKILLS</h4>
-        <div class="sk"><div class="nm">Java</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i class="top" style="width:100%"></i></div><span class="lv">상</span></div><div class="ds">결재, 직원, 빵집 도메인 등 Spring 백엔드 서버 코드 전반 구현</div></div>
-        <div class="sk"><div class="nm">Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i class="top" style="width:100%"></i></div><span class="lv">상</span></div><div class="ds">트랜잭션 경계와 락 전략 설계, Spring Security로 JWT 인증 구조 구성</div></div>
-        <div class="sk"><div class="nm">JPA</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">결재 문서 엔티티 설계, 비관적 락(FOR UPDATE)으로 동시 요청 직렬화</div></div>
-        <div class="sk"><div class="nm">PostgreSQL</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">실행 계획 분석으로 조회 인덱스 5개 설계, 가장 느린 쿼리 252.7ms → 12.4ms</div></div>
-        <div class="sk"><div class="nm">MySQL</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">산, 코스 스키마 설계와 MyBatis 매퍼 구현, Flyway로 스키마 관리</div></div>
-        <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">컨슈머 재시도와 DLT 정책 설계, Transactional Outbox로 결재 결과 발행</div></div>
-        <div class="sk"><div class="nm">Redis</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">리프레시 토큰 저장, 로그인 실패 잠금, 로그아웃 블랙리스트 구현</div></div>
-        <div class="sk"><div class="nm">Python</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">STT 무음 게이트와 골든셋 기반 프롬프트 평가 파이프라인 구현</div></div>
-        <div class="sk"><div class="nm">Kotlin</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Coroutine으로 앱 부팅 시퀀스와 종목별 병렬 요청 구현, Retrofit 통신</div></div>
-        <div class="sk"><div class="nm">Docker</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">GHCR 이미지로 운영과 개발 배포 환경 분리</div></div>
-        <div class="sk"><div class="nm">Linux</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Crontab으로 주기 작업 스케줄링, Valgrind로 메모리 누수 확인</div></div>
+        <div class="sk"><div class="nm">Java, Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i class="top" style="width:100%"></i></div><span class="lv">상</span></div><div class="ds">트랜잭션 경계, 락 전략, Spring Security 인증 구조를 직접 설계</div></div>
+        <div class="sk"><div class="nm">PostgreSQL, MySQL, JPA</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">데이터 모델링과 인덱스로 쿼리 성능 개선</div></div>
+        <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">에러 핸들러, DLT 설계, Transactional Outbox</div></div>
+        <div class="sk"><div class="nm">Redis</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">토큰 저장소 구축과 데이터 캐싱</div></div>
+        <div class="sk"><div class="nm">Kotlin, Android</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Retrofit, Coroutine 비동기 통신</div></div>
+        <div class="sk"><div class="nm">Linux, Docker</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">컨테이너 배포, Crontab 스케줄링</div></div>
       </div>
     </div>
 
