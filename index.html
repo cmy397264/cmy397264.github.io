@@ -207,6 +207,13 @@ section.band-alt .card{box-shadow:none;border:1px solid var(--line)}
 .other .go{font-size:13px;font-weight:700;color:var(--brand);margin-top:14px}
 
 /* about */
+.ai-card{padding:28px;margin-top:32px}
+.ai-card h4{font-size:13.5px;font-weight:700;color:var(--brand);margin-bottom:16px;letter-spacing:0}
+.ai-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.ai-grid b{display:block;font-size:15.5px;font-weight:700;margin-bottom:6px}
+.ai-grid p{font-size:14px;color:var(--mute);line-height:1.65}
+.ai-card + .about{margin-top:16px}
+@media (max-width:860px){ .ai-grid{grid-template-columns:1fr;gap:16px} }
 .about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px;margin-top:32px}
 .info{padding:28px}
 .info h4,.skills h4{font-size:13.5px;font-weight:700;color:var(--brand);margin-bottom:14px;letter-spacing:0}
@@ -1353,8 +1360,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   <div class="side-role">Backend Engineer</div>
   <ul class="side-nav">
     <li><a href="#top" data-sec="top">Introduction</a></li>
-    <li><a href="#projects" data-sec="projects" aria-expanded="false" aria-controls="side-sub">Projects</a><ul class="side-sub" id="side-sub" hidden></ul></li>
     <li><a href="#about" data-sec="about">About</a></li>
+    <li><a href="#projects" data-sec="projects" aria-expanded="false" aria-controls="side-sub">Projects</a><ul class="side-sub" id="side-sub" hidden></ul></li>
     <li class="m-only"><a href="#contact" data-sec="contact">Contact</a></li>
   </ul>
   <dl class="side-contact">
@@ -1376,7 +1383,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <h1>데이터가 끊기지 않고<br><em>흐르게 하는</em> 백엔드 엔지니어</h1>
     <p class="lead">에러 없이 조용히 실패하는 곳을 먼저 찾아 왔습니다. 사라지던 기사, 몰래 쌓이던 과금, 서비스 사이에서 유실될 뻔한 결재 결과를 실측과 구조로 막아 왔습니다.</p>
     <div class="chips" style="margin-top:22px">
-      <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">Docker</span>
+      <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">Docker</span><span class="chip">Claude Code</span>
     </div>
     </div>
     <figure class="hero-photo"><img src="assets/profile.jpg" alt="황우찬 프로필 사진"></figure>
@@ -1387,15 +1394,17 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   </header>
 
   <!-- PROJECTS -->
-  <section id="projects">
-    <div class="sec-title">Projects<small>6개 프로젝트</small></div>
-    <div id="projects-list"></div>
-    <div class="others" id="others"></div>
-  </section>
-
-  <!-- ABOUT -->
   <section id="about" class="band-alt">
     <div class="sec-title">About</div>
+
+    <div class="card ai-card">
+      <h4>AI 업무 활용</h4>
+      <div class="ai-grid">
+        <div><b>AI 코딩 도구로 개발</b><p>Claude Code와 Codex로 기능 구현부터 평가 도구 작성까지 개발 전반에 활용합니다.</p></div>
+        <div><b>결과는 검증한 뒤 사용</b><p>평가 도구에 결함을 일부러 넣어 잡아내는지 먼저 확인하고, AI가 낸 설계안은 공식 문서와 대조해 근거를 확인합니다.</p></div>
+        <div><b>AI 기능은 숫자로 관리</b><p>골든셋 62개로 프롬프트 변경을 A/B 비교해 회귀를 잡고, 정확도를 유지한 채 프롬프트를 21% 줄였습니다.</p></div>
+      </div>
+    </div>
 
     <div class="about">
       <div class="card info">
@@ -1409,7 +1418,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       </div>
       <div class="card skills">
         <h4>기술</h4>
-        <div class="sk"><div class="nm">Java, Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i class="top" style="width:100%"></i></div><span class="lv">상</span></div><div class="ds">트랜잭션 경계, 락 전략, Spring Security 인증 구조를 직접 설계</div></div>
+        <div class="sk"><div class="nm">Java, Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">Spring Security 필터 체인, Spring Cloud Gateway, JPA 낙관적·비관적 락, @Transactional 트랜잭션 경계, Spring Kafka, Actuator</div></div>
         <div class="sk"><div class="nm">PostgreSQL, MySQL, JPA</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">데이터 모델링과 인덱스로 쿼리 성능 개선</div></div>
         <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">에러 핸들러, DLT 설계, Transactional Outbox</div></div>
         <div class="sk"><div class="nm">Redis</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">토큰 저장소 구축과 데이터 캐싱</div></div>
@@ -1440,6 +1449,14 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       </div>
     </div>
   </section>
+
+  <section id="projects">
+    <div class="sec-title">Projects<small>6개 프로젝트</small></div>
+    <div id="projects-list"></div>
+    <div class="others" id="others"></div>
+  </section>
+
+  <!-- ABOUT -->
 
   <!-- CONTACT -->
   <section id="contact">
@@ -1592,7 +1609,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     sideSub.hidden = !sideSub.hidden;
     projLink.setAttribute('aria-expanded', String(!sideSub.hidden));
   });
-  const secs = [['top', document.getElementById('intro')], ['projects', document.getElementById('projects')], ['about', document.getElementById('about')], ['contact', document.getElementById('contact')]];
+  const secs = [['top', document.getElementById('intro')], ['about', document.getElementById('about')], ['projects', document.getElementById('projects')], ['contact', document.getElementById('contact')]];
   const markSide = () => {
     const y = innerHeight * 0.35;
     let cur = 'top';
