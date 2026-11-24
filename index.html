@@ -8,11 +8,11 @@
 <meta property="og:title" content="황우찬 | Backend Engineer">
 <meta property="og:description" content="데이터가 끊기지 않고 흐르게 하는 백엔드 엔지니어입니다.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23002FA7'/><rect x='9' y='21' width='14' height='3' fill='%23FF7A00'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23002FA7'/><circle cx='16' cy='16' r='5' fill='white'/></svg>">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
-  --brand:#002FA7; --brand-deep:#001C64; --accent:#FF7A00;
+  --brand:#002FA7; --brand-deep:#001C64; --accent:#4D6DC1;
   --t2:#4D6DC1; --t4:#D9E0F2; --pale:#EAEEF8;
   --ink:#222222; --text:#3A4654; --mute:#5A6678; --caption:#8A94A2;
   --bg:#F7F8FA; --card:#FFFFFF; --chip:#F2F4F8; --line:#E4E7EC;
@@ -32,7 +32,7 @@ nav{position:sticky;top:0;z-index:10;background:rgba(247,248,250,.85);backdrop-f
 nav.scrolled{border-bottom-color:var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
 .logo{font-weight:800;font-size:17px;letter-spacing:-.01em}
-.logo span{display:inline-block;width:14px;height:3px;background:var(--accent);margin-left:6px;vertical-align:middle}
+.logo span{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--brand);margin-left:6px;vertical-align:middle}
 nav ul{display:flex;gap:28px;list-style:none;font-size:14px;font-weight:600;color:var(--mute)}
 nav ul a:hover{color:var(--brand)}
 
@@ -44,7 +44,7 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:12.5px;font-weight:700;color:var(--brand-deep);background:var(--pale);padding:4px 10px;border-radius:6px}
-.bar{display:block;width:28px;height:3px;background:var(--accent);margin:10px 0}
+.bar{display:block;width:28px;height:2px;background:var(--line);margin:14px 0}
 
 /* hero */
 .hero{padding:88px 0 0}
@@ -106,15 +106,13 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .pse b{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:.06em;padding-top:2px}
 .pse b.sol{color:var(--brand)}
 .result{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-.r{background:var(--pale);border-radius:10px;padding:12px 16px;min-width:150px;position:relative}
-.r::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;background:var(--accent);border-radius:0 2px 2px 0}
+.r{background:var(--pale);border-radius:10px;padding:12px 16px;min-width:150px}
 .r .n{font-size:20px;font-weight:800;color:var(--brand-deep);letter-spacing:-.02em;line-height:1.3}
 .r .l{font-size:12.5px;color:var(--mute)}
 .flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:28px}
 .flow .f-label{width:100%;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand);margin-bottom:4px}
 .node{font-size:13.5px;font-weight:700;padding:9px 14px;border-radius:8px;background:var(--chip);color:var(--ink);position:relative}
-.node.mine{background:var(--t4);color:var(--brand-deep)}
-.node.mine::after{content:"";position:absolute;left:14px;right:14px;bottom:-5px;height:3px;background:var(--accent);border-radius:2px}
+.node.mine{background:var(--brand);color:#fff}
 .arrow{color:var(--caption);font-size:14px}
 .flow .hint{width:100%;font-size:12px;color:var(--caption);margin-top:10px}
 .p-top-links{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;flex:none;max-width:40%}
@@ -167,7 +165,8 @@ details.more .cases{margin-top:14px}
 .tl::before{content:"";position:absolute;left:88px;top:8px;bottom:8px;width:1px;background:var(--line)}
 .tl li{display:grid;grid-template-columns:72px 1fr;gap:32px;padding:8px 0;position:relative}
 .tl li::before{content:"";position:absolute;left:84px;top:16px;width:9px;height:9px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 3px #fff}
-.tl li.award::before{background:var(--accent)}
+.tl li.award::before{background:#fff;box-shadow:0 0 0 2px var(--brand),0 0 0 5px #fff}
+.tl .badge{display:inline-block;font-size:11px;font-weight:700;color:var(--brand);background:var(--pale);border-radius:4px;padding:1px 6px;margin-left:8px;vertical-align:2px}
 .tl .dt{font-size:14px;font-weight:700;color:var(--brand)}
 .tl .ev{font-size:15px;font-weight:700}
 .tl .ev span{font-weight:400;color:var(--mute);margin-left:8px;font-size:14px}
@@ -251,7 +250,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <h1>데이터가 끊기지 않고<br><em>흐르게 하는</em> 백엔드 엔지니어입니다.</h1>
     <p class="lead">에러 없이 조용히 실패하는 곳을 먼저 찾습니다. 사라지던 기사, 몰래 쌓이던 과금, 서비스 사이에서 유실될 뻔한 결재 결과를 실측과 구조로 막아 왔습니다.</p>
     <div class="chips" style="margin-top:22px">
-      <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Kafka</span><span class="chip">Redis</span><span class="chip">Docker</span>
+      <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">Docker</span>
     </div>
     <div class="meta">
       <a class="btn primary" href="#projects">프로젝트 보기</a>
@@ -289,7 +288,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   <section id="projects">
     <div class="label">Projects</div>
     <h2>AI 파이프라인에서 서비스 사이의 이벤트까지,<br>점점 서버 쪽으로 깊어졌습니다.</h2>
-    <p class="sub">최근 프로젝트부터 정리했습니다. 각 프로젝트는 맡은 일과 실제로 부딪힌 문제를 중심으로 썼습니다.</p>
 
     <!-- NEXA -->
     <article class="card project reveal" id="nexa">
@@ -325,7 +323,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             <ul>
               <li>위임전결 규정(금액 · 휴가 일수 · 초과근무) + 조직도로 결재선 자동 생성</li>
               <li>결재 결과를 Transactional Outbox → Kafka로 발행, 발행 지연 메트릭 감시</li>
-              <li>Testcontainers 통합 테스트 포함 approval 162개 · user 98개 테스트</li>
+              <li>approval 162개 · user 98개 테스트로 결재 · 인증 흐름 검증</li>
             </ul>
           </div>
         </div>
@@ -346,7 +344,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <span class="node mine">아웃박스</span><span class="arrow">→</span>
           <span class="node">Kafka</span><span class="arrow">→</span>
           <span class="node">원본 서비스</span>
-          <div class="hint">주황 밑줄 = 담당 구간 · 개발 서버에서 팀장 승인 → Kafka → 근태 반영까지 E2E 확인</div>
         </div>
 
         <div class="cases">
@@ -395,17 +392,17 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         </div>
 
         <div class="p-links">
-          <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot 4</span><span class="chip">Spring Cloud</span><span class="chip">JPA</span><span class="chip">Flyway</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">Kafka</span><span class="chip">Testcontainers</span></div>
+          <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot 4</span><span class="chip">Spring Cloud</span><span class="chip">JPA</span><span class="chip">Flyway</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">Kafka</span></div>
         </div>
       </div>
     </article>
     <!-- BBangPatrol -->
     <article class="card project reveal" id="bbang">
       <div class="p-head">
-        <div class="p-logo" style="display:flex;align-items:center;justify-content:center;font-size:30px" aria-hidden="true">🥐</div>
+        <img class="p-logo" src="assets/logo-bbang.png" alt="빵범대 로고" style="object-fit:contain;background:#fff">
         <div>
           <div class="p-no">PROJECT 02 · 팀 프로젝트</div>
-          <h3>BBangPatrol</h3>
+          <h3>빵범대 <span style="font-size:15px;font-weight:600;color:var(--mute)">BBangPatrol</span></h3>
           <p class="one">영수증 한 장으로 빵집 방문을 인증하고, 미션·포인트·수집품으로 이어지는 빵집 탐방 서비스</p>
         </div>
         <div class="p-top-links">
@@ -426,7 +423,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             <ul>
               <li>백엔드 메인 개발 (인증 · 빵집 · 방문 · 리뷰 · 미션 · 포인트)</li>
               <li>Docker · GHCR 기반 운영/개발 배포 환경 분리</li>
-              <li>2026 대전빵축제 참여 빵집 데이터 시드</li>
+              <li>2026 대전빵축제 참여 빵집 정보를 직접 수집해 서비스에 등록</li>
             </ul>
           </div>
           <div>
@@ -516,7 +513,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <span class="node mine">DB 적재 모듈</span><span class="arrow">→</span>
           <span class="node">PostgreSQL</span><span class="arrow">→</span>
           <span class="node mine">조회 API</span>
-          <div class="hint">주황 밑줄 = 담당 구간</div>
         </div>
 
         <div class="cases">
@@ -546,7 +542,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         </div>
 
         <div class="p-links">
-          <div class="chips"><span class="chip">Spring Boot 4</span><span class="chip">JPA</span><span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">Flyway</span><span class="chip">Testcontainers</span></div>
+          <div class="chips"><span class="chip">Spring Boot 4</span><span class="chip">JPA</span><span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">Flyway</span></div>
         </div>
       </div>
     </article>
@@ -843,13 +839,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         <li><span class="dt">2025.01</span><span class="ev">42 경산 3기<span>라피신 4주 · C · Linux</span></span></li>
         <li><span class="dt">2025.03</span><span class="ev">BigPicture<span>산학협력 · Play 스토어 출시</span></span></li>
         <li><span class="dt">2026.01</span><span class="ev">SSAFY 15기 입과<span>Java / Spring 백엔드</span></span></li>
-        <li class="award"><span class="dt">2026.06</span><span class="ev">1학기 우수상 2개<span>나랑등산이다 프로젝트 · 성적 우수상</span></span></li>
-        <li class="award"><span class="dt">2026.08</span><span class="ev">Mandal-In 우수상<span>2학기 공통 프로젝트</span></span></li>
-        <li class="award"><span class="dt">2026.09</span><span class="ev">WITW 우수상<span>2학기 특화 프로젝트 · 정보처리기사 취득</span></span></li>
-        <li><span class="dt">2026.10</span><span class="ev">BBangPatrol<span>2026 대전빵축제 빵집 데이터 반영</span></span></li>
+        <li class="award"><span class="dt">2026.06</span><span class="ev">1학기 우수상 2개<em class="badge" style="font-style:normal">수상</em><span>나랑등산이다 프로젝트 · 성적 우수상</span></span></li>
+        <li class="award"><span class="dt">2026.08</span><span class="ev">Mandal-In 우수상<em class="badge" style="font-style:normal">수상</em><span>2학기 공통 프로젝트</span></span></li>
+        <li class="award"><span class="dt">2026.09</span><span class="ev">WITW 우수상<em class="badge" style="font-style:normal">수상</em><span>2학기 특화 프로젝트 · 정보처리기사 취득</span></span></li>
+        <li><span class="dt">2026.10</span><span class="ev">빵범대<span>영수증 인증 빵집 탐방 서비스</span></span></li>
         <li><span class="dt">2026.11</span><span class="ev">NEXA<span>2학기 자율 · MSA HR ERP · 개발 서버 QA 완료</span></span></li>
       </ul>
-      <p class="tl-note">주황 점 = 수상</p>
     </div>
 
     <div class="twin">
