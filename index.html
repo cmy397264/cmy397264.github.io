@@ -1334,7 +1334,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   <div class="side-role">Backend Engineer</div>
   <ul class="side-nav">
     <li><a href="#top" data-sec="top">Introduction</a></li>
-    <li><a href="#troubleshooting" data-sec="troubleshooting">Troubleshooting</a></li>
     <li><a href="#projects" data-sec="projects">Projects</a></li>
     <li><a href="#about" data-sec="about">About</a></li>
     <li class="m-only"><a href="#contact" data-sec="contact">Contact</a></li>
@@ -1372,11 +1371,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   </header>
 
   <!-- PROJECTS -->
-  <section id="troubleshooting" class="band-alt">
-    <div class="sec-title">Troubleshooting<small id="ts-count"></small></div>
-    <div class="card ts-table" id="ts-table"></div>
-  </section>
-
   <section id="projects">
     <div class="sec-title">Projects<small>6개 프로젝트</small></div>
     <div id="projects-list"></div>
@@ -1548,11 +1542,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       document.getElementById('kpis').innerHTML = data.kpis.map(k =>
         `<div class="card kpi"><div class="p">${tx(k.label)}</div><div class="v">${tx(k.value)}</div><div class="d">${tx(k.desc)}</div></div>`).join('');
       document.getElementById('projects-list').innerHTML = data.projects.map(projectHTML).join('');
-      const tsRows = data.projects.flatMap((p, i) => p.cases.map((c, k) => ({ p, c, id: `${p.id}-ts-${k + 1}` })));
-      document.getElementById('ts-count').textContent = `${tsRows.length}건`;
-      document.getElementById('ts-table').innerHTML =
-        `<div class="ts-head"><span>프로젝트</span><span>문제</span><span>판단</span></div>` +
-        tsRows.map(r => `<a class="ts-row" href="#${esc(r.id)}"><span class="ts-p">${tx(r.p.name)}</span><span class="ts-q">${tx(r.c.title)}</span><span class="ts-j">${tx(r.c.summary || '')}</span></a>`).join('');
       document.getElementById('others').innerHTML = data.others.map(o =>
         `<a class="card other" href="${url(o.url)}" target="_blank" rel="noopener">
           <div class="label">${tx(o.kind)}</div><h4>${tx(o.name)}</h4><p>${tx(o.desc)}</p>
@@ -1575,7 +1564,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
   // 사이드바: 지금 보고 있는 영역을 표시한다
   const sideLinks = [...document.querySelectorAll('.side-nav a')];
-  const secs = [['top', document.getElementById('intro')], ['troubleshooting', document.getElementById('troubleshooting')], ['projects', document.getElementById('projects')], ['about', document.getElementById('about')], ['contact', document.getElementById('contact')]];
+  const secs = [['top', document.getElementById('intro')], ['projects', document.getElementById('projects')], ['about', document.getElementById('about')], ['contact', document.getElementById('contact')]];
   const markSide = () => {
     const y = innerHeight * 0.35;
     let cur = 'top';
