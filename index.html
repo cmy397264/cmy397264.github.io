@@ -186,6 +186,12 @@ section.band-alt .card{box-shadow:none;border:1px solid var(--line)}
 .case{scroll-margin-top:24px}
 .case:target{outline:2px solid var(--brand);outline-offset:2px}
 @media (max-width:860px){.ts-head{display:none}.ts-row{grid-template-columns:1fr;gap:4px;padding:16px 20px}}
+.ts-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2px}
+.ts-tab{font:inherit;font-size:14px;font-weight:700;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--mute);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.ts-tab:hover{color:var(--brand);border-color:var(--t4)}
+.ts-tab[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.ts-tab:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.case[hidden]{display:none}
 /* other */
 .others{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
 .other{padding:24px;display:flex;flex-direction:column;transition:transform .15s}
@@ -1487,9 +1493,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     return rows.map(r => `<b class="${CLS[r.label] || ''}">${tx(r.label)}</b><span>${r.html}</span>`).join('');
   }
 
-  function caseHTML(c, id) {
-    return `<div class="case" id="${esc(id || '')}">
-      <div class="tag">${tx(c.tag)}</div>
+  function caseHTML(c, id, hidden) {
+    return `<div class="case" role="tabpanel" id="${esc(id || '')}"${hidden ? ' hidden' : ''}>
       <h5>${tx(c.title)}</h5>
       <div class="pse">${caseRows(c)}</div>
     </div>`;
@@ -1518,7 +1523,10 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       <div class="p-body">
         ${p.role || p.build ? `<div class="p-role">${list('담당 역할', p.role)}${list('구현 기능', p.build)}</div>` : ''}
         ${shots}${flow}
-        <div class="cases"><h4>트러블슈팅</h4>${p.cases.map((c, k) => caseHTML(c, `${p.id}-ts-${k + 1}`)).join('')}${more}</div>
+        <div class="cases"><h4>트러블슈팅</h4>
+          <div class="ts-tabs" role="tablist">${p.cases.map((c, k) =>
+            `<button type="button" role="tab" class="ts-tab" id="${esc(p.id)}-tab-${k + 1}" aria-controls="${esc(p.id)}-ts-${k + 1}" aria-selected="${k === 0}">${tx(c.tag)}</button>`).join('')}</div>
+          ${p.cases.map((c, k) => caseHTML(c, `${p.id}-ts-${k + 1}`, k > 0)).join('')}${more}</div>
         <div class="p-links"><div class="chips">${p.stack.map(s => `<span class="chip">${tx(s)}</span>`).join('')}</div></div>
       </div>
     </article>`;
@@ -1577,6 +1585,29 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
   // 해시로 바로 들어왔을 때(예: #nexa) 그려진 뒤 다시 위치를 맞춘다.
   if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView(); }
+
+  // 트러블슈팅 탭: 고른 사례 하나만 보여 준다
+  const showTab = (tab) => {
+    const list = tab.parentElement;
+    list.querySelectorAll('.ts-tab').forEach(b => {
+      const on = b === tab;
+      b.setAttribute('aria-selected', on);
+      b.tabIndex = on ? 0 : -1;
+      const panel = document.getElementById(b.getAttribute('aria-controls'));
+      if (panel) panel.hidden = !on;
+    });
+  };
+  document.querySelectorAll('.ts-tabs').forEach(list => {
+    list.addEventListener('click', e => { const b = e.target.closest('.ts-tab'); if (b) showTab(b); });
+    list.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const tabs = [...list.querySelectorAll('.ts-tab')], i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      n.focus(); showTab(n); e.preventDefault();
+    });
+    list.querySelectorAll('.ts-tab').forEach((b, i) => { b.tabIndex = i ? -1 : 0; });
+  });
 
   const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
   document.querySelectorAll('.shots img').forEach(img => img.addEventListener('click', () => {
