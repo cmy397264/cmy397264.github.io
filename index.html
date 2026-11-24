@@ -301,14 +301,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ]
       ],
       "role": [
-        "인증 서버(user-service): RS256 JWT · JWKS 공개키, Redis 로그인 실패 잠금 · 로그아웃 블랙리스트",
+        "인증 서버(user-service): RS256 JWT, JWKS 공개키, Redis 로그인 실패 잠금, 로그아웃 블랙리스트",
         "토큰 검증 공통 라이브러리 nexa-security 제작, 4개 서비스 적용",
-        "전자결재(approval-service) 설계 · 구현"
+        "전자결재(approval-service) 설계와 구현"
       ],
       "build": [
-        "위임전결 규정(금액 · 휴가 일수 · 초과근무) + 조직도로 결재선 자동 생성",
-        "결재 결과를 Transactional Outbox → Kafka로 발행, 발행 지연 메트릭 감시",
-        "approval 162개 · user 98개 테스트로 결재 · 인증 흐름 검증"
+        "결재 결과를 Transactional Outbox → Kafka로 발행, 발행 지연 메트릭 감시"
       ],
       "shots": [
         {
@@ -496,15 +494,15 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ]
       ],
       "role": [
-        "백엔드 메인 개발 (인증 · 빵집 · 방문 · 리뷰 · 미션 · 포인트)",
-        "Docker · GHCR 기반 운영/개발 배포 환경 분리",
+        "백엔드 메인 개발 (인증, 빵집, 방문, 리뷰, 미션, 포인트)",
+        "Docker, GHCR 기반 운영/개발 배포 환경 분리",
         "2026 대전빵축제 참여 빵집 정보를 직접 수집해 서비스에 등록"
       ],
       "build": [
         "영수증 사진만으로 가게를 찾는 방문 인증 API",
-        "이미지 업로드 시 리사이즈 · 썸네일 생성 (S3)",
-        "탈퇴 30일 후 회원 · 삭제 리뷰 파기 배치",
-        "404 · 405 · 415까지 공통 에러 응답 형식 통일"
+        "이미지 업로드 시 리사이즈, 썸네일 생성 (S3)",
+        "탈퇴 30일 후 회원, 삭제 리뷰 파기 배치",
+        "404, 405, 415까지 공통 에러 응답 형식 통일"
       ],
       "cases": [
         {
@@ -612,10 +610,10 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       ],
       "role": [
         "Kafka 컨슈머 기반 DB 적재 안정화",
-        "데이터 정합성 · 조회 성능 개선"
+        "데이터 정합성과 조회 성능 개선"
       ],
       "build": [
-        "이슈 랭킹 · 이슈 상세 · 국가 메인 · 수집 기사 수 조회 API",
+        "이슈 랭킹, 이슈 상세, 국가 메인, 수집 기사 수 조회 API",
         "Flyway 기반 국가 기준 데이터 시드(249개국)"
       ],
       "shots": [
@@ -759,7 +757,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       ],
       "role": [
         "AI 음성 파이프라인 (Python)",
-        "백엔드 (Spring Boot) · 최종 발표"
+        "백엔드 (Spring Boot), 최종 발표"
       ],
       "build": [
         "STT 무음 게이트(SpeechGate)",
@@ -929,12 +927,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         ]
       ],
       "role": [
-        "팀장: 일정 · 역할 분담",
+        "팀장으로 일정과 역할 분담",
         "인증/인가: Spring Security + JWT 이중 토큰, Redis 토큰 관리, HttpOnly Cookie 전환",
-        "Vercel(FE) · AWS EC2(BE) 서비스 배포"
+        "Vercel(FE), AWS EC2(BE) 서비스 배포"
       ],
       "build": [
-        "산 · 코스 CRUD, GPX 일괄 등록, 즐겨찾기 · 추천순 정렬",
+        "산, 코스 CRUD, GPX 일괄 등록, 즐겨찾기, 추천순 정렬",
         "Cloudflare R2 파일 스토리지, 업로드 실패 시 보상 삭제",
         "기상청 단기예보 연동 (위경도 → LCC 격자 변환)"
       ],
