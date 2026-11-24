@@ -229,14 +229,11 @@ section.band-alt .card{box-shadow:none;border:1px solid var(--line)}
 .profile dd{color:var(--mute);text-align:right}
 .skills{padding:28px}
 .skills h4{font-size:13.5px;font-weight:700;letter-spacing:0;color:var(--brand);margin-bottom:4px}
-.sk{display:grid;grid-template-columns:170px 100px 1fr;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
-.sk:first-of-type{border-top:0}
+.sk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+.sk{padding:14px 0;border-top:1px solid var(--line)}
+.sk-grid .sk:nth-child(-n+2){border-top:0}
 .sk .nm{font-weight:700;font-size:15px}
-.sk .track{height:6px;background:#EEF0F4;border-radius:3px;overflow:hidden}
-.sk .track i{display:block;height:100%;background:var(--t2);border-radius:3px}
-.sk .track i.top{background:var(--brand)}
-.sk .ds{font-size:14px;color:var(--text)}
-.sk .lv{font-size:12px;font-weight:700;color:var(--brand-deep);margin-left:6px}
+.sk .ds{font-size:14px;color:var(--mute);margin-top:4px;line-height:1.6}
 .skills .note{font-size:12px;color:var(--caption);margin-top:10px}
 
 .timeline{margin-top:16px;padding:28px 28px 20px}
@@ -295,7 +292,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         .p-meta{grid-template-columns:1fr 1fr}
   .p-role,.about,.twin{grid-template-columns:1fr}
   .shots.four{grid-template-columns:1fr 1fr}
-  .sk{grid-template-columns:1fr;gap:6px}
+  .sk-grid{grid-template-columns:1fr}
+  .sk-grid .sk:nth-child(2){border-top:1px solid var(--line)}
   .p-links .chips{margin-left:0;width:100%}
 }
 @media (max-width:560px){
@@ -1418,13 +1416,15 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       </div>
       <div class="card skills">
         <h4>기술</h4>
-        <div class="sk"><div class="nm">Java, Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">Spring Security 필터 체인, Spring Cloud Gateway, JPA 낙관적·비관적 락, @Transactional 트랜잭션 경계, Spring Kafka, Actuator</div></div>
-        <div class="sk"><div class="nm">PostgreSQL, MySQL, JPA</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">데이터 모델링과 인덱스로 쿼리 성능 개선</div></div>
-        <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">에러 핸들러, DLT 설계, Transactional Outbox</div></div>
-        <div class="sk"><div class="nm">Redis</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">토큰 저장소 구축과 데이터 캐싱</div></div>
-        <div class="sk"><div class="nm">Kotlin, Android</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Retrofit, Coroutine 비동기 통신</div></div>
-        <div class="sk"><div class="nm">Docker</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">컨테이너 배포, 운영·개발 배포 환경 분리, 헬스체크로 기동 순서 제어</div></div>
-        <div class="sk"><div class="nm">Linux</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Crontab 스케줄링, Valgrind로 메모리 누수 탐지</div></div>
+        <div class="sk-grid">
+          <div class="sk"><div class="nm">Java, Spring Boot</div><div class="ds">Spring Security 필터 체인, Spring Cloud Gateway, JPA 낙관적·비관적 락, @Transactional 트랜잭션 경계, Spring Kafka, Actuator</div></div>
+          <div class="sk"><div class="nm">PostgreSQL, MySQL, JPA</div><div class="ds">데이터 모델링과 인덱스로 쿼리 성능 개선</div></div>
+          <div class="sk"><div class="nm">Kafka</div><div class="ds">에러 핸들러, DLT 설계, Transactional Outbox</div></div>
+          <div class="sk"><div class="nm">Redis</div><div class="ds">토큰 저장소 구축과 데이터 캐싱</div></div>
+          <div class="sk"><div class="nm">Kotlin, Android</div><div class="ds">Retrofit, Coroutine 비동기 통신</div></div>
+          <div class="sk"><div class="nm">Docker</div><div class="ds">컨테이너 배포, 운영·개발 배포 환경 분리, 헬스체크로 기동 순서 제어</div></div>
+          <div class="sk"><div class="nm">Linux</div><div class="ds">Crontab 스케줄링, Valgrind로 메모리 누수 탐지</div></div>
+        </div>
       </div>
     </div>
 
