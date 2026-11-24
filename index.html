@@ -173,6 +173,19 @@ section.band-alt .card{box-shadow:none;border:1px solid var(--line)}
 .p-body>.p-role,.p-body>.shots:first-of-type,.p-body>.flow,.p-body>.cases,.p-body>.p-links{border-top:1px solid var(--line);padding-top:26px;margin-top:26px}
 .p-body>.p-role{border-top:0;padding-top:4px;margin-top:0}
 .p-body>.shots+.shots{border-top:0;padding-top:0;margin-top:12px}
+.ts-table{margin-top:24px;padding:6px 0;overflow:hidden}
+.ts-head,.ts-row{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1.15fr);gap:20px;padding:14px 28px;align-items:baseline}
+.ts-head{font-size:12.5px;font-weight:700;color:var(--mute);border-bottom:1px solid var(--line)}
+.ts-head span:nth-child(2){color:#C62F2F}.ts-head span:nth-child(3){color:var(--brand)}
+.ts-row{border-top:1px solid var(--line);font-size:14.5px;transition:background .12s}
+.ts-head+.ts-row{border-top:0}
+.ts-row:hover{background:var(--pale)}
+.ts-p{font-weight:700;color:var(--ink);font-size:13.5px}
+.ts-q{color:var(--text)}
+.ts-j{color:var(--ink);font-weight:600}
+.case{scroll-margin-top:24px}
+.case:target{outline:2px solid var(--brand);outline-offset:2px}
+@media (max-width:860px){.ts-head{display:none}.ts-row{grid-template-columns:1fr;gap:4px;padding:16px 20px}}
 /* other */
 .others{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
 .other{padding:24px;display:flex;flex-direction:column;transition:transform .15s}
@@ -439,7 +452,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "재배포 0회",
               "키 ID(kid)로 키 교체"
             ]
-          ]
+          ],
+          "summary": "발급은 한 곳만, 검증은 공통 라이브러리로. RS256 + JWKS를 택함"
         },
         {
           "tag": "동시성",
@@ -466,7 +480,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "동시 요청 3종",
               "한 요청만 반영, 늦은 요청은 업무 오류 응답"
             ]
-          ]
+          ],
+          "summary": "실제로 자주 겹치는 요청이라 재시도 대신 비관적 락을 택함"
         },
         {
           "tag": "이벤트 유실",
@@ -497,7 +512,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "5분",
               "미발행 이벤트 지연 경보 기준"
             ]
-          ]
+          ],
+          "summary": "커밋 후 발행도 유실되므로 상태와 이벤트를 한 트랜잭션에 기록"
         }
       ],
       "stack": [
@@ -607,7 +623,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "text": "인증, 리뷰, 뽑기는 미션 오류와 상관없이 저장되고, 이미 누락된 사용자 미션은 백필 스크립트로 채웠습니다.",
               "key": false
             }
-          ]
+          ],
+          "summary": "롤백 범위를 나눠 본 작업은 확정하고 미션은 커밋 뒤로 분리"
         },
         {
           "tag": "인증 정확도",
@@ -633,7 +650,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "text": "사용자는 실패 이유와 다음 행동을 바로 알 수 있고, 서버 로그에서도 원인별로 실패를 구분할 수 있게 됐습니다.",
               "key": false
             }
-          ]
+          ],
+          "summary": "실패를 원인별로 나눠야 사용자 안내와 서버 수정이 가능하다고 봄"
         }
       ],
       "stack": [
@@ -760,7 +778,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "text": "개발 서버에서 검증한 설정을 운영에 반영해, 실패한 기사가 위치와 원인과 함께 DLT에 남게 됐습니다.",
               "key": false
             }
-          ]
+          ],
+          "summary": "날짜를 미루지 않고, 재시도로 풀리는 오류만 재시도하고 나머지는 DLT로"
         },
         {
           "tag": "조회 성능",
@@ -795,7 +814,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "+19.9%",
               "쓰기 비용, 감수하고 수치로 기록"
             ]
-          ]
+          ],
+          "summary": "측정 환경부터 고정하고 2배 이상 빨라진 인덱스만 채택"
         }
       ],
       "stack": [
@@ -909,7 +929,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "34초 중 13.8초",
               "마이크 34초 동안 소켓 개방"
             ]
-          ]
+          ],
+          "summary": "버튼과 VAD 모델 대신 소리 크기(RMS)만 보는 가벼운 게이트를 택함"
         },
         {
           "tag": "프롬프트 회귀",
@@ -944,7 +965,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "-21%",
               "프롬프트 길이, 호출당 약 400토큰 절감"
             ]
-          ]
+          ],
+          "summary": "감이 아니라 같은 케이스끼리 짝지은 A/B로 회귀를 확인"
         },
         {
           "tag": "서버 한도",
@@ -975,7 +997,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "0.7 → 0.1",
               "부하 기준"
             ]
-          ]
+          ],
+          "summary": "짐작한 기준 대신 배포 구성 그대로 메모리를 실측"
         }
       ],
       "stack": [
@@ -1080,7 +1103,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "Auth ↔ User → 한 방향",
               "이후 AI 코드는 의존 방향부터 확인"
             ]
-          ]
+          ],
+          "summary": "@Lazy로 미루지 않고 공통 책임을 TokenService로 분리"
         },
         {
           "tag": "외부 저장소와 트랜잭션",
@@ -1107,7 +1131,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "고아 파일 방지",
               "DB에 없는 파일이 R2에 남지 않음"
             ]
-          ]
+          ],
+          "summary": "롤백에 기댈 수 없으니 업로드를 먼저 하고 실패 시 보상 삭제"
         }
       ],
       "stack": [
@@ -1220,7 +1245,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "즉시",
               "홈 화면 진입"
             ]
-          ]
+          ],
+          "summary": "사용자에게 먼저 필요한 건 첫 화면이라 리포트를 부팅에서 분리"
         },
         {
           "tag": "조용한 실패",
@@ -1246,7 +1272,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
               "text": "첫 실행 토큰 경합과 온보딩 경로 누락을 없애고 재시작 안내 문구를 지웠습니다.",
               "key": false
             }
-          ]
+          ],
+          "summary": "재시작 안내로 우회하지 않고 토큰을 받은 뒤 등록하도록 순서를 수정"
         }
       ],
       "stack": [
@@ -1307,6 +1334,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   <div class="side-role">Backend Engineer</div>
   <ul class="side-nav">
     <li><a href="#top" data-sec="top">Introduction</a></li>
+    <li><a href="#troubleshooting" data-sec="troubleshooting">Troubleshooting</a></li>
     <li><a href="#projects" data-sec="projects">Projects</a></li>
     <li><a href="#about" data-sec="about">About</a></li>
     <li class="m-only"><a href="#contact" data-sec="contact">Contact</a></li>
@@ -1344,6 +1372,11 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   </header>
 
   <!-- PROJECTS -->
+  <section id="troubleshooting" class="band-alt">
+    <div class="sec-title">Troubleshooting<small id="ts-count"></small></div>
+    <div class="card ts-table" id="ts-table"></div>
+  </section>
+
   <section id="projects">
     <div class="sec-title">Projects<small>6개 프로젝트</small></div>
     <div id="projects-list"></div>
@@ -1460,8 +1493,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     return rows.map(r => `<b class="${CLS[r.label] || ''}">${tx(r.label)}</b><span>${r.html}</span>`).join('');
   }
 
-  function caseHTML(c) {
-    return `<div class="case">
+  function caseHTML(c, id) {
+    return `<div class="case" id="${esc(id || '')}">
       <div class="tag">${tx(c.tag)}</div>
       <h5>${tx(c.title)}</h5>
       <div class="pse">${caseRows(c)}</div>
@@ -1491,7 +1524,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       <div class="p-body">
         ${p.role || p.build ? `<div class="p-role">${list('담당 역할', p.role)}${list('구현 기능', p.build)}</div>` : ''}
         ${shots}${flow}
-        <div class="cases"><h4>트러블슈팅</h4>${p.cases.map(caseHTML).join('')}${more}</div>
+        <div class="cases"><h4>트러블슈팅</h4>${p.cases.map((c, k) => caseHTML(c, `${p.id}-ts-${k + 1}`)).join('')}${more}</div>
         <div class="p-links"><div class="chips">${p.stack.map(s => `<span class="chip">${tx(s)}</span>`).join('')}</div></div>
       </div>
     </article>`;
@@ -1515,6 +1548,11 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
       document.getElementById('kpis').innerHTML = data.kpis.map(k =>
         `<div class="card kpi"><div class="p">${tx(k.label)}</div><div class="v">${tx(k.value)}</div><div class="d">${tx(k.desc)}</div></div>`).join('');
       document.getElementById('projects-list').innerHTML = data.projects.map(projectHTML).join('');
+      const tsRows = data.projects.flatMap((p, i) => p.cases.map((c, k) => ({ p, c, id: `${p.id}-ts-${k + 1}` })));
+      document.getElementById('ts-count').textContent = `${tsRows.length}건`;
+      document.getElementById('ts-table').innerHTML =
+        `<div class="ts-head"><span>프로젝트</span><span>문제</span><span>판단</span></div>` +
+        tsRows.map(r => `<a class="ts-row" href="#${esc(r.id)}"><span class="ts-p">${tx(r.p.name)}</span><span class="ts-q">${tx(r.c.title)}</span><span class="ts-j">${tx(r.c.summary || '')}</span></a>`).join('');
       document.getElementById('others').innerHTML = data.others.map(o =>
         `<a class="card other" href="${url(o.url)}" target="_blank" rel="noopener">
           <div class="label">${tx(o.kind)}</div><h4>${tx(o.name)}</h4><p>${tx(o.desc)}</p>
@@ -1537,7 +1575,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
   // 사이드바: 지금 보고 있는 영역을 표시한다
   const sideLinks = [...document.querySelectorAll('.side-nav a')];
-  const secs = [['top', document.getElementById('intro')], ['projects', document.getElementById('projects')], ['about', document.getElementById('about')], ['contact', document.getElementById('contact')]];
+  const secs = [['top', document.getElementById('intro')], ['troubleshooting', document.getElementById('troubleshooting')], ['projects', document.getElementById('projects')], ['about', document.getElementById('about')], ['contact', document.getElementById('contact')]];
   const markSide = () => {
     const y = innerHeight * 0.35;
     let cur = 'top';
