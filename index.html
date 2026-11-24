@@ -39,7 +39,8 @@ nav ul a:hover{color:var(--brand)}
 /* common */
 section{padding:96px 0 0}
 .label{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--brand);text-transform:uppercase}
-h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-height:1.35}
+h2{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:8px 0 4px;line-height:1.45;color:var(--text)}
+.sec-title{font-size:30px;font-weight:800;letter-spacing:-.01em;color:var(--ink);line-height:1.3}
 .sub{color:var(--text);font-size:16px}
 .card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -67,7 +68,7 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .hero-photo b{font-size:17px;font-weight:800}
 .hero-photo span{font-size:13px;color:var(--mute)}
 /* kpi */
-.kpi-head{margin-top:56px}
+.kpi-head{margin-top:64px}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
 .kpi{padding:26px 24px}
 .kpi .p{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--brand)}
@@ -76,6 +77,7 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 
 /* projects */
 .project{margin-top:40px;overflow:hidden}
+#projects-list>.project:first-child{margin-top:24px}
 .p-head{display:flex;gap:20px;align-items:flex-start;padding:32px 32px 0}
 .p-logo{width:64px;height:64px;border-radius:14px;object-fit:cover;flex:none;background:var(--chip)}
 .p-no-n{margin-right:10px;color:var(--mute)}
@@ -111,7 +113,8 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .pse b.t-solve{color:#16794A}
 .pse b.t-result{color:var(--ink)}
 .pse .res-line{display:block}
-.pse .res-line strong{font-weight:800;color:var(--ink);margin-right:6px}
+.pse .res-line strong{font-weight:600;color:var(--text);margin-right:6px}
+.pse b.t-judge+span{color:var(--ink);font-weight:600;background:var(--pale);border-radius:6px;padding:4px 10px;margin:-4px 0 -4px -10px}
 .flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:28px}
 .flow .f-label{width:100%;font-size:13.5px;font-weight:700;letter-spacing:0;color:var(--brand);margin-bottom:4px}
 .node{font-size:13.5px;font-weight:700;padding:9px 14px;border-radius:8px;background:var(--chip);color:var(--ink);position:relative}
@@ -446,7 +449,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "판단",
-              "text": "커밋한 뒤에 발행하는 방식도 발행이 실패하면 이벤트가 그대로 사라집니다. 결재 상태가 바뀐 사실과 보내야 할 이벤트가 같은 트랜잭션에 함께 남아야 한다고 보고 Transactional Outbox를 택했습니다.",
+              "text": "커밋한 뒤에 발행하는 방식도 발행이 실패하면 이벤트가 그대로 사라지는 방식이었습니다. 결재 상태가 바뀐 사실과 보내야 할 이벤트가 같은 트랜잭션에 함께 남아야 한다고 보고 Transactional Outbox를 택했습니다.",
               "key": true
             },
             {
@@ -726,7 +729,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "결과",
-              "text": "개발 서버에서 검증한 설정을 운영에 반영해, 실패한 기사는 위치와 원인과 함께 DLT에 남습니다. 다만 메시지 형식이 바뀌기 전의 약 2만 4천 건은 별도 재계산이 필요해 복구하지 못했습니다.",
+              "text": "개발 서버에서 검증한 설정을 운영에 반영해, 실패한 기사가 위치와 원인과 함께 DLT에 남게 됐습니다. 다만 메시지 형식이 바뀌기 전의 약 2만 4천 건은 별도 재계산이 필요해 복구하지 못했습니다.",
               "key": false
             }
           ]
@@ -742,7 +745,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "판단",
-              "text": "Kafka가 기사를 계속 넣는 테이블이라 인덱스마다 쓰기가 느려집니다. 그래서 2배 이상 빨라진 후보만 채택한다는 기준부터 정했고(1.3배는 측정 노이즈와 구분되지 않음), 각자 로컬 DB로 재면 설정이 달라 비교할 수 없다고 봤습니다.",
+              "text": "Kafka가 기사를 계속 넣는 테이블이라 인덱스마다 쓰기가 느려지는 상황이었습니다. 그래서 2배 이상 빨라진 후보만 채택한다는 기준부터 정했고(1.3배는 측정 노이즈와 구분되지 않음), 각자 로컬 DB로 재면 설정이 달라 비교할 수 없다고 봤습니다.",
               "key": true
             },
             {
@@ -849,7 +852,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           "rows": [
             {
               "label": "문제",
-              "text": "Deepgram은 말한 양이 아니라 소켓이 열린 시간으로 과금합니다. 15분 마이크 창 대부분이 침묵이어도 900초 전부가 청구되는 구조였습니다.",
+              "text": "Deepgram은 말한 양이 아니라 소켓이 열린 시간으로 과금했습니다. 15분 마이크 창 대부분이 침묵이어도 900초 전부가 청구되는 구조였습니다.",
               "key": false
             },
             {
@@ -859,7 +862,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "해결",
-              "text": "서버에서 프레임 RMS로 소리 유무만 보고 발화 구간에만 소켓을 열었습니다. 800ms 이하의 쉼은 그대로 보내고, 800ms 침묵에 발화를 끝내고, 5초 침묵에 소켓을 직접 닫습니다.",
+              "text": "서버에서 프레임 RMS로 소리 유무만 보고 발화 구간에만 소켓을 열었습니다. 800ms 이하의 쉼은 그대로 보내고, 800ms 침묵에 발화를 끝내고, 5초 침묵에 소켓을 직접 닫았습니다.",
               "key": false
             }
           ],
@@ -1036,7 +1039,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "판단",
-              "text": "`@Lazy`로 주입 시점만 미루면 기동은 되지만 서로 기대는 구조는 그대로 남습니다. 두 서비스가 필요로 한 것은 상대 서비스가 아니라 토큰 저장과 삭제라고 봤습니다.",
+              "text": "`@Lazy`로 주입 시점만 미루면 기동은 되지만 서로 기대는 구조는 그대로 남았습니다. 두 서비스가 필요로 한 것은 상대 서비스가 아니라 토큰 저장과 삭제라고 봤습니다.",
               "key": true
             },
             {
@@ -1068,7 +1071,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "해결",
-              "text": "고정 폴더 + UUID 키로 바꿔 업로드 → DB 저장 순서로 바꾸고, DB 저장이 실패하면 올린 파일을 보상 삭제했습니다. GPX 일괄 등록은 올린 키를 모아 두었다가 실패 시 한꺼번에 정리합니다.",
+              "text": "고정 폴더 + UUID 키로 바꿔 업로드 → DB 저장 순서로 바꾸고, DB 저장이 실패하면 올린 파일을 보상 삭제했습니다. GPX 일괄 등록은 올린 키를 모아 두었다가 실패 시 한꺼번에 정리했습니다.",
               "key": false
             }
           ],
@@ -1170,7 +1173,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "해결",
-              "text": "콜백을 suspend 함수로 바꿔 종목별 async 병렬 요청으로 전환하고, 부팅에는 서버 핑과 FCM 토큰 등록만 남겼습니다. 리포트 갱신은 별도 코루틴으로 받아 Room에 저장한 뒤 완료 알림을 띄웁니다.",
+              "text": "콜백을 suspend 함수로 바꿔 종목별 async 병렬 요청으로 전환하고, 부팅에는 서버 핑과 FCM 토큰 등록만 남겼습니다. 리포트 갱신은 별도 코루틴으로 받아 Room에 저장한 뒤 완료 알림을 띄우게 했습니다.",
               "key": false
             }
           ],
@@ -1226,7 +1229,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     {
       "kind": "사이드 프로젝트",
       "name": "Velog Grass",
-      "desc": "Velog 글 작성일을 GraphQL로 모아 GitHub 잔디 같은 SVG로 그리고, GitHub Actions로 자동 갱신하는 프로젝트입니다.",
+      "desc": "Velog 글 작성일을 GraphQL로 모아 GitHub 잔디 같은 SVG로 그리고, GitHub Actions로 자동 갱신하는 프로젝트였습니다.",
       "stack": [
         "Node.js",
         "GitHub Actions"
@@ -1236,7 +1239,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     {
       "kind": "사이드 프로젝트",
       "name": "Pororo OCR 테스트",
-      "desc": "Kakao Brain Pororo로 영수증 OCR을 실험하며, 호환되지 않는 의존성은 패치로 걷어 내고 OCR만 동작하게 구성한 프로젝트입니다.",
+      "desc": "Kakao Brain Pororo로 영수증 OCR을 실험하며, 호환되지 않는 의존성은 패치로 걷어 내고 OCR만 동작하게 구성한 프로젝트였습니다.",
       "stack": [
         "Python",
         "PyTorch",
@@ -1247,7 +1250,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     {
       "kind": "사이드 프로젝트",
       "name": "POS App",
-      "desc": "테이블, 주문, 결제, 영수증 흐름을 Jetpack Compose와 Room으로 구현한 매장용 POS 앱 프로젝트입니다.",
+      "desc": "테이블, 주문, 결제, 영수증 흐름을 Jetpack Compose와 Room으로 구현한 매장용 POS 앱 프로젝트였습니다.",
       "stack": [
         "Kotlin",
         "Compose",
@@ -1278,7 +1281,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <div class="hero-text">
     <div class="eyebrow">BACKEND ENGINEER PORTFOLIO 2026</div>
     <h1>데이터가 끊기지 않고<br><em>흐르게 하는</em> 백엔드 엔지니어입니다.</h1>
-    <p class="lead">에러 없이 조용히 실패하는 곳을 먼저 찾습니다. 사라지던 기사, 몰래 쌓이던 과금, 서비스 사이에서 유실될 뻔한 결재 결과를 실측과 구조로 막아 왔습니다.</p>
+    <p class="lead">에러 없이 조용히 실패하는 곳을 먼저 찾아 왔습니다. 사라지던 기사, 몰래 쌓이던 과금, 서비스 사이에서 유실될 뻔한 결재 결과를 실측과 구조로 막아 왔습니다.</p>
     <div class="chips" style="margin-top:22px">
       <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">Docker</span>
     </div>
@@ -1295,22 +1298,21 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     </figure>
     </div>
 
-    <div class="kpi-head label">How I decide</div>
+    <div class="kpi-head sec-title">How I decide</div>
     <div class="kpis" id="kpis"></div>
   </header>
 
   <!-- PROJECTS -->
   <section id="projects">
-    <div class="label">Projects</div>
-    <h2>AI 파이프라인에서 서비스 사이의 이벤트까지,<br>점점 서버 쪽으로 깊어졌습니다.</h2>
+    <div class="sec-title">Projects</div>
     <div id="projects-list"></div>
     <div class="others" id="others"></div>
   </section>
 
   <!-- ABOUT -->
   <section id="about">
-    <div class="label">About</div>
-    <h2>API 설계부터 쿼리 성능까지 직접 책임집니다.</h2>
+    <div class="sec-title">About</div>
+    <h2>API 설계부터 쿼리 성능까지 직접 책임져 왔습니다.</h2>
 
     <div class="about">
       <div class="card profile">
@@ -1372,7 +1374,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
   <!-- CONTACT -->
   <section id="contact">
-    <div class="label">Contact</div>
+    <div class="sec-title">Contact</div>
     <div class="card closing">
       <p class="big">데이터가 끊기지 않고 신뢰성 있게 흐르는지<br><em>끝까지 확인하는 엔지니어</em>가 되겠습니다.</p>
       <span class="bar"></span>
