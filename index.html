@@ -88,6 +88,7 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .shots.two{grid-template-columns:1fr 1fr}
 .shots.four{grid-template-columns:repeat(4,1fr)}
 .shots.grid4{grid-template-columns:1fr 1fr}
+.shots.three{grid-template-columns:repeat(3,1fr)}
 .shots figure{margin:0}
 .shots img{width:100%;border-radius:10px;border:1px solid var(--line);background:var(--chip);cursor:zoom-in}
 .shots figcaption{font-size:12.5px;color:var(--mute);text-align:center;margin-top:6px}
@@ -110,10 +111,14 @@ h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px;line-h
 .node.mine::after{content:"";position:absolute;left:14px;right:14px;bottom:-5px;height:3px;background:var(--accent);border-radius:2px}
 .arrow{color:var(--caption);font-size:14px}
 .flow .hint{width:100%;font-size:12px;color:var(--caption);margin-top:10px}
+.p-top-links{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;flex:none;max-width:40%}
+.p-top-links a{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:var(--brand);padding:8px 14px;border-radius:8px;background:var(--pale);transition:background .15s}
+.p-top-links a:hover{background:var(--t4)}
+.p-top-links svg{width:15px;height:15px;fill:currentColor}
 .p-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;align-items:center}
 .p-links a{font-size:13.5px;font-weight:700;color:var(--brand);padding:7px 12px;border-radius:8px;background:var(--pale)}
 .p-links a:hover{background:var(--t4)}
-.p-links .chips{margin-left:auto}
+.p-links .chips{margin-left:0}
 details.more{margin-top:14px}
 details.more summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--brand);list-style:none;display:inline-flex;align-items:center;gap:6px}
 details.more summary::-webkit-details-marker{display:none}
@@ -201,7 +206,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   .p-head,.p-body{padding-left:20px;padding-right:20px}
   .p-meta{margin-left:20px;margin-right:20px}
   .p-head{flex-direction:column;gap:12px}
-  .shots.two,.shots.grid4{grid-template-columns:1fr}
+  .p-top-links{margin-left:0;justify-content:flex-start;max-width:none}
+  .shots.two,.shots.grid4,.shots.three{grid-template-columns:1fr}
   .pse{grid-template-columns:1fr;gap:2px}
   .pse b{padding-top:8px}
   .case{padding:18px}
@@ -245,8 +251,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <div class="kpis">
       <div class="card kpi reveal">
         <div class="p">NEXA</div>
-        <div class="v">동시 5건 → 문서 1건</div>
-        <div class="d">같은 요청 키로 동시 상신해도 결재 문서는 하나</div>
+        <div class="v">동시 요청 3종 → 1건</div>
+        <div class="d">결재 · 회수 · 결재자 추가가 겹쳐도 한 요청만 반영</div>
       </div>
       <div class="card kpi reveal">
         <div class="p">WHAT IN THE WORLD</div>
@@ -274,38 +280,44 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         <div>
           <div class="p-no">PROJECT 01 · SSAFY 2학기 자율</div>
           <h3>NEXA</h3>
-          <p class="one">엑셀 이관과 AI 업무 자동화를 갖춘 MSA 인사 ERP</p>
+          <p class="one">근태 · 휴가 · 전자결재 · 급여 · 인사를 MSA로 제공하고, 엑셀 이관과 AI 업무 자동화를 갖춘 HR ERP</p>
+        </div>
+        <div class="p-top-links">
+          <a href="https://github.com/cmy397264/nexa" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub ↗</a>
         </div>
       </div>
       <dl class="p-meta">
-        <div><dt>기간</dt><dd>2026.10 ~ 2026.11 (5주)</dd></div>
+        <div><dt>기간</dt><dd>2026.10 ~ 2026.11 (약 5주)</dd></div>
         <div><dt>인원</dt><dd>6인 (BE 5 · Infra 1)</dd></div>
-        <div><dt>담당</dt><dd>전자결재 서비스 단독</dd></div>
-        <div><dt>기여</dt><dd>결재 서비스 커밋 43/44</dd></div>
+        <div><dt>담당</dt><dd>user · approval · nexa-security</dd></div>
+        <div><dt>현황</dt><dd>개발 서버 배포 · QA 완료</dd></div>
       </dl>
       <div class="p-body">
         <div class="p-role">
           <div>
             <h4>ROLE</h4>
             <ul>
-              <li>전자결재 서비스(approval-service) 설계·구현</li>
-              <li>서비스 공통 인증 라이브러리</li>
-              <li>결재 화면 프론트엔드 (커밋 36/58)</li>
+              <li>인증 서버(user-service): RS256 JWT · JWKS 공개키, Redis 로그인 실패 잠금 · 로그아웃 블랙리스트</li>
+              <li>토큰 검증 공통 라이브러리 nexa-security 제작, 4개 서비스 적용</li>
+              <li>전자결재(approval-service) 설계 · 구현</li>
             </ul>
           </div>
           <div>
             <h4>BUILD</h4>
             <ul>
-              <li>위임전결 규칙에 따른 결재선 자동 생성</li>
-              <li>트랜잭셔널 아웃박스로 결재 결과 이벤트 발행</li>
-              <li>요청 키 기반 멱등 생성 API · 동시성 안전 채번</li>
+              <li>위임전결 규정(금액 · 휴가 일수 · 초과근무) + 조직도로 결재선 자동 생성</li>
+              <li>결재 결과를 Transactional Outbox → Kafka로 발행, 발행 지연 메트릭 감시</li>
+              <li>Testcontainers 통합 테스트 포함 approval 162개 · user 98개 테스트</li>
             </ul>
           </div>
         </div>
 
-        <div class="shots two">
-          <figure><img src="assets/nexa-1.jpg" alt="자동 상신된 결재 문서 화면" loading="lazy"><figcaption>자동 상신된 결재 문서 · 실행 원본 연결</figcaption></figure>
-          <figure><img src="assets/nexa-2.jpg" alt="업무 자동화 워크플로 빌더 화면" loading="lazy"><figcaption>업무 자동화 워크플로 빌더</figcaption></figure>
+        <div class="shots">
+          <figure><img src="assets/nexa-arch.jpg" alt="NEXA 시스템 구성도" loading="lazy"><figcaption>시스템 구성도 · Spring Cloud Gateway · Eureka · Config 기반 MSA</figcaption></figure>
+        </div>
+        <div class="shots two" style="margin-top:12px">
+          <figure><img src="assets/nexa-2.jpg" alt="업무 자동화 워크플로 빌더 화면" loading="lazy"><figcaption>AI 업무 자동화 빌더</figcaption></figure>
+          <figure><img src="assets/nexa-1.jpg" alt="자동 상신된 결재 문서 화면" loading="lazy"><figcaption>자동 상신된 결재 문서</figcaption></figure>
         </div>
 
         <div class="flow">
@@ -316,45 +328,59 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <span class="node mine">아웃박스</span><span class="arrow">→</span>
           <span class="node">Kafka</span><span class="arrow">→</span>
           <span class="node">원본 서비스</span>
-          <div class="hint">주황 밑줄 = 담당 구간</div>
+          <div class="hint">주황 밑줄 = 담당 구간 · 개발 서버에서 팀장 승인 → Kafka → 근태 반영까지 E2E 확인</div>
         </div>
 
         <div class="cases">
           <h4>TROUBLESHOOTING</h4>
           <div class="case">
-            <div class="tag">01 · 이벤트 유실</div>
-            <h5>결재는 승인됐는데, 휴가 서비스가 모를 수 있었다</h5>
+            <div class="tag">01 · 인증 구조</div>
+            <h5>서비스마다 같은 비밀키를 들고 있어야 했다</h5>
             <div class="pse">
-              <b>문제</b><span>상태 저장과 Kafka 발행을 따로 하면, 커밋 뒤 발행이 실패할 때 승인된 휴가가 계속 '결재 대기'로 남는 구조였습니다.</span>
-              <b class="sol">해결</b><span>결재 상태 변경과 아웃박스 기록을 같은 트랜잭션으로 커밋하고, 발행기는 1초 주기 · <code>SKIP LOCKED</code>로 가져가 실패하면 그 자리에서 멈추게 했습니다. 프로듀서는 <code>acks=all</code> · idempotence, 문서별 키로 순서를 보장하고, 수신 측은 상태 기반 멱등 처리 후 3회 재시도 · DLT로 보냅니다.</span>
+              <b>문제</b><span>게이트웨이 1차 구현은 공유 비밀키(HS256)로 검증해, 게이트웨이와 결재 · 근태 · 휴가 · 급여 서비스가 모두 같은 키를 가져야 했습니다. 이 키는 발급에도 쓰여 한 곳만 새도 토큰을 위조할 수 있었고, 키를 바꾸면 전부 다시 배포해야 했습니다.</span>
+              <b class="sol">해결</b><span>RS256을 택해 개인키는 user-service에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명 · 만료 · 토큰 종류 검사와 401/403 응답은 nexa-security 라이브러리로 묶어 Package Registry로 배포했습니다.</span>
             </div>
             <div class="result">
-              <div class="r"><div class="n">0건</div><div class="l">결재 롤백 시 남는 이벤트</div></div>
-              <div class="r"><div class="n">5분</div><div class="l">미발행 이벤트 지연 경보 기준</div></div>
-              <div class="r"><div class="n">7개</div><div class="l">Kafka 통합 4 · 발행기 단위 3 테스트</div></div>
+              <div class="r"><div class="n">모든 서비스 → 1곳</div><div class="l">개인키 보관 지점</div></div>
+              <div class="r"><div class="n">4개 서비스</div><div class="l">같은 규칙으로 토큰 검증</div></div>
+              <div class="r"><div class="n">재배포 0회</div><div class="l">키 ID(kid)로 키 교체</div></div>
             </div>
           </div>
           <div class="case">
-            <div class="tag">02 · 중복 생성</div>
-            <h5>재시도하면 결재 문서가 두 개 생길 수 있었다</h5>
+            <div class="tag">02 · 동시성</div>
+            <h5>결재와 회수가 동시에 오면 둘 다 성공할 수 있었다</h5>
             <div class="pse">
-              <b>문제</b><span>원본 서비스가 응답을 못 받고 다시 요청하면, 같은 기안이 두 번 상신될 수 있었습니다.</span>
-              <b class="sol">해결</b><span>같은 <code>requestKey</code>는 PostgreSQL advisory lock으로 하나씩 처리하고, 이미 있으면 처음 만든 문서를 돌려줍니다. 결과를 알 수 없을 때는 다시 만들지 않고 요청 키 조회 API로 상태를 맞춥니다.</span>
+              <b>문제</b><span>결재 처리와 결재선 변경은 문서 상태를 읽어 검증한 뒤 바꾸는데, 같은 문서에 결재 · 회수 · 결재자 추가가 동시에 오면 둘 다 옛 상태로 검증을 통과했습니다. 회수된 문서가 승인돼도 에러는 나지 않았습니다.</span>
+              <b class="sol">해결</b><span>낙관적 락은 실제로 겹치는 요청마다 재시도 로직이 필요하고, 결재자 추가는 approval_line 행 INSERT라 문서의 <code>@Version</code>으로 잡히지도 않았습니다. 그래서 문서 행을 <code>FOR UPDATE</code>로 잠가 늦은 요청이 바뀐 상태로 다시 검증되게 했습니다.</span>
             </div>
             <div class="result">
-              <div class="r"><div class="n">5건 → 1건</div><div class="l">같은 키 동시 요청 (201 ×1 · 200 ×4)</div></div>
-              <div class="r"><div class="n">동시 10건</div><div class="l">문서번호 겹침 · 빈칸 없이 채번</div></div>
+              <div class="r"><div class="n">동시 요청 3종</div><div class="l">한 요청만 반영, 늦은 요청은 업무 오류 응답</div></div>
             </div>
           </div>
+          <details class="more">
+            <summary>트러블슈팅 더 보기</summary>
+            <div class="cases">
+              <div class="case">
+                <div class="tag">03 · 이벤트 유실</div>
+                <h5>결재는 승인됐는데, 휴가 서비스가 모를 수 있었다</h5>
+                <div class="pse">
+                  <b>문제</b><span>상태 저장과 Kafka 발행을 따로 하면, 커밋 뒤 발행이 실패할 때 승인된 휴가가 계속 '결재 대기'로 남는 구조였습니다.</span>
+                  <b class="sol">해결</b><span>결재 상태 변경과 아웃박스 기록을 같은 트랜잭션으로 커밋하고, 발행기는 <code>SKIP LOCKED</code>로 가져가 실패하면 그 자리에서 멈추게 했습니다. 프로듀서는 <code>acks=all</code> · idempotence, 문서별 키로 순서를 보장하고, 수신 측과 멱등 처리 · DLT 계약을 합의했습니다.</span>
+                </div>
+                <div class="result">
+                  <div class="r"><div class="n">0건</div><div class="l">결재 롤백 시 남는 이벤트</div></div>
+                  <div class="r"><div class="n">5분</div><div class="l">미발행 이벤트 지연 경보 기준</div></div>
+                </div>
+              </div>
+            </div>
+          </details>
         </div>
 
         <div class="p-links">
-          <a href="https://github.com/cmy397264/nexa" target="_blank" rel="noopener">GitHub ↗</a>
-          <div class="chips"><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">React</span><span class="chip">Testcontainers</span></div>
+          <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot 4</span><span class="chip">Spring Cloud</span><span class="chip">JPA</span><span class="chip">Flyway</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">Kafka</span><span class="chip">Testcontainers</span></div>
         </div>
       </div>
     </article>
-
     <!-- BBangPatrol -->
     <article class="card project reveal" id="bbang">
       <div class="p-head">
@@ -363,6 +389,10 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <div class="p-no">PROJECT 02 · 팀 프로젝트</div>
           <h3>BBangPatrol</h3>
           <p class="one">영수증 한 장으로 빵집 방문을 인증하고, 미션·포인트·수집품으로 이어지는 빵집 탐방 서비스</p>
+        </div>
+        <div class="p-top-links">
+          <a href="https://github.com/BBangPatrol/Backend" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Backend ↗</a>
+          <a href="https://github.com/BBangPatrol/OCR" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>OCR ↗</a>
         </div>
       </div>
       <dl class="p-meta">
@@ -413,8 +443,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         </div>
 
         <div class="p-links">
-          <a href="https://github.com/BBangPatrol/Backend" target="_blank" rel="noopener">Backend ↗</a>
-          <a href="https://github.com/BBangPatrol/OCR" target="_blank" rel="noopener">OCR ↗</a>
           <div class="chips"><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">MySQL</span><span class="chip">Flyway</span><span class="chip">Redis</span><span class="chip">S3</span><span class="chip">OAuth2</span><span class="chip">Docker</span></div>
         </div>
       </div>
@@ -428,6 +456,9 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <div class="p-no">PROJECT 03 · SSAFY 2학기 특화 · 우수상</div>
           <h3>What In the World</h3>
           <p class="one">전 세계 뉴스 논조를 지구본 위에 실시간으로 보여 주는 글로벌 이슈 모니터링 서비스</p>
+        </div>
+        <div class="p-top-links">
+          <a href="https://github.com/cmy397264/witw" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub ↗</a>
         </div>
       </div>
       <dl class="p-meta">
@@ -454,9 +485,10 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           </div>
         </div>
 
-        <div class="shots two">
+        <div class="shots three">
           <figure><img src="assets/witw-1.jpg" alt="글로벌 대시보드 화면" loading="lazy"><figcaption>글로벌 대시보드 · 실시간 이슈 TOP 5</figcaption></figure>
           <figure><img src="assets/witw-2.jpg" alt="국가 상세 화면" loading="lazy"><figcaption>국가 상세 · 핫이슈 TOP 5</figcaption></figure>
+          <figure><img src="assets/witw-3.jpg" alt="이슈 상세 논조 지구본 화면" loading="lazy"><figcaption>이슈 상세 · 논조 지구본</figcaption></figure>
         </div>
 
         <div class="flow">
@@ -496,7 +528,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         </div>
 
         <div class="p-links">
-          <div class="chips"><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">Flyway</span><span class="chip">Testcontainers</span></div>
+          <div class="chips"><span class="chip">Spring Boot 4</span><span class="chip">JPA</span><span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">Flyway</span><span class="chip">Testcontainers</span></div>
         </div>
       </div>
     </article>
@@ -509,6 +541,9 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <div class="p-no">PROJECT 04 · SSAFY 2학기 공통 · 우수상</div>
           <h3>Mandal-In</h3>
           <p class="one">음성 대화로 만다라트를 채우는 AI 코치 웹</p>
+        </div>
+        <div class="p-top-links">
+          <a href="https://github.com/cmy397264/Mandalin" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub ↗</a>
         </div>
       </div>
       <dl class="p-meta">
@@ -531,7 +566,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             <ul>
               <li>STT 무음 게이트(SpeechGate)</li>
               <li>골든셋 기반 프롬프트 회귀 평가</li>
-              <li>LiveKit 토큰 발급 API</li>
+              <li>LiveKit 토큰 발급, LLM 호출을 트랜잭션 밖에 둔 주간 리포트 API</li>
             </ul>
           </div>
         </div>
@@ -571,6 +606,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
                 <div class="result">
                   <div class="r"><div class="n">88.71% → 98.39%</div><div class="l">출력 정상률 회복</div></div>
                   <div class="r"><div class="n">7건 → 1건</div><div class="l">같은 62개 케이스 결함</div></div>
+                  <div class="r"><div class="n">-21%</div><div class="l">프롬프트 길이 · 호출당 약 400토큰 절감</div></div>
                 </div>
               </div>
               <div class="case">
@@ -590,7 +626,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         </div>
 
         <div class="p-links">
-          <div class="chips"><span class="chip">Python</span><span class="chip">LiveKit</span><span class="chip">Deepgram</span><span class="chip">Gemini</span><span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span></div>
+          <div class="chips"><span class="chip">Python</span><span class="chip">LiveKit</span><span class="chip">Deepgram</span><span class="chip">Gemini</span><span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span><span class="chip">GitLab CI</span></div>
         </div>
       </div>
     </article>
@@ -598,17 +634,21 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
     <!-- 나랑등산 -->
     <article class="card project reveal" id="hiking">
       <div class="p-head">
-        <div class="p-logo" style="display:flex;align-items:center;justify-content:center;font-size:30px" aria-hidden="true">⛰️</div>
+        <img class="p-logo" src="assets/logo-hiking.png" alt="나랑등산이다 로고">
         <div>
           <div class="p-no">PROJECT 05 · SSAFY 1학기 · 우수상</div>
           <h3>나랑등산이다</h3>
-          <p class="one">산과 코스 정보, 날씨, 후기를 한곳에서 보는 등산 코스 서비스</p>
+          <p class="one">100대 명산 GPX 코스를 지도로 미리 걷고, 후기 · 게시판 · AI 챗봇으로 등산 정보를 나누는 웹 서비스</p>
+        </div>
+        <div class="p-top-links">
+          <a href="https://narang-hiking.vercel.app" target="_blank" rel="noopener">서비스 ↗</a>
+          <a href="https://github.com/NarangHiking/BE" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub ↗</a>
         </div>
       </div>
       <dl class="p-meta">
-        <div><dt>기간</dt><dd>2026 상반기</dd></div>
-        <div><dt>인원</dt><dd>팀 프로젝트 (BE 2)</dd></div>
-        <div><dt>담당</dt><dd>인증 · 산/코스 · 인프라</dd></div>
+        <div><dt>기간</dt><dd>2026.05 ~ 2026.06 (약 6주)</dd></div>
+        <div><dt>인원</dt><dd>2인 (팀장 · BE / BE · AI)</dd></div>
+        <div><dt>담당</dt><dd>팀장 · 백엔드</dd></div>
         <div><dt>수상</dt><dd>1학기 프로젝트 우수상</dd></div>
       </dl>
       <div class="p-body">
@@ -616,27 +656,58 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <div>
             <h4>ROLE</h4>
             <ul>
-              <li>JWT 인증/인가 · Spring Security 권한 제어</li>
-              <li>산 · 코스 · 즐겨찾기 · 추천 API</li>
-              <li>Cloudflare R2 이미지 스토리지 · CORS</li>
+              <li>팀장: 일정 · 역할 분담</li>
+              <li>인증/인가: Spring Security + JWT 이중 토큰, Redis 토큰 관리, HttpOnly Cookie 전환</li>
+              <li>Vercel(FE) · AWS EC2(BE) 서비스 배포</li>
             </ul>
           </div>
           <div>
             <h4>BUILD</h4>
             <ul>
-              <li>accessToken + refreshToken 이중 토큰, 저장소를 LocalStorage → HttpOnly Cookie로 전환</li>
-              <li>기상청 단기예보 연동, 위경도 → 격자좌표(LCC) 변환</li>
-              <li>GPX 일괄 등록 · 응답 DTO 분리로 비밀번호 노출 방지</li>
+              <li>산 · 코스 CRUD, GPX 일괄 등록, 즐겨찾기 · 추천순 정렬</li>
+              <li>Cloudflare R2 파일 스토리지, 업로드 실패 시 보상 삭제</li>
+              <li>기상청 단기예보 연동 (위경도 → LCC 격자 변환)</li>
             </ul>
           </div>
         </div>
+
+        <div class="shots three">
+          <figure><img src="assets/hike-1.jpg" alt="메인 화면" loading="lazy"><figcaption>메인 화면</figcaption></figure>
+          <figure><img src="assets/hike-2.jpg" alt="산 목록 화면" loading="lazy"><figcaption>산 목록</figcaption></figure>
+          <figure><img src="assets/hike-3.jpg" alt="GPX 코스 지도 화면" loading="lazy"><figcaption>GPX 코스 지도</figcaption></figure>
+        </div>
+
+        <div class="cases">
+          <h4>TROUBLESHOOTING</h4>
+          <div class="case">
+            <div class="tag">01 · 의존 방향</div>
+            <h5>AI가 제안한 코드로 서버가 뜨지 않았다</h5>
+            <div class="pse">
+              <b>문제</b><span>AuthService는 사용자 조회를 위해 UserService를, UserService는 탈퇴 시 토큰을 지우려고 AuthService를 주입받아 순환 참조로 기동이 멈췄습니다.</span>
+              <b class="sol">해결</b><span><code>@Lazy</code>는 구조를 그대로 남긴다고 보고, 두 서비스가 실제로 함께 쓰던 토큰 저장 · 삭제를 Redis와 JwtUtil만 의존하는 TokenService로 분리해 의존을 한 방향으로 정리했습니다.</span>
+            </div>
+            <div class="result">
+              <div class="r"><div class="n">Auth ↔ User → 한 방향</div><div class="l">이후 AI 코드는 의존 방향부터 확인</div></div>
+            </div>
+          </div>
+          <div class="case">
+            <div class="tag">02 · 외부 저장소와 트랜잭션</div>
+            <h5>DB id로 R2 폴더를 만들다 파일과 DB가 어긋났다</h5>
+            <div class="pse">
+              <b>문제</b><span>id 폴더를 쓰려면 INSERT 후 업로드해야 했고, 뒤 단계가 실패하면 DB는 롤백돼도 R2에 올라간 파일은 그대로 남았습니다.</span>
+              <b class="sol">해결</b><span>고정 폴더 + UUID 키로 바꿔 업로드 → DB 저장 순서로 바꾸고, DB 저장이 실패하면 올린 파일을 보상 삭제했습니다. GPX 일괄 등록은 올린 키를 모아 두었다가 실패 시 한꺼번에 정리합니다.</span>
+            </div>
+            <div class="result">
+              <div class="r"><div class="n">고아 파일 방지</div><div class="l">DB에 없는 파일이 R2에 남지 않음</div></div>
+            </div>
+          </div>
+        </div>
+
         <div class="p-links">
-          <a href="https://github.com/NarangHiking/BE" target="_blank" rel="noopener">GitHub ↗</a>
-          <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot</span><span class="chip">Spring Security</span><span class="chip">MyBatis</span><span class="chip">Redis</span><span class="chip">JWT</span></div>
+          <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot 4</span><span class="chip">Spring Security</span><span class="chip">MyBatis</span><span class="chip">MySQL (RDS)</span><span class="chip">Redis</span><span class="chip">Cloudflare R2</span><span class="chip">AWS EC2</span></div>
         </div>
       </div>
     </article>
-
     <!-- BigPicture -->
     <article class="card project reveal" id="bigpicture">
       <div class="p-head">
@@ -645,6 +716,10 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <div class="p-no">PROJECT 06 · 산학협력</div>
           <h3>BigPicture</h3>
           <p class="one">종목을 등록하면 AI 주간 경제 리포트가 푸시로 도착하는 안드로이드 앱</p>
+        </div>
+        <div class="p-top-links">
+          <a href="https://github.com/knu-datastreams/BigPicture-APP" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>App ↗</a>
+          <a href="https://github.com/knu-datastreams/BigPicture-BE" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Backend ↗</a>
         </div>
       </div>
       <dl class="p-meta">
@@ -684,8 +759,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           </div>
         </div>
         <div class="p-links">
-          <a href="https://github.com/knu-datastreams/BigPicture-APP" target="_blank" rel="noopener">App ↗</a>
-          <a href="https://github.com/knu-datastreams/BigPicture-BE" target="_blank" rel="noopener">Backend ↗</a>
           <div class="chips"><span class="chip">Kotlin</span><span class="chip">Compose</span><span class="chip">Coroutine</span><span class="chip">Retrofit</span><span class="chip">Room</span><span class="chip">FCM</span></div>
         </div>
       </div>
@@ -729,7 +802,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         <div class="nm">황우찬</div>
         <div class="en">Hwang Woochan · Backend Engineer</div>
         <dl>
-          <div><dt>경북대학교</dt><dd>컴퓨터공학과 · 3.80/4.5</dd></div>
+          <div><dt>경북대학교</dt><dd>컴퓨터공학 (부전공 전자) · 3.80/4.5</dd></div>
           <div><dt>창원대학교</dt><dd>정보통신공학과 · 4.14/4.5</dd></div>
           <div><dt>SSAFY</dt><dd>15기 Java/Spring</dd></div>
           <div><dt>42 경산</dt><dd>3기</dd></div>
@@ -739,7 +812,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         <h4>SKILLS</h4>
         <div class="sk"><div class="nm">Java · Spring Boot</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i class="top" style="width:100%"></i></div><span class="lv">상</span></div><div class="ds">JPA 기반 RESTful API 설계 및 구현</div></div>
         <div class="sk"><div class="nm">PostgreSQL · MySQL · JPA</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:75%"></i></div><span class="lv">중상</span></div><div class="ds">데이터 모델링과 인덱스로 쿼리 성능 개선</div></div>
-        <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">DLT · 재시도 설계, 트랜잭셔널 아웃박스</div></div>
+        <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">에러 핸들러 · DLT 설계, Transactional Outbox</div></div>
         <div class="sk"><div class="nm">Redis</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">토큰 저장소 구축과 데이터 캐싱</div></div>
         <div class="sk"><div class="nm">Kotlin · Android</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Retrofit · Coroutine 비동기 통신</div></div>
         <div class="sk"><div class="nm">Linux · Docker</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">컨테이너 배포, Crontab 스케줄링</div></div>
@@ -757,7 +830,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         <li class="award"><span class="dt">2026.08</span><span class="ev">Mandal-In 우수상<span>2학기 공통 프로젝트</span></span></li>
         <li class="award"><span class="dt">2026.09</span><span class="ev">WITW 우수상<span>2학기 특화 프로젝트 · 정보처리기사 취득</span></span></li>
         <li><span class="dt">2026.10</span><span class="ev">BBangPatrol<span>2026 대전빵축제 빵집 데이터 반영</span></span></li>
-        <li><span class="dt">2026.11</span><span class="ev">NEXA<span>2학기 자율 · MSA 인사 ERP</span></span></li>
+        <li><span class="dt">2026.11</span><span class="ev">NEXA<span>2학기 자율 · MSA HR ERP · 개발 서버 QA 완료</span></span></li>
       </ul>
       <p class="tl-note">주황 점 = 수상</p>
     </div>
