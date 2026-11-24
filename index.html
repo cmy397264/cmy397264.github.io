@@ -22,7 +22,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
-  background:var(--bg);color:var(--ink);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;word-break:keep-all}
+  background:var(--bg);color:var(--ink);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:clip;word-break:keep-all}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
@@ -37,7 +37,7 @@ nav ul{display:flex;gap:28px;list-style:none;font-size:14px;font-weight:600;colo
 nav ul a:hover{color:var(--brand)}
 
 /* common */
-section{padding:96px 0 0}
+
 .label{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--brand);text-transform:uppercase}
 h2{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:8px 0 4px;line-height:1.45;color:var(--text)}
 .sec-title{font-size:30px;font-weight:800;letter-spacing:-.01em;color:var(--ink);line-height:1.3}
@@ -148,6 +148,18 @@ details.more .cases{margin-top:14px}
 .data-error{margin:24px 0 0;padding:20px 24px;border-radius:12px;background:#FFF4F4;border:1px solid #F1C6C6;color:#7A1F1F;font-size:14.5px}
 .data-error b{font-size:16px}
 .data-error ul{margin:8px 0 0 18px}
+
+/* 영역 구분 */
+section{position:relative;padding:88px 0 88px;margin-top:0}
+section::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:-1;background:var(--bg)}
+section.band-alt::before{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+section.band-alt .card{box-shadow:none;border:1px solid var(--line)}
+.hero{padding-bottom:24px}
+.sec-title{display:flex;align-items:baseline;gap:12px}
+.sec-title small{font-size:15px;font-weight:600;color:var(--caption)}
+.p-body>.p-role,.p-body>.shots:first-of-type,.p-body>.flow,.p-body>.cases,.p-body>.p-links{border-top:1px solid var(--line);padding-top:26px;margin-top:26px}
+.p-body>.p-role{border-top:0;padding-top:4px;margin-top:0}
+.p-body>.shots+.shots{border-top:0;padding-top:0;margin-top:12px}
 /* other */
 .others{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
 .other{padding:24px;display:flex;flex-direction:column;transition:transform .15s}
@@ -229,7 +241,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 @media (max-width:560px){
   .wrap{padding:0 16px}
   nav ul li:not(:last-child){display:none}
-  section{padding-top:72px}
+  section{padding:64px 0}
   .p-head,.p-body{padding-left:20px;padding-right:20px}
   .p-meta{margin-left:20px;margin-right:20px}
   .p-head{flex-direction:column;gap:12px}
@@ -725,7 +737,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "결과",
-              "text": "개발 서버에서 검증한 설정을 운영에 반영해, 실패한 기사가 위치와 원인과 함께 DLT에 남게 됐습니다. 다만 메시지 형식이 바뀌기 전의 약 2만 4천 건은 별도 재계산이 필요해 복구하지 못했습니다.",
+              "text": "개발 서버에서 검증한 설정을 운영에 반영해, 실패한 기사가 위치와 원인과 함께 DLT에 남게 됐습니다.",
               "key": false
             }
           ]
@@ -1316,13 +1328,13 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
   <!-- PROJECTS -->
   <section id="projects">
-    <div class="sec-title">Projects</div>
+    <div class="sec-title">Projects<small>6개 프로젝트</small></div>
     <div id="projects-list"></div>
     <div class="others" id="others"></div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about">
+  <section id="about" class="band-alt">
     <div class="sec-title">About</div>
 
     <div class="about">
