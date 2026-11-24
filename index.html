@@ -97,6 +97,7 @@ h2{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:8px 0 4px;line-he
 .p-no{font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--brand)}
 .p-head h3{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.3;margin-top:2px}
 .p-head .one{color:var(--text);font-size:15.5px;margin-top:2px}
+.p-head .p-stack{margin-top:12px}
 .p-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin:24px 32px 0;border-radius:10px;overflow:hidden}
 .p-meta div{background:var(--chip);padding:12px 14px}
 .p-meta dt{font-size:12px;font-weight:700;letter-spacing:0;color:var(--brand)}
@@ -436,12 +437,12 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
             },
             {
               "label": "판단",
-              "text": "검증하는 곳이 늘어나도 발급할 수 있는 곳은 하나여야 한다고 봤습니다. 그래서 발급과 검증의 키를 나누는 RS256을 택했고, 서비스마다 검증 코드를 복사하면 규칙이 어긋날 수 있어 공통 라이브러리로 묶기로 했습니다.",
+              "text": "토큰을 위조할 수 있는 키가 탈취될 수 있는 지점을 최소로 줄여야 한다고 봤습니다. 그래서 서명용 개인키는 발급하는 한 곳에만 두고, 나머지 서비스는 공개키로 검증만 하는 RS256을 택했습니다. 또 서비스마다 검증 코드를 복사하면 규칙이 어긋날 수 있어 공통 라이브러리로 묶기로 했습니다.",
               "key": true
             },
             {
               "label": "해결",
-              "text": "개인키는 직원 서비스에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명, 만료, 토큰 종류 검사와 401/403 응답은 nexa-security로 묶어 Package Registry로 배포했습니다.",
+              "text": "개인키는 직원 서비스에만 두고 공개키는 JWKS로 제공했으며, 게이트웨이도 JWKS로 검증하도록 팀원과 맞췄습니다. 서명, 만료, 토큰 종류 검사와 401/403 응답은 하나로 묶어 Package Registry로 배포했습니다.",
               "key": false
             }
           ],
@@ -1404,7 +1405,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         <div class="sk"><div class="nm">Kafka</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:60%"></i></div><span class="lv">중</span></div><div class="ds">에러 핸들러, DLT 설계, Transactional Outbox</div></div>
         <div class="sk"><div class="nm">Redis</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">토큰 저장소 구축과 데이터 캐싱</div></div>
         <div class="sk"><div class="nm">Kotlin, Android</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Retrofit, Coroutine 비동기 통신</div></div>
-        <div class="sk"><div class="nm">Linux, Docker</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">컨테이너 배포, Crontab 스케줄링</div></div>
+        <div class="sk"><div class="nm">Docker</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">컨테이너 배포, 운영·개발 배포 환경 분리, 헬스체크로 기동 순서 제어</div></div>
+        <div class="sk"><div class="nm">Linux</div><div style="display:flex;align-items:center"><div class="track" style="flex:1"><i style="width:50%"></i></div><span class="lv">중</span></div><div class="ds">Crontab 스케줄링, Valgrind로 메모리 누수 탐지</div></div>
       </div>
     </div>
 
@@ -1515,6 +1517,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <div class="p-no"><span class="p-no-n">프로젝트 ${two(i + 1)}</span>${tx(p.no)}</div>
           <h3>${tx(p.name)}${p.nameSub ? ` <span class="name-sub">${tx(p.nameSub)}</span>` : ''}</h3>
           <p class="one">${tx(p.summary)}</p>
+          <div class="chips p-stack">${p.stack.map(s => `<span class="chip">${tx(s)}</span>`).join('')}</div>
         </div>
         ${p.links.length ? `<div class="p-top-links">${p.links.map(l =>
           `<a href="${url(l.url)}" target="_blank" rel="noopener">${/github\.com/.test(l.url) ? GH : ''}${tx(l.label)} ↗</a>`).join('')}</div>` : ''}
@@ -1527,7 +1530,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
           <div class="ts-tabs" role="tablist">${p.cases.map((c, k) =>
             `<button type="button" role="tab" class="ts-tab" id="${esc(p.id)}-tab-${k + 1}" aria-controls="${esc(p.id)}-ts-${k + 1}" aria-selected="${k === 0}">${tx(c.tag)}</button>`).join('')}</div>
           ${p.cases.map((c, k) => caseHTML(c, `${p.id}-ts-${k + 1}`, k > 0)).join('')}${more}</div>
-        <div class="p-links"><div class="chips">${p.stack.map(s => `<span class="chip">${tx(s)}</span>`).join('')}</div></div>
       </div>
     </article>`;
   }
