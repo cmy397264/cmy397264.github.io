@@ -29,31 +29,46 @@ img{display:block;max-width:100%}
 
 /* sidebar */
 :root{--side:280px}
-.side{position:fixed;top:0;left:0;bottom:0;width:var(--side);background:var(--brand-deep);color:#fff;display:flex;flex-direction:column;align-items:center;padding:64px 0 32px;z-index:20;overflow-y:auto}
+.side{position:fixed;top:0;left:0;bottom:0;width:var(--side);background:var(--brand-deep);color:#fff;display:flex;flex-direction:column;align-items:center;padding:clamp(14px,4.5vh,64px) 0 clamp(10px,2.4vh,32px);z-index:20;overflow-y:auto;scrollbar-width:none}
 .side-photo{width:168px;height:210px;border-radius:16px;object-fit:cover;object-position:top;box-shadow:0 10px 28px rgba(0,0,0,.25)}
 .side-name{font-size:26px;font-weight:800;letter-spacing:-.01em}
 .side-en{font-size:13px;color:rgba(255,255,255,.62);margin-top:2px}
 .side-role{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.8);margin-top:12px;padding:4px 12px;border:1px solid rgba(255,255,255,.22);border-radius:999px}
-.side-nav{list-style:none;width:100%;margin-top:40px;border-top:1px solid rgba(255,255,255,.12)}
-.side-nav a{display:block;text-align:center;padding:18px 0;font-size:15.5px;font-weight:600;color:rgba(255,255,255,.88);border-bottom:1px solid rgba(255,255,255,.12);transition:background .15s,color .15s}
+.side-nav{list-style:none;width:100%;margin-top:clamp(10px,3vh,40px);border-top:1px solid rgba(255,255,255,.12)}
+.side-nav a{display:block;text-align:center;padding:clamp(7px,1.45vh,18px) 0;font-size:15.5px;font-weight:600;color:rgba(255,255,255,.88);border-bottom:1px solid rgba(255,255,255,.12);transition:background .15s,color .15s}
 .side-nav a:hover{background:rgba(255,255,255,.08);color:#fff}
 .side-nav a.on{background:var(--bg);color:var(--brand-deep)}
-.side-sub{list-style:none;background:rgba(0,0,0,.16);border-bottom:1px solid rgba(255,255,255,.12);padding:6px 0}
+.side-sub{list-style:none;background:rgba(0,0,0,.16);border-bottom:1px solid rgba(255,255,255,.12);padding:clamp(2px,.6vh,6px) 0}
 .side-sub[hidden]{display:none}
-.side-nav .side-sub a{padding:9px 0;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.66);border-bottom:0}
+.side-nav .side-sub a{padding:clamp(2px,.55vh,9px) 0;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.66);border-bottom:0}
 .side-nav .side-sub a:hover{color:#fff}
 .side-nav .side-sub a.cur{color:#fff;font-weight:700}
 .side-links{margin-top:auto;display:flex;gap:14px;font-size:13px;padding-top:28px}
 .side-links a{color:rgba(255,255,255,.7)}
 .side-links a:hover{color:#fff}
 .content{margin-left:var(--side);overflow-x:clip}
-.side-contact{margin-top:auto;width:100%;padding:24px 28px 0}
-.side-contact div{padding:10px 0;border-top:1px solid rgba(255,255,255,.12)}
+.side-contact{margin-top:auto;width:100%;padding:clamp(6px,1.6vh,24px) 28px 0}
+.side-contact div{padding:clamp(3px,.7vh,10px) 0;border-top:1px solid rgba(255,255,255,.12)}
 .side-contact div:first-child{border-top:0}
 .side-contact dt{font-size:11.5px;font-weight:700;color:rgba(255,255,255,.55)}
 .side-contact dd{font-size:13.5px;font-weight:600;margin-top:2px;word-break:break-all}
 .side-contact a{color:#fff}
 .side-contact a:hover{text-decoration:underline}
+.side::-webkit-scrollbar{display:none}
+@media (min-width:1001px) and (max-height:960px){
+  .side-contact dt{display:none}
+  .side-contact dd{margin-top:0}
+  .side-role{margin-top:8px}
+}
+@media (min-width:1001px) and (max-height:700px){
+  .side-en,.side-role{display:none}
+  .side-name{font-size:22px}
+  .side-nav .side-sub a{font-size:12.5px}
+}
+@media (min-width:1001px) and (max-height:620px){
+  .side-contact dd{font-size:12.5px}
+  .side-contact div{padding:2px 0;border-top:0}
+}
 .m-only,#contact{display:none}
 
 
