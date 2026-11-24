@@ -198,10 +198,12 @@ details.more .cases{margin-top:14px}
 .rows span{color:var(--mute);font-size:14px}
 
 /* closing */
-.closing{margin-top:32px;padding:40px;text-align:left}
-.closing p.big{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.45}
-.closing p.big em{font-style:normal;color:var(--brand)}
-.contact{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.contact-list{margin-top:24px;padding:8px 32px}
+.c-row{display:grid;grid-template-columns:120px 1fr;align-items:center;padding:18px 0;border-top:1px solid var(--line);font-size:16px}
+.c-row:first-child{border-top:0}
+.c-k{font-size:14px;font-weight:700;color:var(--mute)}
+.c-v{font-weight:600;color:var(--ink)}
+.c-row:hover .c-v{color:var(--brand)}
 footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center}
 
 /* lightbox */
@@ -236,8 +238,8 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   .pse{grid-template-columns:1fr;gap:2px}
   .pse b{padding-top:8px}
   .case{padding:18px}
-  .closing{padding:28px 22px}
-  .closing p.big{font-size:20px}
+  .contact-list{padding:4px 20px}
+  .c-row{grid-template-columns:80px 1fr}
   .tl::before,.tl li::before{display:none}
   .tl li{grid-template-columns:64px 1fr;gap:12px}
 }
@@ -320,16 +322,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
         "결재 결과를 Transactional Outbox → Kafka로 발행, 발행 지연 메트릭 감시"
       ],
       "shots": [
-        {
-          "layout": "one",
-          "items": [
-            {
-              "src": "assets/nexa-arch.jpg",
-              "alt": "NEXA 시스템 구성도",
-              "caption": "시스템 구성도: Spring Cloud Gateway, Eureka, Config 기반 MSA"
-            }
-          ]
-        },
         {
           "layout": "two",
           "items": [
@@ -1394,15 +1386,11 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   <!-- CONTACT -->
   <section id="contact">
     <div class="sec-title">Contact</div>
-    <div class="card closing">
-      <p class="big">데이터가 끊기지 않고 신뢰성 있게 흐르는지<br><em>끝까지 확인하는 엔지니어</em>가 되겠습니다.</p>
-      <span class="bar"></span>
-      <p class="sub">함께 이야기 나누고 싶으시면 편하게 연락 주세요.</p>
-      <div class="contact">
-        <a class="btn primary" href="mailto:cmy397264@naver.com">cmy397264@naver.com</a>
-        <a class="btn ghost" href="https://github.com/cmy397264" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn ghost" href="https://velog.io/@cmy397264" target="_blank" rel="noopener">Velog</a>
-      </div>
+    <div class="card contact-list">
+      <a class="c-row" href="mailto:cmy397264@naver.com"><span class="c-k">이메일</span><span class="c-v">cmy397264@naver.com</span></a>
+      <a class="c-row" href="https://github.com/cmy397264" target="_blank" rel="noopener"><span class="c-k">GitHub</span><span class="c-v">github.com/cmy397264</span></a>
+      <a class="c-row" href="https://velog.io/@cmy397264" target="_blank" rel="noopener"><span class="c-k">Velog</span><span class="c-v">velog.io/@cmy397264</span></a>
+      <a class="c-row" href="tel:01048496017"><span class="c-k">연락처</span><span class="c-v">010-4849-6017</span></a>
     </div>
   </section>
 </main>
