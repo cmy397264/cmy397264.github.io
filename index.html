@@ -1359,7 +1359,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   <ul class="side-nav">
     <li><a href="#top" data-sec="top">Introduction</a></li>
     <li><a href="#about" data-sec="about">About</a></li>
-    <li><a href="#projects" data-sec="projects" aria-expanded="false" aria-controls="side-sub">Projects</a><ul class="side-sub" id="side-sub" hidden></ul></li>
+    <li><a href="#projects" data-sec="projects">Projects</a><ul class="side-sub" id="side-sub"></ul></li>
     <li class="m-only"><a href="#contact" data-sec="contact">Contact</a></li>
   </ul>
   <dl class="side-contact">
@@ -1603,15 +1603,11 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
   // 사이드바: 지금 보고 있는 영역을 표시한다
   const sideLinks = [...document.querySelectorAll('.side-nav > li > a')];
-  // Projects를 누르면 프로젝트별 바로가기를 펼친다
-  const projLink = document.querySelector('.side-nav a[data-sec="projects"]');
+  // Projects 아래에 프로젝트별 바로가기를 늘 보여 준다
   const sideSub = document.getElementById('side-sub');
   if (data && data.projects) sideSub.innerHTML = data.projects.map(p => `<li><a href="#${esc(p.id)}" data-pid="${esc(p.id)}">${tx(p.nav || p.name)}</a></li>`).join('');
   const subLinks = [...sideSub.querySelectorAll('a')];
-  projLink.addEventListener('click', () => {
-    sideSub.hidden = !sideSub.hidden;
-    projLink.setAttribute('aria-expanded', String(!sideSub.hidden));
-  });
+
   const secs = [['top', document.getElementById('intro')], ['about', document.getElementById('about')], ['projects', document.getElementById('projects')], ['contact', document.getElementById('contact')]];
   const markSide = () => {
     const y = innerHeight * 0.35;
