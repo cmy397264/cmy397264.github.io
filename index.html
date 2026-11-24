@@ -30,7 +30,7 @@ img{display:block;max-width:100%}
 /* sidebar */
 :root{--side:280px}
 .side{position:fixed;top:0;left:0;bottom:0;width:var(--side);background:var(--brand-deep);color:#fff;display:flex;flex-direction:column;align-items:center;padding:48px 0 32px;z-index:20;overflow-y:auto}
-.side-photo{width:150px;height:186px;border-radius:50%/42%;object-fit:cover;object-position:top;border:4px solid rgba(255,255,255,.14)}
+.side-photo{width:168px;height:210px;border-radius:16px;object-fit:cover;object-position:top;box-shadow:0 10px 28px rgba(0,0,0,.25)}
 .side-name{font-size:24px;font-weight:800;margin-top:22px;letter-spacing:-.01em}
 .side-en{font-size:13px;color:rgba(255,255,255,.62);margin-top:2px}
 .side-role{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.8);margin-top:12px;padding:4px 12px;border:1px solid rgba(255,255,255,.22);border-radius:999px}
@@ -229,7 +229,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
 
 @media (max-width:1000px){
   .side{position:sticky;bottom:auto;width:auto;height:auto;flex-direction:row;flex-wrap:wrap;justify-content:space-between;padding:10px 16px;gap:8px}
-  .side-photo{width:40px;height:40px;border-radius:50%;border-width:2px}
+  .side-photo{width:36px;height:44px;border-radius:8px;box-shadow:none}
   .side-id{display:flex;align-items:center;gap:10px}
   .side-name{font-size:16px;margin:0}
   .side-en,.side-role,.side-links{display:none}
@@ -238,7 +238,7 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   .content{margin-left:0}
   html{scroll-padding-top:72px}
 }
-@media (max-width:560px){ .side-nav li:first-child{display:none} .side-name{display:none} }
+@media (max-width:560px){ .side-name{display:none} }
 @media (max-width:860px){
   .kpis,.others{grid-template-columns:1fr}
         .p-meta{grid-template-columns:1fr 1fr}
@@ -1292,7 +1292,6 @@ footer{padding:64px 0 48px;font-size:13px;color:var(--caption);text-align:center
   </div>
   <div class="side-role">Backend Engineer</div>
   <ul class="side-nav">
-    <li><a href="#top" data-sec="top">Introduction</a></li>
     <li><a href="#projects" data-sec="projects">Projects</a></li>
     <li><a href="#about" data-sec="about">About</a></li>
     <li><a href="#contact" data-sec="contact">Contact</a></li>
